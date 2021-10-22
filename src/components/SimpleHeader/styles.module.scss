@@ -1,0 +1,45 @@
+.simpleHeaderWrapper {
+  height: 8.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .menu {
+    width: 60vw;
+    min-width: 40rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .menuItem {
+      list-style: none;
+
+      .logoWrapper {
+        display: flex;
+        align-items: flex-start;
+        align-items: center;
+        color: #fff;
+
+        .logoTitle {
+          font-size: 2rem;
+          font-weight: bold;
+          color: #fff
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 490px) {
+  .simpleHeaderWrapper {
+    .menu {
+      min-width: 30rem;
+      .logoWrapper {
+        .logoTitle {
+          display: none;
+        }
+      }
+    }
+  }
+}

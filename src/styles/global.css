@@ -8,3 +8,21 @@
 a {
   text-decoration: none;
 }
+
+@media only screen and (max-width: 620px) {
+  * {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 560px) {
+  * {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 490px) {
+  * {
+    font-size: 12px;
+  }
+}
