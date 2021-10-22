@@ -10,7 +10,7 @@ const Input: React.FC<IProps> = ({ formType, ...rest }) => {
   return (
     <>
       { formType === 'login' && <input className={styles.login} {...rest} />}
-      { formType === 'signup' && <input className={styles.signup} />}
+      { formType === 'signup' && <input className={styles.signup} {...rest} />}
     </>
   )
 }
