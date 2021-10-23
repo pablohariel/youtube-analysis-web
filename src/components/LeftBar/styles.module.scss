@@ -1,0 +1,162 @@
+.leftBarWrapperClosed {
+  height: 100vh;
+  width: 5rem;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: 0.5s;
+  background-color: #8981D8;
+
+
+  .arrowBtn {
+    width: 100%;
+    border: none;
+    background-color: #6A61C0;
+    height: 4.625rem;
+
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    padding-right: 1.625rem;
+
+    svg {
+      color: #8981D8;
+    }
+
+    &:hover {
+      cursor: pointer;
+      filter: brightness(0.9);
+      
+      svg {
+        color: #fff
+      }
+    }
+  }
+
+  .linkList {
+    li {
+      .link {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        height: 4rem;
+        padding-left: 1.25rem;
+        transition: 0.5s;
+        
+        svg {
+          color: #6A61C0;
+        }
+
+        &:hover {
+          cursor: pointer;
+          filter: brightness(0.9);
+
+          svg {
+            color: #fff;
+          }
+        }
+
+        span {
+          display: none;
+          margin-left: 0.2rem;
+
+          font-weight: bold;
+        }
+      }
+
+      &:first-child {
+        margin-top: 2rem;
+      }
+    }
+
+    
+    .divider {
+      width: 80%;
+      background-color: #6A61C0;
+      height: 1px;
+      margin-top: 2rem;
+      margin-left: 10%;
+    }
+  }
+}
+
+.leftBarWrapperOpen {
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 14rem;
+  transition: 0.5s;
+  background-color: #8981D8;
+
+
+
+  .arrowBtn {
+    width: 100%;
+    border: none;
+    background-color: #6A61C0;
+    height: 4.625rem;
+
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    padding-right: 1.625rem;
+
+    svg {
+      color: #8981D8;
+    }
+
+    &:hover {
+      cursor: pointer;
+      filter: brightness(0.9);
+      
+      svg {
+        color: #fff
+      }
+    }
+  }
+
+  .linkList {
+    li {
+      .link {
+        width: 14rem;
+        display: flex;
+        align-items: center;
+        padding-left: 1.25rem;
+        height: 4rem;
+        
+        svg {
+          color: #6A61C0;
+        }
+        
+        span {
+          display: block;
+          margin-left: 0.8rem;
+          color: #fff;
+        }
+
+        &:hover {
+          cursor: pointer;
+          filter: brightness(0.9);
+
+          svg {
+            color: #fff;
+          }
+        }
+      }
+
+      &:first-child {
+        margin-top: 2rem;
+      }
+    }
+
+    
+    .divider {
+      width: 80%;
+      background-color: #6A61C0;
+      height: 1px;
+      margin-top: 2rem;
+      margin-left: 10%;
+    }
+  }
+}

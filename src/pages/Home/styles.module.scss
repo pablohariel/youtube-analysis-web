@@ -1,0 +1,13 @@
+.homeWrapper {
+  display: flex;
+  height: 2000px;
+  padding-left: 6rem;
+  transition: 0.5s;
+}
+
+.homeWrapperOpen {
+  display: flex;
+  height: 2000px;
+  padding-left: 11rem;
+  transition: 0.5s;
+}

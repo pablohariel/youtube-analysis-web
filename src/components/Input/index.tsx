@@ -1,4 +1,3 @@
-import { FaGithub } from 'react-icons/fa'
 import styles from './styles.module.scss'
 
 interface IProps extends React.HTMLProps<HTMLInputElement> {
