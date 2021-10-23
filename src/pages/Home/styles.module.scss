@@ -1,13 +1,36 @@
 .homeWrapper {
   display: flex;
   height: 2000px;
-  padding-left: 6rem;
+  padding-left: 5rem;
   transition: 0.5s;
+  background-color: #F0F0F7;
+
+  .main {
+    width: 100%;
+  }
 }
 
 .homeWrapperOpen {
   display: flex;
   height: 2000px;
-  padding-left: 11rem;
+  padding-left: 14rem;
   transition: 0.5s;
+
+  .main {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 490px) {
+  .homeWrapperOpen {
+    display: flex;
+    height: 2000px;
+    padding-left: 5rem;
+    transition: 0.5s;
+    background-color: #F0F0F7;
+  
+    .main {
+      width: 100%;
+    }
+  }
 }

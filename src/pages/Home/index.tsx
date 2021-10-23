@@ -1,5 +1,7 @@
 import { useState } from 'react'
+
 import { LeftBar } from '../../components/LeftBar'
+import { TopBar } from '../../components/TopBar'
 
 import styles from './styles.module.scss'
 
@@ -9,7 +11,9 @@ const Home: React.FC = () => {
   return (
     <div className={open ? styles.homeWrapperOpen : styles.homeWrapper}>
       <LeftBar open={open} setOpen={setOpen} />
-      <h1>Home</h1>
+      <div className={styles.main}>
+        <TopBar />
+      </div>
     </div>
   )
 }

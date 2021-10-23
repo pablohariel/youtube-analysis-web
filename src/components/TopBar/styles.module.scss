@@ -1,0 +1,113 @@
+.topBarWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4.625rem;
+  background-color: #fff;
+
+  padding-left: 2.938rem;
+  padding-right: 2.938rem;
+
+  .searchBarWrapper {
+    width: 30rem;
+    display: flex;
+    align-items: center;
+    
+    svg {
+      color: #7E7E7E;
+    }
+
+    .searchBarInput {
+      width: 100%;
+      margin-left: 1rem;
+      height: 2.125rem;
+      border: none;
+      font-size: 1.25rem;
+      color: #7E7E7E;
+    }
+
+    .searchBarInput::placeholder {
+      font-size: 1.25rem;
+      color: #7E7E7E;
+      opacity: 100%;
+    }
+
+    .searchBarInput:focus {
+      outline: none;
+    }
+  }
+
+  .rightGroupWrapper {
+    display: flex;
+    align-items: center;
+
+    .userInfoWrapper {
+      width: 9.375rem;
+      display: flex;
+      align-items: center;
+      margin-right: 0.875rem;
+
+      .userImg {
+        height: 2.688rem;
+        width: 2.688rem;
+        border-radius: 50%;
+        margin-right: 0.875rem;
+      }
+
+      .userName {
+        font-size: 1rem;
+        color: #7E7E7E;
+      }
+    }
+
+    svg {
+      color: #7E7E7E;
+    }
+
+    .btnSignUp, .btnSignIn {
+      height: 2.25rem;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      color: #fff;
+      padding: 0.688rem 0.938rem 0.688rem 0.938rem;
+      border-radius: 0.313rem;
+      border: none;
+    }
+
+    .btnSignUp {
+      background-color: #8981D8;
+      margin-right: 0.625rem;
+    }
+
+    .btnSignIn {
+      background-color: #1AAE9F;
+    }
+
+    .btnSignUp, .btnSignIn:hover {
+      cursor: pointer;
+      
+    }
+  }
+}
+
+@media only screen and (max-width: 490px) {
+  .topBarWrapper { 
+    padding-left: 2rem;
+    padding-right: 2rem;
+
+    .searchBarWrapper {
+      width: 14rem;
+    }
+
+    .rightGroupWrapper {
+      .userInfoWrapper {
+        width: 3rem;
+        .userName {
+          display: none;
+        }
+      }
+    }
+    
+  }
+}
