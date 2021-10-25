@@ -15,9 +15,9 @@ const Home: React.FC = () => {
     <div className={open ? styles.homeWrapperOpen : styles.homeWrapper}>
       <LeftBar open={open} setOpen={setOpen} />
       <div className={styles.main}>
-        <TopBar />
+        <TopBar user={null} />
         <Introdution />
-        <SecondaryTopBar />
+        <SecondaryTopBar title='Análises' />
         <CardList />
       </div>
     </div>

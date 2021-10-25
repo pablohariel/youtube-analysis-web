@@ -2,7 +2,11 @@ import { AiOutlinePlus } from 'react-icons/ai'
 
 import styles from './styles.module.scss'
 
-const SecondaryTopBar: React.FC = () => {
+interface IProps {
+  title: string
+}
+
+const SecondaryTopBar: React.FC<IProps> = ({ title }) => {
   return (
     <div className={styles.secondaryTopBarWrapper}>
       <div className={styles.filtersWrapper}>
@@ -13,7 +17,7 @@ const SecondaryTopBar: React.FC = () => {
           <button className={styles.btnUnselected}>Minhas</button>
         </div>
       </div>
-      <h1 className={styles.title}>Análises</h1>
+      <h1 className={styles.title}>{title}</h1>
       <div className={styles.btnCreateAnalysis}>
         
         <button><AiOutlinePlus /><span>Criar nova análise</span></button>

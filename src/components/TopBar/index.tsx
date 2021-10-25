@@ -6,9 +6,11 @@ import userImg from '../../assets/userImg.png'
 
 import styles from './styles.module.scss'
 
-const TopBar: React.FC = () => {
-  const [user, setUser] = useState({})
+interface IProps {
+  user: Object | null
+}
 
+const TopBar: React.FC<IProps> = ({ user }) => {
   return (  
     <header className={styles.topBarWrapper}>
       <div className={styles.searchBarWrapper}>
