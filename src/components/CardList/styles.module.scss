@@ -1,0 +1,44 @@
+.cardListWrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 5rem 3rem 5rem;
+
+  .header {
+    display: flex;
+    color: #7E7E7E;
+    align-items: center;
+    font-size: 0.80rem;
+    margin-left: 2rem;
+
+    .resultText {
+
+      .resultCount {
+        color: #8981D8;
+      }
+    }
+
+    .divider {
+      margin-left: 0.75rem;
+      margin-right: 0.75rem;
+      background-color: #8981D8;
+      height: 0.813rem;
+      width: 0.063rem;
+    }
+
+    .selectedFilter {
+
+    }
+  }
+
+  .cardList {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+  
+
+  li {
+    list-style: none;
+    margin: 1rem
+  }
+} 

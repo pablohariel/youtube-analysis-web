@@ -3,6 +3,8 @@ import { useState } from 'react'
 import { LeftBar } from '../../components/LeftBar'
 import { SecondaryTopBar } from '../../components/SecondaryTopBar'
 import { TopBar } from '../../components/TopBar'
+import { CardList } from '../../components/CardList'
+import { Introdution } from '../../components/Introdution'
 
 import styles from './styles.module.scss'
 
@@ -14,7 +16,9 @@ const Home: React.FC = () => {
       <LeftBar open={open} setOpen={setOpen} />
       <div className={styles.main}>
         <TopBar />
+        <Introdution />
         <SecondaryTopBar />
+        <CardList />
       </div>
     </div>
   )

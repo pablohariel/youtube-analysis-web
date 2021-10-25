@@ -1,0 +1,49 @@
+.cardWrapper {
+  width: 18.125rem;
+  height: 19.5rem;
+  background-color: #fff;
+  color: #7E7E7E;
+  padding: 1.5rem;
+  border-radius: 0.313rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+  }
+
+  .main {
+    margin-top: 0.938rem;
+
+    .videoTitle {
+      font-size: 1.125rem;
+      font-weight: bold;
+    }
+
+    .videoDescription {
+      margin-top: 0.875rem;
+      font-size: 1rem;
+    }
+  }
+
+  .footer {
+    display: flex;
+    flex: 1;
+    align-items: flex-end;
+
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 1rem;
+
+      svg {
+        margin-right: 0.2rem;
+      }
+    }
+  }
+}

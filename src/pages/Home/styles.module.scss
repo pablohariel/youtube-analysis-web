@@ -1,6 +1,5 @@
 .homeWrapper {
   display: flex;
-  height: 2000px;
   padding-left: 5rem;
   transition: 0.5s;
   background-color: #F0F0F7;
@@ -12,7 +11,6 @@
 
 .homeWrapperOpen {
   display: flex;
-  height: 2000px;
   padding-left: 14rem;
   transition: 0.5s;
 
@@ -24,7 +22,6 @@
 @media only screen and (max-width: 490px) {
   .homeWrapperOpen {
     display: flex;
-    height: 2000px;
     padding-left: 5rem;
     transition: 0.5s;
     background-color: #F0F0F7;
