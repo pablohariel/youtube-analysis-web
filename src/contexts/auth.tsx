@@ -14,6 +14,7 @@ interface AuthContextData {
   user: IUser | null
   signIn: Function
   signOut: Function
+  setUser: React.Dispatch<React.SetStateAction<IUser | null>>
 }
 
 interface IAuthResponse {
@@ -72,7 +73,7 @@ const AuthProvider: React.FC = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, signIn, signOut, setUser }}>
       {children}
     </AuthContext.Provider>
   )

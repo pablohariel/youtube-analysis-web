@@ -1,0 +1,34 @@
+.profileWrapper {
+  margin-left: 5rem;
+
+  .userInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .title {
+      margin-top: 1.75rem;
+      color: #34495E;
+      font-size: 1.875rem;
+      font-weight: bold;
+    }
+    
+    .btnDeleteAccount {
+      width: 29.125rem;
+      height: 4.688rem;
+      margin-top: 4.25rem;
+      background-color: #E33D3D;
+      color: #fff;
+      font-size: 1.625rem;
+      font-weight: bold;  
+      border: none;
+      border-radius: 0.313rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btnDeleteAccount:hover {
+      filter: brightness(1.2);
+    }
+  }
+}

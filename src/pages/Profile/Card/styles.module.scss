@@ -1,0 +1,97 @@
+.cardWrapper {
+  margin-top: 4.125rem;
+  display: flex;
+  flex-direction: column;
+  width: 29.125rem;
+  height: 21rem;
+  background-color: #fff;
+  box-shadow: 0.25rem 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
+  border-radius: 0.313rem;
+  padding: 1.625rem;
+
+
+  .title {
+    color: #34495E;
+    font-size: 1.875rem;
+    font-weight: bold;
+  }
+
+  .userInfo {
+    display: flex;
+    flex-direction: column;
+
+    .inputWrapper {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.25rem;
+      color: #8FA7B2;
+      height: 3.438rem;
+      align-items: center;
+
+      &:first-child {
+        margin-top: 2rem;
+      }
+
+      &:not(:first-child) {
+        // margin-top: 2.25rem;
+      }
+
+      .label {
+        width: 5rem;
+        font-size: 1.25rem;
+        color: #8FA7B2;
+      }
+
+      .input {
+        padding-left: 2rem;
+        width: 16rem;
+        font-size: 1.25rem;
+        height: 100%;
+        color: #34495E;
+        border: none;
+      }
+
+      .input:focus {
+        outline: none;
+      }
+
+      .input:disabled {
+        background-color: #fff;
+      }
+
+      .inputImg {
+        padding-left: 2rem;
+        width: 16rem;
+        height: 100%;
+        display: flex;
+        align-items: center;        
+
+        .img {
+          width: 3rem;
+          height: 3rem;
+        }
+      }
+
+      .btnEdit {
+        width: 5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        button {  
+          color: #8981D8;
+          background-color: #fff;
+          border: none;
+          font-size: 1.25rem;
+          cursor: pointer;
+          transition: 0.2s;
+
+        }
+
+        .btnEdit:hover {
+          filter: brightness(1.1);
+        }
+      }
+    }
+  }
+}
