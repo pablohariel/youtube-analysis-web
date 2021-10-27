@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+
 
 import { LeftBar } from '../../components/LeftBar'
 import { SecondaryTopBar } from '../../components/SecondaryTopBar'
@@ -7,16 +8,19 @@ import { CardList } from '../../components/CardList'
 import { Introdution } from '../../components/Introdution'
 
 import styles from './styles.module.scss'
+import { AuthContext } from '../../contexts/auth'
 
 const Home: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false)
 
+  const { user, signOut } = useContext(AuthContext)
+
   return (
     <div className={open ? styles.homeWrapperOpen : styles.homeWrapper}>
-      <LeftBar open={open} setOpen={setOpen} />
+      <LeftBar open={open} setOpen={setOpen} user={user} />
       <div className={styles.main}>
-        <TopBar user={null} />
-        <Introdution />
+        <TopBar user={user} />
+        {!user && <Introdution />}
         <SecondaryTopBar title='Análises' />
         <CardList />
       </div>

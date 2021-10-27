@@ -4,9 +4,8 @@
   position: fixed;
   left: 0;
   top: 0;
-  transition: 0.2s;
   background-color: #8981D8;
-
+  transition: 0.5s;
 
   .arrowBtn {
     width: 100%;
@@ -36,6 +35,8 @@
   .linkList {
     li {
       .link {
+        border: none;
+        background-color: transparent;
         width: 100%;
         display: flex;
         align-items: center;
@@ -89,7 +90,6 @@
   background-color: #8981D8;
   transition: 0.2s;
 
-
   .arrowBtn {
     width: 100%;
     border: none;
@@ -118,6 +118,8 @@
   .linkList {
     li {
       .link {
+        border: none;
+        background-color: transparent;
         width: 14rem;
         display: flex;
         align-items: center;
