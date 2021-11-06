@@ -26,13 +26,20 @@ const SignUp: React.FC = () => {
 
             <button className={styles.btnSignUpSubmit} type='submit'>Cadastrar</button>
           </form>
+
+          <div className={styles.divider}>
+            <span className={styles.borderLeft}></span>
+            <span className={styles.text}>OU</span>
+            <span className={styles.borderRight}></span>
+          </div>
+          
+
+          <button className={styles.btnLoginWithGoogle} type='submit' disabled>Entrar com o Google</button>
         </div>
 
         <p className={styles.textLogin}>Já possui conta? <Link to="/login" className={styles.linkLogin}>Login</Link></p>
 
       </main>
-
-      <Footer />
     </div>
   )
 }

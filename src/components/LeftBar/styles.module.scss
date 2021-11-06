@@ -1,4 +1,4 @@
-.leftBarWrapperClosed {
+.leftBarWrapper {
   height: 100vh;
   width: 5rem;
   position: fixed;
@@ -7,19 +7,17 @@
   background-color: #8981D8;
   transition: 0.5s;
 
-  .arrowBtn {
+  .logoBtn {
     width: 100%;
     border: none;
     background-color: #6A61C0;
     height: 4.625rem;
-
-    justify-content: flex-end;
-    display: flex;
+    justify-content: center;
     align-items: center;
-    padding-right: 1.625rem;
+    display: flex;
 
-    svg {
-      color: #8981D8;
+    img {
+      width: 40px;
     }
 
     &:hover {
@@ -39,10 +37,11 @@
         background-color: transparent;
         width: 100%;
         display: flex;
+        justify-content: center;
         align-items: center;
         height: 4rem;
-        padding-left: 1.25rem;
         transition: 0.5s;
+        
         
         svg {
           color: #6A61C0;
@@ -65,75 +64,10 @@
         }
       }
 
-      &:first-child {
-        margin-top: 2rem;
-      }
-    }
-
-    
-    .divider {
-      width: 80%;
-      background-color: #6A61C0;
-      height: 1px;
-      margin-top: 2rem;
-      margin-left: 10%;
-    }
-  }
-}
-
-.leftBarWrapperOpen {
-  height: 100vh;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 14rem;
-  background-color: #8981D8;
-  transition: 0.2s;
-
-  .arrowBtn {
-    width: 100%;
-    border: none;
-    background-color: #6A61C0;
-    height: 4.625rem;
-
-    justify-content: flex-end;
-    display: flex;
-    align-items: center;
-    padding-right: 1.625rem;
-
-    svg {
-      color: #8981D8;
-    }
-
-    &:hover {
-      cursor: pointer;
-      filter: brightness(0.9);
-      
-      svg {
-        color: #fff
-      }
-    }
-  }
-
-  .linkList {
-    li {
-      .link {
-        border: none;
-        background-color: transparent;
-        width: 14rem;
-        display: flex;
-        align-items: center;
-        padding-left: 1.25rem;
-        height: 4rem;
+      .linkSelected {
         
         svg {
-          color: #6A61C0;
-        }
-        
-        span {
-          display: block;
-          margin-left: 0.8rem;
-          color: #fff;
+          color: #FFF;
         }
 
         &:hover {
@@ -147,7 +81,7 @@
       }
 
       &:first-child {
-        margin-top: 2rem;
+        margin-top: 1rem;
       }
     }
 
@@ -161,3 +95,4 @@
     }
   }
 }
+

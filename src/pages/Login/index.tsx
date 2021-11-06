@@ -66,16 +66,24 @@ const Login: React.FC = () => {
               onChange={event => setPassword((event.target as HTMLInputElement).value)} 
             />
 
-            <a className={styles.linkForgotPassword} href="/">Esqueceu senha?</a>
             <button className={styles.btnLoginSubmit} type='submit'>Entrar</button>
           </form>
+
+          <a className={styles.linkForgotPassword} href="/">Esqueceu senha?</a>
+
+          <div className={styles.divider}>
+            <span className={styles.borderLeft}></span>
+            <span className={styles.text}>OU</span>
+            <span className={styles.borderRight}></span>
+          </div>
+          
+
+          <button className={styles.btnLoginWithGoogle} type='submit' disabled>Entrar com o Google</button>
         </div>
 
         <p className={styles.textSignUp}>Não possui conta? <Link to="/signup" className={styles.linkSignUp}>Cadastrar</Link></p>
 
       </main>
-
-      <Footer />
     </div>
   )
 }

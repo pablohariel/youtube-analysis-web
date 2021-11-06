@@ -6,7 +6,7 @@
   align-items: center;
 
   .menu {
-    width: 60vw;
+    width: 40vw;
     min-width: 40rem;
     display: flex;
     justify-content: space-between;
@@ -20,6 +20,10 @@
         align-items: flex-start;
         align-items: center;
         color: #fff;
+
+        img {
+          width: 4.5rem;
+        }
 
         .logoTitle {
           font-size: 2rem;

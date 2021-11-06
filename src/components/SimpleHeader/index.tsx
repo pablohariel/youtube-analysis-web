@@ -2,14 +2,15 @@ import { Link } from 'react-router-dom'
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
 import styles from './styles.module.scss'
 
+import logo from '../../assets/logo-white.svg'
+
 const SimpleHeader: React.FC = () => {
   return (
     <header className={styles.simpleHeaderWrapper}>
       <ul className={styles.menu}>
         <li className={styles.menuItem}>
           <Link className={styles.logoWrapper} to='/' >
-            <MdOutlineKeyboardArrowRight size={'4.5rem'} color={'#1AAE9F'} />
-            <p className={styles.logoTitle}>Youmine</p>
+            <img src={logo} />
           </Link>
         </li>
       </ul>

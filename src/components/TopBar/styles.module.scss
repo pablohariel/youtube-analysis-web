@@ -73,20 +73,26 @@
       padding: 0.688rem 0.938rem 0.688rem 0.938rem;
       border-radius: 0.313rem;
       border: none;
+      cursor: pointer;
+      transition: 0.2s;
     }
 
     .btnSignUp {
-      background-color: #8981D8;
+      background-color: #FFF;
       margin-right: 0.625rem;
+      color: #1B1B1D;
     }
 
     .btnSignIn {
-      background-color: #1AAE9F;
+      background-color: #8981D8;
     }
 
-    .btnSignUp, .btnSignIn:hover {
-      cursor: pointer;
-      
+    .btnSignIn:hover {
+      filter: brightness(1.1);
+    }
+
+    .btnSignUp:hover {
+      color: #8981D8;
     }
   }
 }

@@ -1,16 +1,19 @@
 .signUpWrapper {
   background-color: #8981D8;
-  height: 100vh;
+
+  button:hover {
+    filter: brightness(1.1);
+  }
 
   .main {
     background: -webkit-linear-gradient(#8981D8 20%, #F0F0F7 20%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 15.75rem;
+    padding-bottom: 8.875rem;
 
     .title {
-      margin-top: 0.125rem;
+      margin-top: -2rem;
       color: #fff;
       font-weight: bold;
       font-style: normal;
@@ -19,9 +22,12 @@
     }
 
     .card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       margin-top: 2.5rem;
       width: 29.125rem;
-      height: 29.375rem;
+      height: 38.875rem;
       background-color: #fff;
       border-radius: 0.625rem;
       padding: 3.875rem 2.813rem 0 2.813rem;
@@ -32,9 +38,9 @@
         flex-direction: column;
      
         .checkboxWrapper {
-          color: #8981D8;
-          align-self: flex-end;
-          margin-top: 1.75rem;
+          color: #8FA7B2;
+          align-self: center;
+          margin-top: 2rem;
           font-size: 1rem;
           display: flex;
 
@@ -44,19 +50,50 @@
         }
 
         .btnSignUpSubmit {
-          margin-top: 1.75rem;
-          height: 3.5rem;
-          background-color: #1AAE9F;
+          margin-top: 2rem;
+          background-color: #8981D8;
           color: #fff;
           border: none;
-          border-radius: 0.625rem;
+          border-radius: 0.313rem;
           font-size: 1.625rem;
           font-weight: bold;
+          height: 4.583rem;
+          cursor: pointer;
+          width: 23.443rem;
+        }
+      }
+
+      .divider {
+        width: 19.594rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1.375rem;
+        margin-bottom: 0.875rem;
+
+        .text {
+          margin-left: 0.625rem;
+          margin-right: 0.625rem;
+          color: rgba(143, 167, 178, 0.5);
         }
 
-        .btnSignUpSubmit:hover {
-          cursor: pointer;
+        .borderLeft, .borderRight {
+          width: 8.469rem;
+          height: 4px;
+          background-color: rgba(143, 167, 178, 0.5);
         }
+      }
+      .btnLoginWithGoogle {
+        height: 4.563rem;
+        width: 19.625rem;
+        background: rgba(137, 129, 216, 0.5);
+        border: none;
+        border-radius: 0.313rem;
+        color: #fff;
+        font-size: 1.625rem;
+        cursor: pointer;
+        transition: 0.2s;
       }
     }
 

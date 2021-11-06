@@ -11,13 +11,12 @@ import styles from './styles.module.scss'
 import { AuthContext } from '../../contexts/auth'
 
 const Home: React.FC = () => {
-  const [open, setOpen] = useState<boolean>(false)
 
   const { user, signOut } = useContext(AuthContext)
 
   return (
-    <div className={open ? styles.homeWrapperOpen : styles.homeWrapper}>
-      <LeftBar open={open} setOpen={setOpen} user={user} />
+    <div className={styles.homeWrapper}>
+      <LeftBar user={user} />
       <div className={styles.main}>
         <TopBar user={user} />
         {!user && <Introdution />}
