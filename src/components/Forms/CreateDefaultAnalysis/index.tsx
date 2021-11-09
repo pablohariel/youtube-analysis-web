@@ -71,13 +71,11 @@ interface IInputs {
 }
 
 const CreateDefaultAnalysis: React.FC = () => {
-  const { register, handleSubmit, watch,  } = useForm<IInputs>()
+  const { register, handleSubmit, watch } = useForm<IInputs>()
   const [creating, setCreating] = useState<boolean>(false)
   
 
   const onSubmit: SubmitHandler<IInputs> = async data => {
-  // const token = localStorage.getItem('@youmine:token')
-
     setCreating(true)
 
     const result = await api.post('/analysis', { 
