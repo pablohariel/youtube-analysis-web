@@ -1,36 +1,38 @@
 import { AiFillLike, AiFillDislike } from 'react-icons/ai'
+import { IAnalysis } from '../../contexts/analysis'
 
 import styles from './styles.module.scss'
 
-const Card: React.FC = () => {
+interface IProps {
+  analysis: IAnalysis
+}
+
+const Card: React.FC<IProps> = ({ analysis }) => {
+  const { videoData,  } = analysis
+  
   return (
     <div className={styles.cardWrapper}>
       <header className={styles.header}>
-        <span className={styles.analysisData}>20 Junho, 2017</span>
+        <span className={styles.analysisData}>{analysis.created_at}</span>
         <span className={styles.analysisUser}>User</span>
       </header>
       <main className={styles.main}>
-        <h1 className={styles.videoTitle}>Twiiter Responsivo com ReactJS | UI CLone #6</h1>
+        <h1 className={styles.videoTitle}>{videoData.title}</h1>
         <p className={styles.videoDescription}>
-          Faala dev!
-          Você já criou interfaces responsivas?
-          Bora aprimorar as habilidades?
-          Nesse episódio eu, Guilherme Rodz, desenvolvi uma aplicação em React reproduzindo a interface do Twitter!
-
-          Valeu! 💜
+          {videoData.description} 💜
         </p>
       </main>
       <footer className={styles.footer}>
         <div>
           <AiFillLike />
-          <span>2.6K</span>
+          <span>{videoData.statistics.likeCount}</span>
         </div>
         <div>  
           <AiFillDislike />
-          <span>19</span>
+          <span>{videoData.statistics.dislikeCount}</span>
         </div>
         <div>  
-          <span>311</span>
+          <span>{videoData.statistics.viewCount}</span>
         </div>
       </footer>
     </div>

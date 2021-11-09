@@ -56,7 +56,7 @@ const LeftBar: React.FC<IParams> = ({ user }) => {
             </Link>
           </li>
           <li>
-            <Link to='' className={`${styles.link} ${pathname === '/contact' && styles.linkSelected}`}>  
+            <Link to='/contact' className={`${styles.link} ${pathname === '/contact' && styles.linkSelected}`}>  
               <BsHeadset size={'2rem'} />
               <span>Entrar em contato</span>
             </Link>
@@ -83,7 +83,7 @@ const LeftBar: React.FC<IParams> = ({ user }) => {
             </Link>
           </li>
           <li>
-            <Link to='/' className={`${styles.link} ${pathname === '/contact' && styles.linkSelected}`}>  
+            <Link to='/contact' className={`${styles.link} ${pathname === '/contact' && styles.linkSelected}`}>  
               <MdHeadsetMic size={'2rem'} />
               <span>Entrar em contato</span>
             </Link>

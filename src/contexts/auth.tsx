@@ -1,6 +1,4 @@
-import { useState } from 'react'
-import { useEffect } from 'react'
-import { createContext } from 'react'
+import { useState, useEffect, createContext } from 'react'
 import { api } from '../services/api'
 
 export interface IUser {

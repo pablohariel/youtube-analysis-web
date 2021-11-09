@@ -9,10 +9,11 @@ import { Introdution } from '../../components/Introdution'
 
 import styles from './styles.module.scss'
 import { AuthContext } from '../../contexts/auth'
+import { AnalysisContext } from '../../contexts/analysis'
 
 const Home: React.FC = () => {
-
   const { user, signOut } = useContext(AuthContext)
+  const { analysis } = useContext(AnalysisContext)
 
   return (
     <div className={styles.homeWrapper}>
@@ -21,7 +22,7 @@ const Home: React.FC = () => {
         <TopBar user={user} />
         {!user && <Introdution />}
         <SecondaryTopBar title='Análises' />
-        <CardList />
+        <CardList analysis={analysis} />
       </div>
     </div>
   )

@@ -3,11 +3,19 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Archivo', sans-serif;
+  
+}
+
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none; /* Firefox */
 }
 
 a {
   text-decoration: none;
+  
 }
+
 
 @media only screen and (max-width: 620px) {
   * {
