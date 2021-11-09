@@ -1,4 +1,5 @@
 import { AiOutlinePlus } from 'react-icons/ai'
+import { Link } from 'react-router-dom'
 
 import styles from './styles.module.scss'
 
@@ -20,7 +21,7 @@ const SecondaryTopBar: React.FC<IProps> = ({ title }) => {
       <h1 className={styles.title}>{title}</h1>
       <div className={styles.btnCreateAnalysis}>
         
-        <button><AiOutlinePlus /><span>Criar nova análise</span></button>
+        <Link to='/analysis/create'><AiOutlinePlus /><span>Criar nova análise</span></Link>
       </div>
     </div>
   )

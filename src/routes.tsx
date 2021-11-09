@@ -5,6 +5,7 @@ import { Search } from './pages/Search';
 import { Login } from './pages/Login';
 import { SignUp } from './pages/SignUp';
 import { Profile } from './pages/Profile';
+import { CreateAnalysis } from './pages/CreateAnalysis';
 import { Contact } from './pages/Contact';
 
 const Routes: React.FC = () => {
@@ -16,6 +17,7 @@ const Routes: React.FC = () => {
                 <Route path="/login" component={Login} />
                 <Route path="/signup" component={SignUp} />
                 <Route path="/profile" component={Profile} />
+                <Route path="/analysis/create" component={CreateAnalysis} />
                 <Route path="/contact" component={Contact} />
             </Switch>
         </BrowserRouter>

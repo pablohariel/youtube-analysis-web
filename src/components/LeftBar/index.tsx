@@ -38,7 +38,7 @@ const LeftBar: React.FC<IParams> = ({ user }) => {
             </Link>
           </li>
           <li>
-            <Link to='/' className={`${styles.link} ${pathname === '/analysis/create' && styles.linkSelected}`}>  
+            <Link to='/analysis/create' className={`${styles.link} ${pathname === '/analysis/create' && styles.linkSelected}`}>  
               <AiFillPlusCircle size={'2rem'} />
               <span>Criar análise</span>
             </Link>
