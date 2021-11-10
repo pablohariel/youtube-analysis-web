@@ -70,20 +70,22 @@ interface IInputs {
   save: boolean
 }
 
-const CreateDefaultAnalysis: React.FC = () => {
+interface IProps {
+  videoId: string
+}
+
+const CreateDefaultAnalysis: React.FC<IProps> = ({ videoId }) => {
   const { register, handleSubmit, watch } = useForm<IInputs>()
   const [creating, setCreating] = useState<boolean>(false)
   
 
   const onSubmit: SubmitHandler<IInputs> = async data => {
     setCreating(true)
-
     const result = await api.post('/analysis', { 
-      videoId: "TPGZcfNVUGI",
+      videoId,
       type: 'default',
       ...data 
     })
-
     setCreating(false)
 
     console.log(result)

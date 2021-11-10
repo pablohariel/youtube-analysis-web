@@ -1,16 +1,15 @@
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 
 import { LeftBar } from '../../components/LeftBar'
 import { TopBar } from '../../components/TopBar'
-
 import { CreateDefaultAnalysis } from '../../components/Forms/CreateDefaultAnalysis'
+import { CreateMiningAnalysis } from '../../components/Forms/CreateMiningAnalysis'
 
 import { AuthContext } from '../../contexts/auth'
+import { api } from '../../services/api'
 
 import styles from './styles.module.scss'
-import { useState } from 'react'
-import { api } from '../../services/api'
 
 interface IInputs {
   videoUrl: string
@@ -27,6 +26,8 @@ const CreateAnalysis: React.FC = () => {
     setTypeSelected(event.target.value)
   }
 
+  let videoIdVerified = '' as string
+
   const verifyVideo: SubmitHandler<IInputs> = async data => {
     const { videoUrl } = data
     const url = new URL(videoUrl)
@@ -38,6 +39,7 @@ const CreateAnalysis: React.FC = () => {
         const result = await api.get(`/videos?videoId=${videoId}`)
       
         if(result.data) {
+          videoIdVerified = videoId
           setVideoIsValid(true)
         }
       } catch(error) {
@@ -54,20 +56,24 @@ const CreateAnalysis: React.FC = () => {
       <LeftBar user={user} />
       <div className={styles.main}>
         <TopBar user={user} />
+
         <h1>Create Analysis</h1>
+
         <form onSubmit={handleSubmit(verifyVideo)}>
           <input type='url' {...register('videoUrl')} placeholder='URL do Vídeo' />
           <button type='submit'>Verificar</button>
         </form>
+ 
         {videoIsValid &&
-        <>
-          <select value={typeSelected} onChange={handleChangeType}>
-            <option value='default'>Padrão</option>
-            <option value='mining'>Mineração</option>
-            <option value='complete'>Completa</option>
-          </select>
-          <CreateDefaultAnalysis />
-        </>
+          <>
+            <select value={typeSelected} onChange={handleChangeType}>
+              <option value='default'>Padrão</option>
+              <option value='mining'>Mineração</option>
+              <option value='complete'>Completa</option>
+            </select>
+            {typeSelected === 'default' && <CreateDefaultAnalysis videoId={videoIdVerified} />}
+            {typeSelected === 'mining' && <CreateMiningAnalysis videoId={videoIdVerified} />}
+          </>
         }
       </div>
     </div>
