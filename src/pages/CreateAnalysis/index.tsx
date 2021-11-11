@@ -18,15 +18,16 @@ interface IInputs {
 const CreateAnalysis: React.FC = () => {
   const { register, handleSubmit, watch } = useForm<IInputs>()
   const [typeSelected, setTypeSelected] = useState<string>('default')
-  const [videoIsValid, setVideoIsValid] = useState<boolean>(false)
+  const [video, setVideo] = useState<{ isValid: boolean, id: string }>({
+    isValid: false,
+    id: ''
+  })
 
   const { user } = useContext(AuthContext)
 
   const handleChangeType = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setTypeSelected(event.target.value)
   }
-
-  let videoIdVerified = '' as string
 
   const verifyVideo: SubmitHandler<IInputs> = async data => {
     const { videoUrl } = data
@@ -39,8 +40,7 @@ const CreateAnalysis: React.FC = () => {
         const result = await api.get(`/videos?videoId=${videoId}`)
       
         if(result.data) {
-          videoIdVerified = videoId
-          setVideoIsValid(true)
+          setVideo({ isValid: true, id: videoId })
         }
       } catch(error) {
         alert('Vídeo não encontrado')
@@ -64,15 +64,15 @@ const CreateAnalysis: React.FC = () => {
           <button type='submit'>Verificar</button>
         </form>
  
-        {videoIsValid &&
+        {video.isValid &&
           <>
             <select value={typeSelected} onChange={handleChangeType}>
               <option value='default'>Padrão</option>
               <option value='mining'>Mineração</option>
               <option value='complete'>Completa</option>
             </select>
-            {typeSelected === 'default' && <CreateDefaultAnalysis videoId={videoIdVerified} />}
-            {typeSelected === 'mining' && <CreateMiningAnalysis videoId={videoIdVerified} />}
+            {typeSelected === 'default' && <CreateDefaultAnalysis videoId={video.id} />}
+            {typeSelected === 'mining' && <CreateMiningAnalysis videoId={video.id} />}
           </>
         }
       </div>
