@@ -1,4 +1,4 @@
-import { WordRelatedToVideoTitle } from '../services/analysis/utils/default/getWordsRelatedToVideoTitle'
+import { WordRelatedToVideoTitle } from './wordRelatedToVideoTitle'
 import { Comment, CommentAnalyzed, CommentsGroupedByPolarityNoComments } from './comment'
 import { CommentsFromWord, CommentsFromPhrase, CommentsFromUser } from './commentFromData'
 import { CommentUser } from './commentUser'
@@ -10,7 +10,6 @@ import { JoinedWord } from './word'
 import { WordsTogether } from './wordsTogether'
 
 interface MiningResponse {
-  type: 'default' | 'mining' | 'complete',
   requestData: MiningRequest,
   videoData: VideoData,
   content: {
@@ -23,7 +22,6 @@ interface MiningResponse {
 }
 
 interface DefaultResponse {
-  type: 'default' | 'mining' | 'complete',
   requestData: DefaultRequest,
   videoData: VideoData,
   content: {

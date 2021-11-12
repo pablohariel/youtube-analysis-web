@@ -1,5 +1,6 @@
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useContext, useState } from 'react'
+import { useBeforeunload } from 'react-beforeunload'
 
 import { LeftBar } from '../../components/LeftBar'
 import { TopBar } from '../../components/TopBar'
@@ -9,7 +10,10 @@ import { CreateMiningAnalysis } from '../../components/Forms/CreateMiningAnalysi
 import { AuthContext } from '../../contexts/auth'
 import { api } from '../../services/api'
 
+import { DefaultResponse, MiningResponse } from '../../interfaces/responseData'
+
 import styles from './styles.module.scss'
+import { Analysis } from '../../components/Analysis'
 
 interface IInputs {
   videoUrl: string
@@ -21,6 +25,9 @@ const CreateAnalysis: React.FC = () => {
   const [video, setVideo] = useState<{ isValid: boolean, id: string }>({
     isValid: false,
     id: ''
+  })
+  const [analysis, setAnalysis] = useState<{ created: boolean, content?: DefaultResponse | MiningResponse }>({
+    created: false
   })
 
   const { user } = useContext(AuthContext)
@@ -51,30 +58,39 @@ const CreateAnalysis: React.FC = () => {
     }
   } 
 
+  useBeforeunload(() => 'Todos dados serão perdidos')
+
   return (
     <div className={styles.createAnalysisWrapper}>
       <LeftBar user={user} />
       <div className={styles.main}>
         <TopBar user={user} />
 
-        <h1>Create Analysis</h1>
-
-        <form onSubmit={handleSubmit(verifyVideo)}>
-          <input type='url' {...register('videoUrl')} placeholder='URL do Vídeo' />
-          <button type='submit'>Verificar</button>
-        </form>
- 
-        {video.isValid &&
+        { analysis.created && analysis.content ?
+           <Analysis analysis={analysis.content} />
+          :
           <>
-            <select value={typeSelected} onChange={handleChangeType}>
-              <option value='default'>Padrão</option>
-              <option value='mining'>Mineração</option>
-              <option value='complete'>Completa</option>
-            </select>
-            {typeSelected === 'default' && <CreateDefaultAnalysis videoId={video.id} />}
-            {typeSelected === 'mining' && <CreateMiningAnalysis videoId={video.id} />}
+            <h1>Create Analysis</h1>
+
+            <form onSubmit={handleSubmit(verifyVideo)}>
+              <input type='url' {...register('videoUrl')} placeholder='URL do Vídeo' />
+              <button type='submit'>Verificar</button>
+            </form>
+
+            {video.isValid &&
+              <>
+                <select value={typeSelected} onChange={handleChangeType}>
+                  <option value='default'>Padrão</option>
+                  <option value='mining'>Mineração</option>
+                  <option value='complete'>Completa</option>
+                </select>
+                {typeSelected === 'default' && <CreateDefaultAnalysis videoId={video.id} setAnalysis={setAnalysis} />}
+                {typeSelected === 'mining' && <CreateMiningAnalysis videoId={video.id} />}
+              </>
+            }
           </>
         }
+        
       </div>
     </div>
   )

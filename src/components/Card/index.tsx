@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router-dom'
 import { AiFillLike, AiFillDislike } from 'react-icons/ai'
 import { IAnalysis } from '../../contexts/analysis'
 
@@ -8,10 +9,12 @@ interface IProps {
 }
 
 const Card: React.FC<IProps> = ({ analysis }) => {
-  const { videoData,  } = analysis
+  const { videoData, id } = analysis
+
+  const history = useHistory()
   
   return (
-    <div className={styles.cardWrapper}>
+    <div className={styles.cardWrapper} onClick={() => history.push(`/analysis/${id}`)}>
       <header className={styles.header}>
         <span className={styles.analysisData}>{analysis.created_at}</span>
         <span className={styles.analysisUser}>User</span>

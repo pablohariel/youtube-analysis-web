@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { DefaultResponse, MiningResponse } from '../../../interfaces/responseData'
 import { api } from '../../../services/api'
 
 interface IInputs {
@@ -71,24 +72,26 @@ interface IInputs {
 }
 
 interface IProps {
-  videoId: string
+  videoId: string,
+  setAnalysis: React.Dispatch<React.SetStateAction<{
+    created: boolean;
+    content?: DefaultResponse | MiningResponse | undefined;
+  }>>
 }
 
-const CreateDefaultAnalysis: React.FC<IProps> = ({ videoId }) => {
+const CreateDefaultAnalysis: React.FC<IProps> = ({ videoId, setAnalysis }) => {
   const { register, handleSubmit, watch } = useForm<IInputs>()
   const [creating, setCreating] = useState<boolean>(false)
   
 
   const onSubmit: SubmitHandler<IInputs> = async data => {
     setCreating(true)
-    const result = await api.post('/analysis', { 
+    const result = await api.post<DefaultResponse>('/analysis', { 
       videoId,
       type: 'default',
       ...data 
     })
-    setCreating(false)
-
-    console.log(result)
+    setAnalysis({ created: true, content: result.data })
   }
 
   return (
