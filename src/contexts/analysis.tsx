@@ -62,6 +62,7 @@ export interface IMiningAnalysis {
 
 interface AnalysisContextData {
   analysis: (IDefaultAnalysis | IMiningAnalysis)[]
+  setAnalysis: React.Dispatch<React.SetStateAction<(IDefaultAnalysis | IMiningAnalysis)[]>>
 }
 
 const AnalysisContext = createContext({} as AnalysisContextData)
@@ -76,7 +77,7 @@ const AnalysisProvider: React.FC = ({ children }) => {
   }, [])
 
   return (
-    <AnalysisContext.Provider value={{ analysis }}>
+    <AnalysisContext.Provider value={{ analysis, setAnalysis }}>
       {children}
     </AnalysisContext.Provider>
   )

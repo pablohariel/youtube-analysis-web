@@ -1,5 +1,7 @@
 import { AiOutlinePlus } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
+import { ButtonGroup, Button, IconButton } from '@chakra-ui/react'
+import { AddIcon } from '@chakra-ui/icons'
 
 import styles from './styles.module.scss'
 
@@ -21,7 +23,12 @@ const SecondaryTopBar: React.FC<IProps> = ({ title }) => {
       <h1 className={styles.title}>{title}</h1>
       <div className={styles.btnCreateAnalysis}>
         
-        <Link to='/analysis/create'><AiOutlinePlus /><span>Criar nova análise</span></Link>
+        <Link to='/analysis/create'>
+          <ButtonGroup size="sm" isAttached variant="outline">
+            <Button mr="-px">Criar nova análise</Button>
+            <IconButton aria-label="Add to friends" icon={<AddIcon />} />
+          </ButtonGroup>
+        </Link>
       </div>
     </div>
   )

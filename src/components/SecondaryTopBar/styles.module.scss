@@ -56,9 +56,9 @@
   .title {
     flex: 1;
     text-align: center;
-    font-size: 1.875rem;
     color: #34495E;
-    font-weight: normal;
+    font-size: 1.875rem;
+    font-weight: bold;
   }
 
   .btnCreateAnalysis {
@@ -69,18 +69,18 @@
     align-items: flex-end;
 
     button {
-      font-size: 1.125rem;
+      // font-size: 1.125rem;
       color: #8981D8;
-      background-color: transparent;
-      border: none;
-      padding-bottom: 0.688rem;
+      // background-color: transparent;
+      // border: none;
+      // padding-bottom: 0.688rem;
 
-      display: flex;
-      align-items: center;
+      // display: flex;
+      // align-items: center;
 
-      svg {
-        margin-right: 0.6rem;
-      }
+      // svg {
+      //   margin-right: 0.6rem;
+      // }
 
       cursor: pointer;
     }

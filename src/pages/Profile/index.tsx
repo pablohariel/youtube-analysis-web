@@ -11,8 +11,6 @@ import { useHistory } from 'react-router-dom'
 const Profile: React.FC = () => {
   const history = useHistory()
 
-  const [open, setOpen] = useState<boolean>(false)
-
   const { user, setUser } = useContext(AuthContext)
 
   useEffect(() => {
@@ -25,7 +23,7 @@ const Profile: React.FC = () => {
     <div className={styles.profileWrapper}>
       {user && (
         <>
-          <LeftBar open={open} setOpen={setOpen} user={user} />
+          <LeftBar user={user} />
           <div className={styles.main}>
             <TopBar user={user} />
               <div className={styles.userInfo}>

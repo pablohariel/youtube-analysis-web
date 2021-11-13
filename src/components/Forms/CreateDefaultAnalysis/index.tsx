@@ -10,6 +10,7 @@ import { Checkbox } from '../../../components/Checkbox'
 import { api } from '../../../services/api'
 
 import styles from './styles.module.scss'
+import { useEffect } from 'react'
 
 export interface IInputs {
   options: {
@@ -159,16 +160,17 @@ const CreateDefaultAnalysis: React.FC<IProps> = ({ videoId, setAnalysis }) => {
   const [creating, setCreating] = useState<boolean>(false)
   
 
+
   const onSubmit: SubmitHandler<IInputs> = async data => {
     console.log(data)
 
-    // setCreating(true)
-    // const result = await api.post<DefaultResponse>('/analysis', { 
-    //   videoId,
-    //   type: 'default',
-    //   ...data 
-    // })
-    // setAnalysis({ created: true, content: result.data })
+    setCreating(true)
+    const result = await api.post<DefaultResponse>('/analysis', { 
+      videoId,
+      type: 'default',
+      ...data 
+    })
+    setAnalysis({ created: true, content: result.data })
   }
 
   return (

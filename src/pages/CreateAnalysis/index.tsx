@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { useBeforeunload } from 'react-beforeunload'
 // import { Select, MenuItem, SelectChangeEvent } from '@mui/material'
 import { Button, ButtonGroup, Image, Input, Divider, Select } from "@chakra-ui/react"
@@ -19,6 +19,7 @@ import { DefaultResponse, MiningResponse } from '../../interfaces/responseData'
 import styles from './styles.module.scss'
 import { Analysis } from '../../components/Analysis'
 import { VideoData } from '../../interfaces/videoData'
+import { AnalysisContext, IDefaultAnalysis, IMiningAnalysis } from '../../contexts/analysis'
 
 interface IInputs {
   videoUrl: string
@@ -37,10 +38,20 @@ const CreateAnalysis: React.FC = () => {
   })
 
   const { user } = useContext(AuthContext)
+  const { setAnalysis: setContextAnalysis } = useContext(AnalysisContext)
 
   const handleChangeType = (event: React.FormEvent<HTMLSelectElement>) => {
     setTypeSelected(event.currentTarget.value)
   }
+
+  useEffect(() => {
+    if(analysis.created) {
+      api.get<(IDefaultAnalysis | IMiningAnalysis)[]>('/analysis').then(response => {
+        setContextAnalysis(response.data)
+      })
+    }
+    console.log('new analysis!!')
+  }, [analysis])
 
   const verifyVideo: SubmitHandler<IInputs> = async data => {
 
