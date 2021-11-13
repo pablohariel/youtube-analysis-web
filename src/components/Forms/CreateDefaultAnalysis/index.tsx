@@ -1,9 +1,17 @@
 import { useState } from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm, SubmitHandler, Controller } from 'react-hook-form'
+// import { Switch } from '@mui/material'
+import { Switch, Button, Select } from "@chakra-ui/react"
+
 import { DefaultResponse, MiningResponse } from '../../../interfaces/responseData'
+
+import { Checkbox } from '../../../components/Checkbox'
+
 import { api } from '../../../services/api'
 
-interface IInputs {
+import styles from './styles.module.scss'
+
+export interface IInputs {
   options: {
     commentCount: {
       checked: boolean
@@ -56,8 +64,6 @@ interface IInputs {
     topComentingUser: {
       checked: boolean
       includeCommentReplies: boolean
-      avoidAccentuation: boolean
-      caseSensitive: boolean
     }
     commentsLanguage: {
       checked: boolean
@@ -68,7 +74,8 @@ interface IInputs {
       includeCommentReplies: boolean
     }
   }
-  save: boolean
+  privacy: 'public' | 'private'
+  save: boolean 
 }
 
 interface IProps {
@@ -80,256 +87,504 @@ interface IProps {
 }
 
 const CreateDefaultAnalysis: React.FC<IProps> = ({ videoId, setAnalysis }) => {
-  const { register, handleSubmit, watch } = useForm<IInputs>()
+  const { handleSubmit, watch, control } = useForm<IInputs>({
+    defaultValues: {
+      options: {
+        commentCount: {
+          checked: false,
+          includeCommentReplies: false
+        },
+        commentsPolarity: {
+          checked: false,
+          includeCommentReplies: false
+        }, 
+        topPositiveComments: {
+          checked: false,
+          includeCommentReplies: false
+        },
+        topNegativeComments: {
+          checked: false,
+          includeCommentReplies: false
+        },
+        topComentingUser: {
+          checked: false,
+          includeCommentReplies: false
+        },
+        mostLikedComment: {
+          checked: false,
+          includeCommentReplies: false
+        },
+        mostRepliesComment: {
+          checked: false
+        },
+        wordCount: {
+          checked: false,
+          includeCommentReplies: false,
+          avoidAccentuation: false,
+          caseSensitive: false,
+          includeRepeatedWords: false
+        },
+        topWords: {
+          checked: false,
+          includeCommentReplies: false,
+          avoidAccentuation: false,
+          caseSensitive: false,
+        },
+        topWordsUsedTogether: {
+          checked: false,
+          includeCommentReplies: false,
+          avoidAccentuation: false,
+          caseSensitive: false,
+        },
+        wordsRelatedToVideoTitle: {
+          checked: false,
+          includeCommentReplies: false,
+          avoidAccentuation: false,
+          caseSensitive: false,
+        },
+        commentsLanguage: {
+          checked: false,
+          includeCommentReplies: false
+        },
+        commentsPublicationData: {
+          checked: false,
+          includeCommentReplies: false
+        }
+      },
+      privacy: 'public',
+      save: false
+    }
+
+  })
   const [creating, setCreating] = useState<boolean>(false)
   
 
   const onSubmit: SubmitHandler<IInputs> = async data => {
-    setCreating(true)
-    const result = await api.post<DefaultResponse>('/analysis', { 
-      videoId,
-      type: 'default',
-      ...data 
-    })
-    setAnalysis({ created: true, content: result.data })
+    console.log(data)
+
+    // setCreating(true)
+    // const result = await api.post<DefaultResponse>('/analysis', { 
+    //   videoId,
+    //   type: 'default',
+    //   ...data 
+    // })
+    // setAnalysis({ created: true, content: result.data })
   }
 
   return (
-    <>
-    {creating ? <h1>Criando análise...</h1> : 
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label>
-          <input type='checkbox'  {...register('options.commentCount.checked')} />
-          Contagem de comentários
-        </label>
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.defaultFormWrapper}>
+      
+
+      <div className={styles.option}>
+        <Controller 
+          control={control}
+          name='options.commentCount.checked'
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Checkbox text='Contagem de comentários' onChange={onChange} onBlur={onBlur} checked={value} />
+          )}
+        />
+          
         {watch('options.commentCount.checked') && 
-          <>
-            <input type='checkbox' {...register('options.commentCount.includeCommentReplies')} />
-            Incluir respostas dos comentários
-          </>
+          <div className={styles.filters}>
+            <div>
+              <Controller 
+                control={control}
+                name='options.commentCount.includeCommentReplies'
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Checkbox text='Incluir respostas dos comentários' onChange={onChange} onBlur={onBlur} checked={value} />
+                )}
+              />
+            </div>
+          </div>
         }
       </div>
 
-      <div>
-        <label>
-          <input type='checkbox'  {...register('options.commentsPolarity.checked')} />
-          Polaridade dos comentários
-        </label>
+      <div className={styles.option}>
+        <Controller 
+          control={control}
+          name='options.commentsPolarity.checked'
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Checkbox text='Polaridade dos comentários' onChange={onChange} onBlur={onBlur} checked={value} />
+          )}
+        />
         {watch('options.commentsPolarity.checked') && 
-          <>
-            <input type='checkbox' {...register('options.commentsPolarity.includeCommentReplies')} />
-            Incluir respostas dos comentários
-          </>
+          <div className={styles.filters}>
+            <div>
+              <Controller 
+                control={control}
+                name='options.commentsPolarity.includeCommentReplies'
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Checkbox text='Incluir respostas dos comentários' onChange={onChange} onBlur={onBlur} checked={value} />
+                )}
+              />
+            </div>
+          </div>
         }
       </div>
 
-      <div>
-        <label>
-          <input type='checkbox'  {...register('options.topPositiveComments.checked')} />
-          Principais comentários positivos
-        </label>
+      <div className={styles.option}>
+        <Controller 
+          control={control}
+          name='options.topPositiveComments.checked'
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Checkbox text='Principais comentários positivos' onChange={onChange} onBlur={onBlur} checked={value} />
+          )}
+        />
         {watch('options.topPositiveComments.checked') && 
-          <>
-            <input type='checkbox' {...register('options.topPositiveComments.includeCommentReplies')} />
-            Incluir respostas dos comentários
-          </>
+          <div className={styles.filters}>
+            <div>
+              <Controller 
+                control={control}
+                name='options.topPositiveComments.includeCommentReplies'
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Checkbox text='Incluir respostas dos comentários' onChange={onChange} onBlur={onBlur} checked={value} />
+                )}
+              />
+            </div>
+          </div>
         }
       </div>
 
-      <div>
-        <label>
-          <input type='checkbox'  {...register('options.topNegativeComments.checked')} />
-          Principais comentários negativos
-        </label>
+      <div className={styles.option}>
+        <Controller 
+          control={control}
+          name='options.topNegativeComments.checked'
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Checkbox text='Principais comentários negativos' onChange={onChange} onBlur={onBlur} checked={value} />
+          )}
+        />
         {watch('options.topNegativeComments.checked') && 
-          <>
-            <input type='checkbox' {...register('options.topNegativeComments.includeCommentReplies')} />
-            Incluir respostas dos comentários
-          </>
+          <div className={styles.filters}>
+            <div>
+              <Controller 
+                control={control}
+                name='options.topNegativeComments.includeCommentReplies'
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Checkbox text='Incluir respostas dos comentários' onChange={onChange} onBlur={onBlur} checked={value} />
+                )}
+              />
+            </div>
+          </div>
         }
       </div>
 
-      <div>
-        <label>
-          <input type='checkbox'  {...register('options.mostLikedComment.checked')} />
-          Comentários com mais curtidas
-        </label>
+      <div className={styles.option}>
+        <Controller 
+          control={control}
+          name='options.mostLikedComment.checked'
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Checkbox text='Comentários com mais curtidas' onChange={onChange} onBlur={onBlur} checked={value} />
+          )}
+        />
         {watch('options.mostLikedComment.checked') && 
-          <>
-            <input type='checkbox' {...register('options.mostLikedComment.includeCommentReplies')} />
-            Incluir respostas dos comentários
-          </>
+          <div className={styles.filters}>
+            <div>
+              <Controller 
+                control={control}
+                name='options.mostLikedComment.includeCommentReplies'
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Checkbox text='Incluir respostas dos comentários' onChange={onChange} onBlur={onBlur} checked={value} />
+                )}
+              />
+            </div>
+          </div>
         }
       </div>
 
-      <div>
-        <label>
-          <input type='checkbox'  {...register('options.mostRepliesComment.checked')} />
-          Comentários com mais respostas
-        </label>
+      <div className={styles.option}>
+        <Controller 
+          control={control}
+          name='options.mostRepliesComment.checked'
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Checkbox text='Comentário com mais respostas' onChange={onChange} onBlur={onBlur} checked={value} />
+          )}
+        />
       </div>
       
-      <div>
-        <label>
-          <input type='checkbox'  {...register('options.wordCount.checked')} />
-          Contagem de palavras
-        </label>
+      <div className={styles.option}>
+        <Controller 
+          control={control}
+          name='options.wordCount.checked'
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Checkbox text='Contagem de palavras' onChange={onChange} onBlur={onBlur} checked={value} />
+          )}
+        />
         {watch('options.wordCount.checked') && 
-          <>
-            <label>
-              <input type='checkbox' {...register('options.wordCount.includeCommentReplies')} />
-              Incluir respostas dos comentários
-            </label>
-            <label>
-              <input type='checkbox' {...register('options.wordCount.avoidAccentuation')} />
-              Ignorar acentuação
-            </label>
-            <label>
-              <input type='checkbox' {...register('options.wordCount.caseSensitive')} />
-              Diferenciar letras maiusculas de minusculas
-            </label>
-            <label>
-              <input type='checkbox' {...register('options.wordCount.includeRepeatedWords')} />
-              Contar palavras repetidas
-            </label>
-          </>
+          <div className={styles.filters}>
+            <div>
+              <Controller 
+                control={control}
+                name='options.wordCount.includeCommentReplies'
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Checkbox text='Incluir respostas dos comentários' onChange={onChange} onBlur={onBlur} checked={value} />
+                )}
+              />
+            </div>
+            <div>
+              <Controller 
+                control={control}
+                name='options.wordCount.avoidAccentuation'
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Checkbox text='Ignorar acentuação' onChange={onChange} onBlur={onBlur} checked={value} />
+                )}
+              />
+            </div>
+            <div>
+              <Controller 
+                control={control}
+                name='options.wordCount.caseSensitive'
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Checkbox text='Diferenciar letras maiusculas de minusculas' onChange={onChange} onBlur={onBlur} checked={value} />
+                )}
+              />
+            </div>
+            <div>
+              <Controller 
+                control={control}
+                name='options.wordCount.includeRepeatedWords'
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Checkbox text='Contar palavras repetidas' onChange={onChange} onBlur={onBlur} checked={value} />
+                )}
+              />
+            </div>
+          </div>
         }
       </div>
 
-      <div>
-        <label>
-          <input type='checkbox'  {...register('options.topWords.checked')} />
-          Principais palavras
-        </label>
+      <div className={styles.option}>
+        <Controller 
+          control={control}
+          name='options.topWords.checked'
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Checkbox text='Principais palavras' onChange={onChange} onBlur={onBlur} checked={value} />
+          )}
+        />
         {watch('options.topWords.checked') && 
-          <>
-            <label>
-              <input type='checkbox' {...register('options.topWords.includeCommentReplies')} />
-              Incluir respostas dos comentários
-            </label>
-            <label>
-              <input type='checkbox' {...register('options.topWords.avoidAccentuation')} />
-              Ignorar acentuação
-            </label>
-            <label>
-              <input type='checkbox' {...register('options.topWords.caseSensitive')} />
-              Diferenciar letras maiusculas de minusculas
-            </label>
-          </>
+          <div className={styles.filters}>
+            <div>
+              <Controller 
+                control={control}
+                name='options.topWords.includeCommentReplies'
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Checkbox text='Incluir respostas dos comentários' onChange={onChange} onBlur={onBlur} checked={value} />
+                )}
+              />
+            </div>
+            <div>
+              <Controller 
+                control={control}
+                name='options.topWords.avoidAccentuation'
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Checkbox text='Ignorar acentuação' onChange={onChange} onBlur={onBlur} checked={value} />
+                )}
+              />
+            </div>
+            <div>
+              <Controller 
+                control={control}
+                name='options.topWords.caseSensitive'
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Checkbox text='Diferenciar letras maiusculas de minusculas' onChange={onChange} onBlur={onBlur} checked={value} />
+                )}
+              />
+            </div>
+          </div>
         }
       </div>
 
-      <div>
-        <label>
-          <input type='checkbox'  {...register('options.topWordsUsedTogether.checked')} />
-          Principais palavras usadas em conjunto
-        </label>
+      <div className={styles.option}>
+        <Controller 
+          control={control}
+          name='options.topWordsUsedTogether.checked'
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Checkbox text='Principais palavras usadas em conjunto' onChange={onChange} onBlur={onBlur} checked={value} />
+          )}
+        />
         {watch('options.topWordsUsedTogether.checked') && 
-          <>
-            <label>
-              <input type='checkbox' {...register('options.topWordsUsedTogether.includeCommentReplies')} />
-              Incluir respostas dos comentários
-            </label>
-            <label>
-              <input type='checkbox' {...register('options.topWordsUsedTogether.avoidAccentuation')} />
-              Ignorar acentuação
-            </label>
-            <label>
-              <input type='checkbox' {...register('options.topWordsUsedTogether.caseSensitive')} />
-              Diferenciar letras maiusculas de minusculas
-            </label>
-          </>
+          <div className={styles.filters}>
+            <div>
+              <Controller 
+                control={control}
+                name='options.topWordsUsedTogether.includeCommentReplies'
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Checkbox text='Incluir respostas dos comentários' onChange={onChange} onBlur={onBlur} checked={value} />
+                )}
+              />
+            </div>
+            <div>
+              <Controller 
+                control={control}
+                name='options.topWordsUsedTogether.avoidAccentuation'
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Checkbox text='Ignorar acentuação' onChange={onChange} onBlur={onBlur} checked={value} />
+                )}
+              />
+            </div>
+            <div>
+              <Controller 
+                control={control}
+                name='options.topWordsUsedTogether.caseSensitive'
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Checkbox text='Diferenciar letras maiusculas de minusculas' onChange={onChange} onBlur={onBlur} checked={value} />
+                )}
+              />
+            </div>
+          </div>
         }
       </div>
 
-      <div>
-        <label>
-          <input type='checkbox'  {...register('options.wordsRelatedToVideoTitle.checked')} />
-          Palavras relacionadas ao título do vídeo
-        </label>
+      <div className={styles.option}>
+        <Controller 
+          control={control}
+          name='options.wordsRelatedToVideoTitle.checked'
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Checkbox text='Palavras relacionadas ao título do vídeo' onChange={onChange} onBlur={onBlur} checked={value} />
+          )}
+        />
         {watch('options.wordsRelatedToVideoTitle.checked') && 
-          <>
-            <label>
-              <input type='checkbox' {...register('options.wordsRelatedToVideoTitle.includeCommentReplies')} />
-              Incluir respostas dos comentários
-            </label>
-            <label>
-              <input type='checkbox' {...register('options.wordsRelatedToVideoTitle.avoidAccentuation')} />
-              Ignorar acentuação
-            </label>
-            <label>
-              <input type='checkbox' {...register('options.wordsRelatedToVideoTitle.caseSensitive')} />
-              Diferenciar letras maiusculas de minusculas
-            </label>
-          </>
+          <div className={styles.filters}>
+            <div>
+              <Controller 
+                control={control}
+                name='options.wordsRelatedToVideoTitle.includeCommentReplies'
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Checkbox text='Incluir respostas dos comentários' onChange={onChange} onBlur={onBlur} checked={value} />
+                )}
+              />
+            </div>
+            <div>
+              <Controller 
+                control={control}
+                name='options.wordsRelatedToVideoTitle.avoidAccentuation'
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Checkbox text='Ignorar acentuação' onChange={onChange} onBlur={onBlur} checked={value} />
+                )}
+              />
+            </div>
+            <div>
+              <Controller 
+                control={control}
+                name='options.wordsRelatedToVideoTitle.caseSensitive'
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Checkbox text='Diferenciar letras maiusculas de minusculas' onChange={onChange} onBlur={onBlur} checked={value} />
+                )}
+              />
+            </div>
+          </div>
         }
       </div>
 
-      <div>
-        <label>
-          <input type='checkbox'  {...register('options.topComentingUser.checked')} />
-          Usuário com mais comentários
-        </label>
+      <div className={styles.option}>
+        <Controller 
+          control={control}
+          name='options.topComentingUser.checked'
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Checkbox text='Usuário com mais comentários' onChange={onChange} onBlur={onBlur} checked={value} />
+          )}
+        />
         {watch('options.topComentingUser.checked') && 
-          <>
-            <label>
-              <input type='checkbox' {...register('options.topComentingUser.includeCommentReplies')} />
-              Incluir respostas dos comentários
-            </label>
-            <label>
-              <input type='checkbox' {...register('options.topComentingUser.avoidAccentuation')} />
-              Ignorar acentuação
-            </label>
-            <label>
-              <input type='checkbox' {...register('options.topComentingUser.caseSensitive')} />
-              Diferenciar letras maiusculas de minusculas
-            </label>
-          </>
+          <div className={styles.filters}>
+            <div>
+              <Controller 
+                control={control}
+                name='options.topComentingUser.includeCommentReplies'
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Checkbox text='Incluir respostas dos comentários' onChange={onChange} onBlur={onBlur} checked={value} />
+                )}
+              />
+            </div>
+          </div>
         }
       </div>
 
-      <div>
-        <label>
-          <input type='checkbox'  {...register('options.commentsLanguage.checked')} />
-          Idioma dos comentários
-        </label>
+      <div className={styles.option}>
+        <Controller 
+          control={control}
+          name='options.commentsLanguage.checked'
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Checkbox text='Idioma dos comentários' onChange={onChange} onBlur={onBlur} checked={value} />
+          )}
+        />
         {watch('options.commentsLanguage.checked') && 
-          <>
-            <label>
-              <input type='checkbox' {...register('options.commentsLanguage.includeCommentReplies')} />
-              Incluir respostas dos comentários
-            </label>
-          </>
+          <div className={styles.filters}>
+            <div>
+              <Controller 
+                control={control}
+                name='options.commentsLanguage.includeCommentReplies'
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Checkbox text='Incluir respostas dos comentários' onChange={onChange} onBlur={onBlur} checked={value} />
+                )}
+              />
+            </div>
+          </div>
         }
       </div>
 
-      <div>
-        <label>
-          <input type='checkbox'  {...register('options.commentsPublicationData.checked')} />
-          Data de publicação dos comentários
-        </label>
+      <div className={styles.option}>
+        <Controller 
+          control={control}
+          name='options.commentsPublicationData.checked'
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Checkbox text='Data de publicação dos comentários' onChange={onChange} onBlur={onBlur} checked={value} />
+          )}
+        />
         {watch('options.commentsPublicationData.checked') && 
-          <>
-            <label>
-              <input type='checkbox' {...register('options.commentsPublicationData.includeCommentReplies')} />
-              Incluir respostas dos comentários
-            </label>
-          </>
+          <div className={styles.filters}>
+            <div>
+              <Controller 
+                control={control}
+                name='options.commentsPublicationData.includeCommentReplies'
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Checkbox text='Incluir respostas dos comentários' onChange={onChange} onBlur={onBlur} checked={value} />
+                )}
+              />
+            </div>
+          </div>
         }
       </div>
 
-      <div>
+      {watch('save') && (
+        <div className={styles.privacy}>
+          <label className={styles.subtitle}>
+            Privacidade
+          </label>
+          <div className={styles.select}>
+            <Controller 
+              control={control}
+              name='privacy'
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Select 
+                  id='selectType'
+                  value={value}
+                  onChange={onChange}
+                >
+                  <option value='public'>Pública</option>
+                  <option value='private'>Privada</option>
+                </Select>
+              )}
+            />
+          </div>
+          
+        </div>
+      )}
+
+      <div className={styles.save}>
         <label>
-          <input type='checkbox'  {...register('save')} />
           Salvar
         </label>
-      </div>
+        
+        <Controller 
+          control={control}
+          name='save'
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Switch onChange={onChange} checked={value} />
+          )}
+        />
+      </div>  
       
-      <button type='submit'>Enviar</button>
+      <Button className={styles.submitBtn} _hover={{ backgroundColor: '#8981D8 '}} isLoading={creating} type='submit'>Enviar</Button>
+      <Button className={styles.resetBtn} _hover={{ backgroundColor: '#D4C2FF '}} type='reset'>Resetar</Button>
     </form>
-    }
-    </>
   )
 }
 

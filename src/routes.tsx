@@ -7,6 +7,7 @@ import { SignUp } from './pages/SignUp'
 import { Profile } from './pages/Profile'
 import { CreateAnalysis } from './pages/CreateAnalysis'
 import { Analysis } from './pages/Analysis'
+import { History } from './pages/History'
 import { Contact } from './pages/Contact'
 
 const Routes: React.FC = () => {
@@ -20,6 +21,7 @@ const Routes: React.FC = () => {
                 <Route path="/profile" component={Profile} />
                 <Route path="/analysis/create" component={CreateAnalysis} />
                 <Route path="/analysis/:id" component={Analysis} />
+                <Route path="/history" component={History} />
                 <Route path="/contact" component={Contact} />
             </Switch>
         </BrowserRouter>
