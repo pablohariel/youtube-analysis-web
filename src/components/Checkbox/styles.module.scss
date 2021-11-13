@@ -1,0 +1,12 @@
+.checkboxWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  color: #34495E;
+  border-color: #34495E;
+
+  span {
+    margin-left: 10px;
+  }
+}
