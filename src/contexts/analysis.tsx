@@ -1,6 +1,6 @@
 import { useState, createContext } from "react"
 
-import { DefaultRequest, MiningRequest } from '../interfaces/requestData'
+import { CompleteRequest, DefaultRequest, MiningRequest } from '../interfaces/requestData'
 import { Comment, CommentAnalyzed, CommentsGroupedByPolarityNoComments } from '../interfaces/comment'
 import { JoinedPhrase } from '../interfaces/joinedPhrase'
 import { VideoData } from '../interfaces/videoData'
@@ -60,18 +60,50 @@ export interface IMiningAnalysis {
   updated_at: string
 }
 
+export interface ICompleteAnalysis {
+  id: string
+  userId: string
+  user: IUser
+  requestData: CompleteRequest
+  videoData: VideoData
+  content: {
+    commentCount?: number
+    commentsPolarity?: CommentsGroupedByPolarityNoComments,
+    topPositiveComments?: CommentAnalyzed[]
+    topNegativeComments?: CommentAnalyzed[]
+    mostLikedComment?: Comment
+    mostRepliesComment?: Comment
+    wordCount?: number
+    topWords?: JoinedWord[]
+    topWordsUsedTogether?: WordsTogether[]
+    wordsRelatedToVideoTitle?: WordRelatedToVideoTitle[]
+    topComentingUser?: IUser
+    commentsLanguage?: LanguagesCount
+    commentsPublicationData?: string[]
+    words?: JoinedWord[]
+    phrases?: JoinedPhrase[]
+    commentsFromWords?: CommentsFromWord[]
+    commentsFromPhrases?: CommentsFromPhrase[]
+    commentsFromUsers?: CommentsFromUser[]
+  }
+  viewCount: number
+  privacy: 'private' | 'public'
+  created_at: string
+  updated_at: string
+}
+
 interface AnalysisContextData {
-  analysis: (IDefaultAnalysis | IMiningAnalysis)[]
-  setAnalysis: React.Dispatch<React.SetStateAction<(IDefaultAnalysis | IMiningAnalysis)[]>>
+  analysis: (IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis)[]
+  setAnalysis: React.Dispatch<React.SetStateAction<(IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis)[]>>
 }
 
 const AnalysisContext = createContext({} as AnalysisContextData)
 
 const AnalysisProvider: React.FC = ({ children }) => {
-  const [analysis, setAnalysis] = useState<(IDefaultAnalysis | IMiningAnalysis)[]>([])
+  const [analysis, setAnalysis] = useState<(IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis)[]>([])
 
   useEffect(() => {
-    api.get<(IDefaultAnalysis | IMiningAnalysis)[]>('/analysis').then(response => {
+    api.get<(IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis)[]>('/analysis').then(response => {
       setAnalysis(response.data)
     })
   }, [])

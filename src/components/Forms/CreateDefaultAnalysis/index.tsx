@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
 // import { Switch } from '@mui/material'
-import { Switch, Button, Select } from "@chakra-ui/react"
+import { Switch, Button, Select } from '@chakra-ui/react'
 
 import { DefaultResponse, MiningResponse } from '../../../interfaces/responseData'
 

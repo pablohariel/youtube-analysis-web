@@ -10,6 +10,7 @@ import { LeftBar } from '../../components/LeftBar'
 import { TopBar } from '../../components/TopBar'
 import { CreateDefaultAnalysis } from '../../components/Forms/CreateDefaultAnalysis'
 import { CreateMiningAnalysis } from '../../components/Forms/CreateMiningAnalysis'
+import { CreateCompleteAnalysis } from '../../components/Forms/CreateCompleteAnalysis'
 
 import { AuthContext } from '../../contexts/auth'
 import { api } from '../../services/api'
@@ -141,6 +142,7 @@ const CreateAnalysis: React.FC = () => {
                     </label>
                     {typeSelected === 'default' && <CreateDefaultAnalysis videoId={video.id} setAnalysis={setAnalysis} />}
                     {typeSelected === 'mining' && <CreateMiningAnalysis videoId={video.id} setAnalysis={setAnalysis} />}
+                    {typeSelected === 'complete' && <CreateCompleteAnalysis videoId={video.id} setAnalysis={setAnalysis} />}
                   </div>
                   
                 </>
