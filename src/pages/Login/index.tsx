@@ -3,8 +3,6 @@ import { Link, useHistory } from 'react-router-dom'
 import { api } from '../../services/api'
 
 import { SimpleHeader } from '../../components/SimpleHeader'
-import { Input } from '../../components/Input'
-import { Footer } from '../../components/Footer'
 
 import styles from './styles.module.scss'
 import { FormEvent, useState, useContext } from 'react'
@@ -50,16 +48,16 @@ const Login: React.FC = () => {
         <h1 className={styles.title}>Bem Vindo!</h1>
         <div className={styles.card}>
           <form className={styles.cardForm} onSubmit={handleLogin}>
-            <Input 
-              formType='login' 
+            <input 
+              className={styles.input}
               type='email' 
               placeholder='Email' 
               value={email} 
               onChange={event => setEmail((event.target as HTMLInputElement).value)} 
             />
-            <Input 
+            <input 
+              className={styles.input}
               style={{ marginTop: '1.125rem' }} 
-              formType='login' 
               type='password' 
               placeholder='Senha' 
               value={password} 

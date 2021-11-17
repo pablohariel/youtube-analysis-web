@@ -5,6 +5,8 @@ import { AddIcon } from "@chakra-ui/icons"
 
 import { api } from '../../../services/api'
 
+import { DefaultResponse, MiningResponse } from '../../../interfaces/responseData'
+
 import { Checkbox } from '../../Checkbox'
 
 import styles from './styles.module.scss'
@@ -47,10 +49,14 @@ interface IInputs {
 }
 
 interface IProps {
-  videoId: string
+  videoId: string,
+  setAnalysis: React.Dispatch<React.SetStateAction<{
+    created: boolean;
+    content?: DefaultResponse | MiningResponse | undefined;
+  }>>
 }
 
-const CreateMiningAnalysis: React.FC<IProps> = ({ videoId }) => {
+const CreateMiningAnalysis: React.FC<IProps> = ({ videoId, setAnalysis }) => {
   const { register, handleSubmit, watch, control } = useForm<IInputs>({
     defaultValues: {
       options: {
@@ -109,7 +115,7 @@ const CreateMiningAnalysis: React.FC<IProps> = ({ videoId }) => {
   console.log(videoId)
 
   const onSubmit: SubmitHandler<IInputs> = async data => {
-    // setCreating(true)
+    setCreating(true)
 
     const { options, privacy, save } = data
 
@@ -149,9 +155,9 @@ const CreateMiningAnalysis: React.FC<IProps> = ({ videoId }) => {
 
     console.log(finalData)
 
-    // const result = await api.post('/analysis', finalData)
+    const result = await api.post<MiningResponse>('/analysis', finalData)
 
-    // setCreating(false)
+    setAnalysis({ created: true, content: result.data })
 
     // console.log(result)
   }
