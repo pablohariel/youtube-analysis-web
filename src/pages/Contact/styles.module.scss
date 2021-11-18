@@ -1,0 +1,72 @@
+.contactWrapper {
+  padding-left: 5rem;
+  background-color: #F0F0F7;
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 8.875rem;
+
+    .title {
+      margin-top: 1.75rem;
+      color: #34495E;
+      font-size: 1.875rem;
+      font-weight: bold;
+    }
+    
+    .card {
+      box-shadow: 0.25rem 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
+      background-color: #fff;
+      margin-top: 4.125rem;
+      width: 37.5rem;
+      padding: 2.875rem 4.5rem;
+      border-radius: 0.313rem;
+
+      .subtitle {
+        color: #34495E;
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .form {
+        margin-top: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        label {
+          &:not(:first-child) {
+            margin-top: 2.5rem;
+          }
+
+          .input, .textarea {
+            width: 28.5rem;
+          }
+
+          .input {
+            height: 3.313rem;
+          }
+
+          .textarea {
+            min-height: 12rem;
+            max-height: 14rem;
+          }
+        }
+
+        .btnSubmit {
+          background-color: #8981D8;
+          font-size: 1.625rem;
+          color: #fff;
+          margin-top: 2.5rem;
+          height: 3.875rem;
+          width: 28.5rem;
+        }
+
+        .text {
+          text-align: center;
+        }
+      }
+    }
+  }
+}

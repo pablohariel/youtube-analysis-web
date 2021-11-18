@@ -1,0 +1,21 @@
+.divider {
+  width: 19.594rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.375rem;
+  margin-bottom: 0.875rem;
+
+  .text {
+    margin-left: 0.625rem;
+    margin-right: 0.625rem;
+    color: rgba(143, 167, 178, 0.5);
+  }
+
+  .borderLeft, .borderRight {
+    width: 8.469rem;
+    height: 4px;
+    background-color: rgba(143, 167, 178, 0.5);
+  }
+}

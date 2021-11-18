@@ -9,7 +9,7 @@ import { LeftBar } from '../../components/LeftBar'
 import { TopBar } from '../../components/TopBar'
 
 import styles from './styles.module.scss'
-import { DefaultResponse, MiningResponse } from '../../interfaces/responseData'
+import { CompleteResponse, DefaultResponse, MiningResponse } from '../../interfaces/responseData'
 
 const Analysis: React.FC = () => {
   const { id } = useParams() as { id: string }
@@ -28,7 +28,7 @@ const Analysis: React.FC = () => {
         {analysis ? (
             <div>
               <h1>{analysis.videoData.title}</h1>
-              <AnalysisCard analysis={analysis as (DefaultResponse | MiningResponse)} />
+              <AnalysisCard analysis={analysis as (DefaultResponse | MiningResponse | CompleteResponse)} />
             </div>
           ) 
             :

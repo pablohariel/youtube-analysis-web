@@ -1,7 +1,7 @@
-import { DefaultResponse, MiningResponse } from '../../interfaces/responseData'
+import { CompleteResponse, DefaultResponse, MiningResponse } from '../../interfaces/responseData'
 
 interface IProps {
-  analysis: DefaultResponse | MiningResponse
+  analysis: DefaultResponse | MiningResponse | CompleteResponse
 }
 
 const Analysis: React.FC<IProps> = ({ analysis }) => {

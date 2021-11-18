@@ -1,6 +1,6 @@
 import { useEffect, useContext, useState } from 'react'
 
-import { AnalysisContext, IDefaultAnalysis, IMiningAnalysis } from "../../contexts/analysis"
+import { AnalysisContext, ICompleteAnalysis, IDefaultAnalysis, IMiningAnalysis } from "../../contexts/analysis"
 import { AuthContext } from "../../contexts/auth"
 
 import { LeftBar } from '../../components/LeftBar'
@@ -11,7 +11,7 @@ import { CardList } from '../../components/CardList'
 import styles from './styles.module.scss'
 
 const History: React.FC = () => {
-  const [history, setHistory] = useState<(IDefaultAnalysis | IMiningAnalysis)[]>([])
+  const [history, setHistory] = useState<(IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis)[]>([])
 
   const { analysis: allAnalysis } = useContext(AnalysisContext)
   const { user } = useContext(AuthContext)
@@ -19,7 +19,7 @@ const History: React.FC = () => {
   useEffect(() => {
     const result = allAnalysis.filter((analysis) => analysis.userId === user?.id)
     setHistory(result)
-  })
+  }, [allAnalysis])
 
   return (
     <div className={styles.historyWrapper}>

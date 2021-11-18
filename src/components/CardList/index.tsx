@@ -1,10 +1,10 @@
-import { IAnalysis } from '../../contexts/analysis'
+import { IDefaultAnalysis, IMiningAnalysis, ICompleteAnalysis  } from '../../contexts/analysis'
 import { Card } from '../Card'
 
 import styles from './styles.module.scss'
 
 interface IProps {
-  analysis: IAnalysis[]
+  analysis: (IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis)[]
 }
 
 const CardList: React.FC<IProps> = ({ analysis }) => {
