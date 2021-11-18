@@ -18,7 +18,7 @@ const TopBar: React.FC<IProps> = ({ user }) => {
   return (  
     <header className={styles.topBarWrapper}>
       <div className={styles.searchBarWrapper}>
-        <Link to={`/search?query=${search}`}><RiSearch2Line size={'2rem'} /></Link>
+        <Link to={`/search?query=${search}`}><RiSearch2Line size={'1.6rem'} /></Link>
         <input className={styles.searchBarInput} placeholder='Procurar análise' value={search} onChange={event => setSearch((event.target as HTMLInputElement).value)} />
       </div>
 
