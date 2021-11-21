@@ -22,7 +22,7 @@ const Home: React.FC = () => {
         <TopBar user={user} />
         {!user && <Introdution />}
         <SecondaryTopBar title='Análises' />
-        <CardList analysis={analysis} />
+        <CardList analysis={analysis} isHistory={false} />
       </div>
     </div>
   )

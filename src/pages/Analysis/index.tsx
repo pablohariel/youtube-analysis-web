@@ -24,18 +24,20 @@ const Analysis: React.FC = () => {
       <LeftBar user={user} />
       <div className={styles.main}>
         <TopBar user={user} />
-        <h1>Análise</h1>
-        {analysis ? (
-            <div>
-              <h1>{analysis.videoData.title}</h1>
-              <AnalysisCard analysis={analysis as (DefaultResponse | MiningResponse | CompleteResponse)} />
-            </div>
-          ) 
-            :
-          (
-            <h3>Análise não encontrada</h3>
-          )
-        }
+          <main className={styles.main}>
+            <h1 className={styles.title}>Dados da análise:</h1>
+            {analysis ? (
+                <div>
+                  <AnalysisCard analysis={analysis as (DefaultResponse | MiningResponse | CompleteResponse)} />
+                </div>
+              ) 
+                :
+              (
+                <h3>Análise não encontrada</h3>
+              )
+            }
+          </main>
+        
       </div>
      
     </div>

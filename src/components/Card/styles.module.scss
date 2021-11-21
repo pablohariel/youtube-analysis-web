@@ -10,7 +10,9 @@
   flex-direction: column;
   justify-content: flex-start;
 
-  cursor: pointer;
+  .analysisHandler {
+    display: none;
+  }
 
   .header {
     display: flex;
@@ -24,6 +26,11 @@
     .videoTitle {
       font-size: 1.125rem;
       font-weight: bold;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: #7E7E7E underline;
+      }
     }
 
     .videoDescription {
@@ -46,6 +53,36 @@
       svg {
         margin-right: 0.2rem;
       }
+    }
+  }
+}
+
+.historyCardWrapper {
+  transition: 0.2s;
+  padding-top: 0;
+  padding-right: 0;
+
+  .header, .main, .footer {
+    margin-right: 1.5rem;
+  }
+
+  .analysisHandler {
+    display: flex;
+    padding-right: 1.5rem;
+    justify-content: flex-end;
+    color: black;
+    border-radius: 0.313rem;  
+
+    button {
+      padding: 0;
+      border: none;
+
+      svg {
+        color: #8981D8;
+      }
+    }
+    span {
+      cursor: pointer;
     }
   }
 }

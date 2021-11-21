@@ -1,0 +1,85 @@
+.analysisCardWrapper {
+  width: 63.75rem;
+  background: #FFFFFF;
+  box-shadow: 0.25rem 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
+  border-radius: 0.313rem;
+
+  .header {
+    display: flex;
+
+    .videoImg {
+      border-radius: 0.313rem;
+      width: 33.875rem;
+      min-width: 33.875rem;
+      height: 23rem;
+      max-height: 23rem;
+    }
+
+    .videoInfo {
+      border-bottom: 1px solid rgba(212, 194, 255, 0.5) ;
+      padding: 1rem 1rem 0rem 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .title {
+        line-height: 2.75rem;
+        font-size: 2.5rem;
+        color: #34495E;
+        font-weight: bold;
+      }
+
+      .channelInfoWrapper {
+        display: flex;
+        margin-top: 0.625rem;
+
+        .channelImg {
+          width: 25px;
+          max-width: 1.563rem;
+          height: 25px;
+          border-radius: 50%;
+        }
+
+        .channelTitle {
+          font-size: 0.875rem;
+          font-weight: normal;
+          color: #34495E;
+          margin-left: 0.375rem;
+        }
+      }
+
+      .videoStatistics {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+
+        div {
+          margin-right: 1.25rem;
+          display: flex;
+          align-items: center;
+
+          svg {
+            color: #D4C2FF;
+          }
+
+          span {
+            color: #34495E;
+            margin-left: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+
+  .content {
+    padding: 4.375rem;
+
+    h3 {
+      font-size: 1.875rem;
+      color: #34495E;
+      font-weight: bold;
+    }
+  }
+}

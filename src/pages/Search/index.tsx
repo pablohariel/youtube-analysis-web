@@ -36,7 +36,7 @@ const Search: React.FC = (props) => {
       <main>
         <TopBar user={user} />
         <SecondaryTopBar title={`Análises encontradas com o título "${queryValue}"`} />
-        <CardList analysis={analysisFound} />
+        <CardList analysis={analysisFound} isHistory={false} />
       </main>
     </div>
   )

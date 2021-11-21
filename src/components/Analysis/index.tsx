@@ -1,4 +1,26 @@
+import { RiThumbUpFill, RiThumbDownFill, RiQuestionAnswerFill, RiCalendarFill } from 'react-icons/ri'
+
 import { CompleteResponse, DefaultResponse, MiningResponse } from '../../interfaces/responseData'
+
+import { CommentsPolarity } from './components/default/CommentsPolarity'
+import { TopPositiveComments } from './components/default/TopPositiveComments'
+import { TopNegativeComments } from './components/default/TopNegativeComments'
+import { MostLikedComment } from './components/default/MostLikedComment'
+import { MostRepliesComment } from './components/default/MostRepliesComment'
+import { TopCommentingUser } from './components/default/TopCommentingUser'
+import { CommentsLanguage } from './components/default/CommentsLanguage'
+import { WordsRelatedToVideoTitle } from './components/default/WordsRelatedToVideoTitle'
+import { WordCount } from './components/default/WordCount'
+import { CommentCount } from './components/default/CommentCount'
+import { TopWords } from './components/default/TopWords'
+import { TopWordsUsedTogether } from './components/default/TopWordsUsedTogether'
+import { ListWords } from './components/mining/ListWords'
+import { CommentsFromWords } from './components/mining/CommentsFromWords'
+import { CommentsFromPhrases } from './components/mining/CommentsFromPhrases'
+import { ListPhrases } from './components/mining/ListPhrases'
+import { CommentsFromUsers } from './components/mining/CommentsFromUsers'
+
+import styles from './styles.module.scss'
 
 interface IProps {
   analysis: DefaultResponse | MiningResponse | CompleteResponse
@@ -6,6 +28,10 @@ interface IProps {
 
 const Analysis: React.FC<IProps> = ({ analysis }) => {
   const { type } = analysis.requestData
+
+  const handleDownload = () => {
+    console.log('handle download clicked!')
+  }
 
   if(type === 'default') {
     const { content, requestData, videoData } = analysis as DefaultResponse
@@ -26,110 +52,103 @@ const Analysis: React.FC<IProps> = ({ analysis }) => {
       wordsRelatedToVideoTitle
     } = content
 
+    console.log(videoData.thumbnail)
+    videoData.statistics
+
     return (
-      <div>
-        <h1>Análise realizada com sucesso. Resultados:</h1>
-        <header>
-          <img src={videoData.thumbnail} width='100px' height='100px' />
-          <h2>{videoData.title}</h2>
+      <div className={styles.analysisCardWrapper}>
+        <header className={styles.header}>
+          <img className={styles.videoImg} src={videoData.thumbnail} />
+          <div className={styles.videoInfo}>
+            <div>
+              <h2 className={styles.title}>{videoData.title}</h2>
+              <div className={styles.channelInfoWrapper}> 
+                <img className={styles.channelImg} src={videoData.channelDetails.thumbnail} />
+                <h3 className={styles.channelTitle}>{videoData.channelDetails.title}</h3>
+              </div>
+            </div>
+            <div className={styles.videoStatistics}>
+              
+              <div className={styles.likeCount}>
+                <RiThumbUpFill />
+                <span>{videoData.statistics.likeCount}</span>
+              </div>
+              <div className={styles.dislikeCount}>
+                <RiThumbDownFill />
+                <span>{videoData.statistics.dislikeCount}</span>
+              </div>
+              <div className={styles.commentCount}>
+                <RiQuestionAnswerFill />
+                <span>{videoData.statistics.commentCount}</span>
+              </div>
+              <div className={styles.videoDate}>
+                <RiCalendarFill />
+                <span>{videoData.published_at}</span>
+              </div>
+            </div>
+          </div>
         </header>
         {type === 'default' && (
-          <div>
+          <div className={styles.content}>
             {/* Polaridade dos comentários */}
             { options.commentsPolarity && (
-              <div>
-                <h3>Polaridade dos comentários</h3>
-                {JSON.stringify(commentsPolarity)}
-              </div>
+              <CommentsPolarity commentsPolarity={commentsPolarity} />
             )}
 
             {/* Principais comentários positivos */}
             { options.topPositiveComments && (
-              <div>
-                <h3>Principais comentários positivos</h3>
-                {JSON.stringify(topPositiveComments)}
-              </div>
+              <TopPositiveComments comments={topPositiveComments} />
             )}
 
             {/* Principais comentários negativos */}
             { options.topNegativeComments && (
-              <div>
-                <h3>Principais comentários negativos</h3>
-                {JSON.stringify(topNegativeComments)}
-              </div>
+              <TopNegativeComments comments={topNegativeComments} />
             )}
 
             {/* Contagem de comentários */}
             { options.commentCount && (
-              <div>
-                <h3>Contagem de comentários</h3>
-                <p>Foram encontrados um total de <strong>{commentCount}</strong> comentários</p>
-              </div>
+              <CommentCount count={commentCount} />
             )}
 
             {/* Comentário com mais curtidas */}
             { options.mostLikedComment && (
-              <div>
-                <h3>Comentário com mais curtidas</h3>
-                <p>{mostLikedComment?.content}</p>
-              </div>
+              <MostLikedComment comment={mostLikedComment} />
             )}
 
             {/* Idioma dos comentários */}
             { options.commentsLanguage && (
-              <div>
-                <h3>Idioma dos comentários</h3>
-                <p>{JSON.stringify(commentsLanguage)}</p>
-              </div>
+              <CommentsLanguage languages={commentsLanguage} />
             )}
 
 
             {/* Comentário com mais respostas */}
             { options.mostRepliesComment && (
-              <div>
-                <h3>Comentário com mais respostas</h3>
-                <p>{JSON.stringify(mostRepliesComment)}</p>
-              </div>
+              <MostRepliesComment comment={mostRepliesComment} />
             )}
 
             {/* Usuário com mais comentários */}
             { options.topComentingUser && (
-              <div>
-                <h3>Usuário com mais comentários</h3>
-                <p>{JSON.stringify(topComentingUser)}</p>
-              </div>
+              <TopCommentingUser user={topComentingUser} />
             )}
 
             {/* Contagem de palavras */}
             { options.wordCount && (
-              <div>
-                <h3>Contagem de palavras</h3>
-                <p>Foram encontrados um total de <strong>{wordCount}</strong> palavras</p>
-              </div>
+              <WordCount count={wordCount} />
             )}
 
             {/* Principais palavras */}
             { options.topWords && (
-              <div>
-                <h3>Principais palavras</h3>
-                <p>{JSON.stringify(topWords)}</p>
-              </div>
+              <TopWords words={topWords} />
             )}
 
             {/* Principais palavras usadas em conjunto */}
             { options.topWordsUsedTogether && (
-              <div>
-                <h3>Principais palavras usadas em conjunto</h3>
-                <p>{JSON.stringify(topWordsUsedTogether)}</p>
-              </div>
+              <TopWordsUsedTogether words={topWordsUsedTogether} />
             )}
 
             {/* Palavras relacionadas ao título do vídeo */}
             { options.wordsRelatedToVideoTitle && (
-              <div>
-                <h3>Palavras relacionadas ao título do vídeo</h3>
-                <p>{JSON.stringify(wordsRelatedToVideoTitle)}</p>
-              </div>
+              <WordsRelatedToVideoTitle words={wordsRelatedToVideoTitle} />
             )}
           </div>
         )}
@@ -149,54 +168,64 @@ const Analysis: React.FC<IProps> = ({ analysis }) => {
     } = content
 
     return (
-      <div>
-        <h1>Análise realizada com sucesso. Resultados:</h1>
-        <header>
-          <img src={videoData.thumbnail} width='100px' height='100px' />
-          <h2>{videoData.title}</h2>
-        </header>
-          <div>
-            {/* Palavras mineradas */}
-            { options.wordsToFindWords && (
-              <div>
-                <h3>Palavras mineradas</h3>
-                {JSON.stringify(words)}
+      <div className={styles.analysisCardWrapper} id='analysisCardWrapper'>
+        <header className={styles.header}>
+          <img className={styles.videoImg} src={videoData.thumbnail} />
+          <div className={styles.videoInfo}>
+            <div>
+              <h2 className={styles.title}>{videoData.title}</h2>
+              <div className={styles.channelInfoWrapper}> 
+                <img className={styles.channelImg} src={videoData.channelDetails.thumbnail} />
+                <h3 className={styles.channelTitle}>{videoData.channelDetails.title}</h3>
               </div>
-            )}
-
-            {/* Frases mineradas */}
-            { options.phrasesToFindPhrases && (
-              <div>
-                <h3>Frases mineradas</h3>
-                {JSON.stringify(phrases)}
+            </div>
+            <div className={styles.videoStatistics}>
+              <div className={styles.likeCount}>
+                <RiThumbUpFill />
+                <span>{videoData.statistics.likeCount}</span>
               </div>
-            )}
-
-            {/* Comentários de palavras específicas */}
-            { options.wordsToFindComments && (
-              <div>
-                <h3>Comentários de palavras específicas</h3>
-                {JSON.stringify(commentsFromWords)}
+              <div className={styles.dislikeCount}>
+                <RiThumbDownFill />
+                <span>{videoData.statistics.dislikeCount}</span>
               </div>
-            )}
-
-            {/* Comentários de frases específicas */}
-            { options.phrasesToFindComments && (
-              <div>
-                <h3>Comentários de frases específicas</h3>
-                {JSON.stringify(commentsFromPhrases)}
+              <div className={styles.commentCount}>
+                <RiQuestionAnswerFill />
+                <span>{videoData.statistics.commentCount}</span>
               </div>
-            )}
-
-              {/* Comentários de usuários específicos */}
-            { options.usersToFindComments && (
-              <div>
-                <h3>Comentários de usuários específicos</h3>
-                {JSON.stringify(commentsFromUsers)}
+              <div className={styles.videoDate}>
+                <RiCalendarFill />
+                <span>{videoData.published_at}</span>
               </div>
-            )}
-
+            </div>
           </div>
+        </header>
+        <div className={styles.content}>
+          {/* Palavras mineradas */}
+          { options.wordsToFindWords && (
+            <ListWords words={words} />
+          )}
+
+          {/* Frases mineradas */}
+          { options.phrasesToFindPhrases && (
+            <ListPhrases phrases={phrases} />
+          )}
+
+          {/* Comentários de palavras específicas */}
+          { options.wordsToFindComments && (
+            <CommentsFromWords comments={commentsFromWords} />
+          )}
+
+          {/* Comentário  s de frases específicas */}
+          { options.phrasesToFindComments && (
+            <CommentsFromPhrases comments={commentsFromPhrases} />
+          )}
+
+            {/* Comentários de usuários específicos */}
+          { options.usersToFindComments && (
+            <CommentsFromUsers comments={commentsFromUsers} />
+          )}
+        </div>
+        <button onClick={handleDownload}>Download</button>
       </div>
     )
 

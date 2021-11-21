@@ -28,7 +28,7 @@ const History: React.FC = () => {
         <TopBar user={user} />
         <SecondaryTopBar title='Histórico' />
         <div>
-          {history.length > 0 ? <CardList analysis={history} />:
+          {history.length > 0 ? <CardList analysis={history} isHistory />:
           (
             <h1>No analysis found</h1>
           )

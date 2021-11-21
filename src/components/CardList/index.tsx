@@ -5,9 +5,10 @@ import styles from './styles.module.scss'
 
 interface IProps {
   analysis: (IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis)[]
+  isHistory: boolean
 }
 
-const CardList: React.FC<IProps> = ({ analysis }) => {
+const CardList: React.FC<IProps> = ({ analysis, isHistory }) => {
   console.log('cardlist', analysis)
 
   return (
@@ -18,7 +19,7 @@ const CardList: React.FC<IProps> = ({ analysis }) => {
         <span className={styles.selectedFilter}>Todas</span>
       </div>
       <div className={styles.cardList}>
-        {analysis.map(item => <li><Card analysis={item} /></li>)}
+        {analysis.map(item => <li><Card analysis={item} isHistory={isHistory} /></li>)}
       </div>
     </div>
   )
