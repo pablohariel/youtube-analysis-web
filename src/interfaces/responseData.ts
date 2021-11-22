@@ -37,7 +37,7 @@ interface DefaultResponse {
     wordsRelatedToVideoTitle?: WordRelatedToVideoTitle[],
     topComentingUser?: CommentUser,
     commentsLanguage?: LanguagesCount,
-    commentsPublicationData?: string[]
+    commentsPublicationDate?: string[]
   }
 }
 
@@ -57,7 +57,7 @@ interface CompleteResponse {
     wordsRelatedToVideoTitle?: WordRelatedToVideoTitle[],
     topComentingUser?: CommentUser,
     commentsLanguage?: LanguagesCount,
-    commentsPublicationData?: string[]
+    commentsPublicationDate?: string[]
     words?: JoinedWord[],
     phrases?: JoinedPhrase[],
     commentsFromWords?: CommentsFromWord[],

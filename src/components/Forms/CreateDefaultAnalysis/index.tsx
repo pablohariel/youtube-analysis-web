@@ -70,7 +70,7 @@ export interface IInputs {
       checked: boolean
       includeCommentReplies: boolean
     }
-    commentsPublicationData: {
+    commentsPublicationDate: {
       checked: boolean
       includeCommentReplies: boolean
     }
@@ -147,7 +147,7 @@ const CreateDefaultAnalysis: React.FC<IProps> = ({ videoId, setAnalysis }) => {
           checked: false,
           includeCommentReplies: false
         },
-        commentsPublicationData: {
+        commentsPublicationDate: {
           checked: false,
           includeCommentReplies: false
         }
@@ -525,17 +525,17 @@ const CreateDefaultAnalysis: React.FC<IProps> = ({ videoId, setAnalysis }) => {
       <div className={styles.option}>
         <Controller 
           control={control}
-          name='options.commentsPublicationData.checked'
+          name='options.commentsPublicationDate.checked'
           render={({ field: { onChange, onBlur, value } }) => (
             <Checkbox text='Data de publicação dos comentários' onChange={onChange} onBlur={onBlur} checked={value} />
           )}
         />
-        {watch('options.commentsPublicationData.checked') && 
+        {watch('options.commentsPublicationDate.checked') && 
           <div className={styles.filters}>
             <div>
               <Controller 
                 control={control}
-                name='options.commentsPublicationData.includeCommentReplies'
+                name='options.commentsPublicationDate.includeCommentReplies'
                 render={({ field: { onChange, onBlur, value } }) => (
                   <Checkbox text='Incluir respostas dos comentários' onChange={onChange} onBlur={onBlur} checked={value} />
                 )}

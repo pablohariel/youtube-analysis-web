@@ -74,7 +74,7 @@ interface DefaultRequest {
     wordsRelatedToVideoTitle?: DefaultRequestWordFilters
     topComentingUser?: DefaultRequestCommentFilters
     commentsLanguage?: DefaultRequestCommentFilters
-    commentsPublicationData?: DefaultRequestCommentFilters
+    commentsPublicationDate?: DefaultRequestCommentFilters
   },
   save: boolean
 }
@@ -96,7 +96,7 @@ interface CompleteRequest {
     wordsRelatedToVideoTitle?: DefaultRequestWordFilters
     topComentingUser?: DefaultRequestCommentFilters
     commentsLanguage?: DefaultRequestCommentFilters
-    commentsPublicationData?: DefaultRequestCommentFilters
+    commentsPublicationDate?: DefaultRequestCommentFilters
     wordsToFindWords?: {
       content: string[]
       filters: MiningRequestWordFilters

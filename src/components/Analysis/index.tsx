@@ -1,4 +1,5 @@
 import { RiThumbUpFill, RiThumbDownFill, RiQuestionAnswerFill, RiCalendarFill } from 'react-icons/ri'
+import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
 
 import { CompleteResponse, DefaultResponse, MiningResponse } from '../../interfaces/responseData'
 
@@ -19,6 +20,7 @@ import { CommentsFromWords } from './components/mining/CommentsFromWords'
 import { CommentsFromPhrases } from './components/mining/CommentsFromPhrases'
 import { ListPhrases } from './components/mining/ListPhrases'
 import { CommentsFromUsers } from './components/mining/CommentsFromUsers'
+import { CommentsPublicationDate } from './components/default/CommentsPublicationDate';
 
 import styles from './styles.module.scss'
 
@@ -30,7 +32,12 @@ const Analysis: React.FC<IProps> = ({ analysis }) => {
   const { type } = analysis.requestData
 
   const handleDownload = () => {
-    console.log('handle download clicked!')
+    let element = document.getElementById("analysisCardWrapper") || document.body;
+    savePDF(element, {
+      paperSize: "A4",
+      scale: 0.6,
+      imageResolution: 1080
+    });
   }
 
   if(type === 'default') {
@@ -49,7 +56,8 @@ const Analysis: React.FC<IProps> = ({ analysis }) => {
       wordCount,
       topWords,
       topWordsUsedTogether,
-      wordsRelatedToVideoTitle
+      wordsRelatedToVideoTitle,
+      commentsPublicationDate
     } = content
 
     console.log(videoData.thumbnail)
@@ -149,6 +157,11 @@ const Analysis: React.FC<IProps> = ({ analysis }) => {
             {/* Palavras relacionadas ao título do vídeo */}
             { options.wordsRelatedToVideoTitle && (
               <WordsRelatedToVideoTitle words={wordsRelatedToVideoTitle} />
+            )}
+
+            {/* Data de publicação dos comentários */}
+            { options.commentsPublicationDate && (
+              <CommentsPublicationDate dates={commentsPublicationDate} />
             )}
           </div>
         )}
