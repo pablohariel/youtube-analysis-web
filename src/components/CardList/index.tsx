@@ -19,7 +19,7 @@ const CardList: React.FC<IProps> = ({ analysis, isHistory }) => {
         <span className={styles.selectedFilter}>Todas</span>
       </div>
       <div className={styles.cardList}>
-        {analysis.map(item => <li><Card analysis={item} isHistory={isHistory} /></li>)}
+        {analysis.map(a => <li key={a.id}><Card analysis={a} isHistory={isHistory} /></li>)}
       </div>
     </div>
   )

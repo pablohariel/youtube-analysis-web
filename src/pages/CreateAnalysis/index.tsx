@@ -20,7 +20,7 @@ import { DefaultResponse, MiningResponse } from '../../interfaces/responseData'
 import styles from './styles.module.scss'
 import { Analysis } from '../../components/Analysis'
 import { VideoData } from '../../interfaces/videoData'
-import { AnalysisContext, IDefaultAnalysis, IMiningAnalysis } from '../../contexts/analysis'
+import { AnalysisContext, IDefaultAnalysis, IMiningAnalysis, ICompleteAnalysis } from '../../contexts/analysis'
 
 interface IInputs {
   videoUrl: string
@@ -47,7 +47,7 @@ const CreateAnalysis: React.FC = () => {
 
   useEffect(() => {
     if(analysis.created) {
-      api.get<(IDefaultAnalysis | IMiningAnalysis)[]>('/analysis').then(response => {
+      api.get<(IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis)[]>('/analysis').then(response => {
         setContextAnalysis(response.data)
       })
     }

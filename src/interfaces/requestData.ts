@@ -44,6 +44,7 @@ interface MiningRequest {
       filters: MiningRequestUserFilters
     },
   },
+  privacy: 'public' | 'private'
   save: boolean
 }
 
@@ -76,6 +77,7 @@ interface DefaultRequest {
     commentsLanguage?: DefaultRequestCommentFilters
     commentsPublicationDate?: DefaultRequestCommentFilters
   },
+  privacy: 'public' | 'private'
   save: boolean
 }
 
@@ -118,6 +120,7 @@ interface CompleteRequest {
       filters: MiningRequestUserFilters
     },
   },
+  privacy: 'public' | 'private'
   save: boolean
 }
 

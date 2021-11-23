@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useContext } from 'react'
 
-import { AnalysisContext } from '../../contexts/analysis'
+import { AnalysisContext, ICompleteAnalysis, IDefaultAnalysis, IMiningAnalysis } from '../../contexts/analysis'
 import { AuthContext } from '../../contexts/auth'
 
 import { Analysis as AnalysisCard } from '../../components/Analysis'
@@ -10,14 +10,18 @@ import { TopBar } from '../../components/TopBar'
 
 import styles from './styles.module.scss'
 import { CompleteResponse, DefaultResponse, MiningResponse } from '../../interfaces/responseData'
+import { useEffect } from 'react'
+import { api } from '../../services/api'
 
 const Analysis: React.FC = () => {
   const { id } = useParams() as { id: string }
 
-  const { analysis: allAnalysis } = useContext(AnalysisContext)
+  const { analysis: allAnalysis, setAnalysis } = useContext(AnalysisContext)
   const { user } = useContext(AuthContext)
 
-  const analysis = allAnalysis.filter(a => a.id === id)[0]
+  const analysisToShow = allAnalysis.filter(a => a.privacy === 'public' || a.userId === user?.id)
+
+  const analysis = analysisToShow.filter(a => a.id === id)[0]
 
   return (
     <div className={styles.analysisWrapper}>

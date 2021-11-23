@@ -22,9 +22,11 @@ const Search: React.FC = (props) => {
   const { user, signIn } = useContext(AuthContext)
   const { analysis } = useContext(AnalysisContext)
 
+  const analysisToShow = analysis.filter(a => a.privacy === 'public')
+
   useEffect(() => {
     if(queryValue) {
-      setAnalysisFound(analysis.filter(a => a.videoData.title.toLowerCase().includes(queryValue.toLowerCase())))
+      setAnalysisFound(analysisToShow.filter(a => a.videoData.title.toLowerCase().includes(queryValue.toLowerCase())))
     } else {
       setAnalysisFound([])
     }
@@ -35,7 +37,7 @@ const Search: React.FC = (props) => {
       <LeftBar user={user} />
       <main>
         <TopBar user={user} />
-        <SecondaryTopBar title={`Análises encontradas com o título "${queryValue}"`} />
+        <SecondaryTopBar title={`Análises encontradas`} />
         <CardList analysis={analysisFound} isHistory={false} />
       </main>
     </div>

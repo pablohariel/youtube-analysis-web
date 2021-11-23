@@ -15,6 +15,8 @@ const Home: React.FC = () => {
   const { user, signOut } = useContext(AuthContext)
   const { analysis } = useContext(AnalysisContext)
 
+  const analysisToShow = analysis.filter(a => a.privacy === 'public')
+
   return (
     <div className={styles.homeWrapper}>
       <LeftBar user={user} />
@@ -22,7 +24,7 @@ const Home: React.FC = () => {
         <TopBar user={user} />
         {!user && <Introdution />}
         <SecondaryTopBar title='Análises' />
-        <CardList analysis={analysis} isHistory={false} />
+        <CardList analysis={analysisToShow} isHistory={false} />
       </div>
     </div>
   )

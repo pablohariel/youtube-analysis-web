@@ -33,7 +33,7 @@ export interface IDefaultAnalysis {
     wordsRelatedToVideoTitle?: WordRelatedToVideoTitle[]
     topComentingUser?: IUser
     commentsLanguage?: LanguagesCount
-    commentsPublicationData?: string[]
+    commentsPublicationDate?: string[]
   }
   viewCount: number
   privacy: 'private' | 'public'
@@ -79,7 +79,7 @@ export interface ICompleteAnalysis {
     wordsRelatedToVideoTitle?: WordRelatedToVideoTitle[]
     topComentingUser?: IUser
     commentsLanguage?: LanguagesCount
-    commentsPublicationData?: string[]
+    commentsPublicationDate?: string[]
     words?: JoinedWord[]
     phrases?: JoinedPhrase[]
     commentsFromWords?: CommentsFromWord[]

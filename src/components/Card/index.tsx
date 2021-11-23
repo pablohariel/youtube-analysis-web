@@ -57,7 +57,7 @@ const Card: React.FC<IProps> = ({ analysis, isHistory }) => {
       </div>
       <header className={styles.header}>
         <span className={styles.analysisData}>{analysis.created_at}</span>
-        <span className={styles.analysisUser}>User</span>
+        <span className={styles.analysisUser}>{analysis.user.name}</span>
       </header>
       <main className={styles.main}>
         <Text className={styles.videoTitle} noOfLines={2} onClick={() => history.push(`/analysis/${id}`)}>{videoData.title}</Text>

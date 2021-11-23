@@ -275,10 +275,14 @@ const CreateCompleteAnalysis: React.FC<IProps> = ({ videoId, setAnalysis }) => {
     }
 
     console.log(finalData)
-
-    // setCreating(true)
-    // const result = await api.post<CompleteResponse>('/analysis', finalData)
-    // setAnalysis({ created: true, content: result.data })
+    try {
+      setCreating(true)
+      const result = await api.post<CompleteResponse>('/analysis', finalData)
+      setAnalysis({ created: true, content: result.data })
+    } catch(error) {
+      setCreating(false)
+      alert(error)
+    }
   }
 
   return (
