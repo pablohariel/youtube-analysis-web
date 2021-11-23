@@ -281,7 +281,7 @@ const CreateCompleteAnalysis: React.FC<IProps> = ({ videoId, setAnalysis }) => {
       setAnalysis({ created: true, content: result.data })
     } catch(error) {
       setCreating(false)
-      alert(error)
+      alert('Não foi possível criar a análise')
     }
   }
 

@@ -162,15 +162,19 @@ const CreateDefaultAnalysis: React.FC<IProps> = ({ videoId, setAnalysis }) => {
 
 
   const onSubmit: SubmitHandler<IInputs> = async data => {
-    console.log(data)
-
-    setCreating(true)
-    const result = await api.post<DefaultResponse>('/analysis', { 
-      videoId,
-      type: 'default',
-      ...data 
-    })
-    setAnalysis({ created: true, content: result.data })
+    try {
+      setCreating(true)
+      const result = await api.post<DefaultResponse>('/analysis', { 
+        videoId,
+        type: 'default',
+        ...data 
+      })
+      setAnalysis({ created: true, content: result.data })
+    } catch(error) {
+      setCreating(false)
+      alert('Não foi possível criar a análise')
+    }
+    
   }
 
   return (

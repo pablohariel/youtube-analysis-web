@@ -1,0 +1,17 @@
+.btnDeleteAccount {
+  width: 29.125rem !important;
+  height: 4.688rem !important;
+  margin-top: 4.25rem;
+  background-color: #E33D3D !important;
+  color: #fff;
+  font-size: 1.625rem !important; 
+  font-weight: bold !important;  
+  border: none;
+  border-radius: 0.313rem;
+  cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: #E33D3D;
+  }
+}

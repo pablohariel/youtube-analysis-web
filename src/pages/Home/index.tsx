@@ -14,6 +14,8 @@ import { AuthContext } from '../../contexts/auth'
 import { AnalysisContext, IDefaultAnalysis, IMiningAnalysis, ICompleteAnalysis } from '../../contexts/analysis'
 
 import styles from './styles.module.scss'
+import { useEffect } from 'react'
+import { api } from '../../services/api'
 
 const Home: React.FC = () => {
   const [ filters, setFilters ] = useState<IFilters>({ active: 'time', options: {
@@ -21,6 +23,13 @@ const Home: React.FC = () => {
     popularity: false,
     own: false
   }})
+
+  const { user, signOut } = useContext(AuthContext)
+  const { analysis, setAnalysis } = useContext(AnalysisContext)
+
+  useEffect(() => {
+    api.get<(IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis)[]>('/analysis').then(result => setAnalysis(result.data))
+  }, [])
 
   const handleFilterChange = (option: IFilterOptions) => {
     switch(option) {
@@ -63,8 +72,7 @@ const Home: React.FC = () => {
     }
   }
 
-  const { user, signOut } = useContext(AuthContext)
-  const { analysis } = useContext(AnalysisContext)
+  
 
   const analysisToShow = analysis.filter(a => a.privacy === 'public')
   let filteredAnalysis = [] as (IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis)[]

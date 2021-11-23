@@ -9,7 +9,6 @@ interface IProps {
 
 import userImg from '../../../assets/userImg.png'
 
-import { Input } from '../../../components/Input'
 import { useState } from 'react'
 import { api } from '../../../services/api'
 
@@ -26,7 +25,6 @@ const Card: React.FC<IProps> = ({ user, setUser }) => {
 
   const handleSave = async () => {
     if(!nameIsEqual) {
-      console.log('aqui')
       try {
         const token = localStorage.getItem('@youmine:token')
         api.defaults.headers.common.authorization = `Bearer ${token}`

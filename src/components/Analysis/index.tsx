@@ -23,6 +23,8 @@ import { CommentsFromUsers } from './components/mining/CommentsFromUsers'
 import { CommentsPublicationDate } from './components/default/CommentsPublicationDate';
 
 import styles from './styles.module.scss'
+import { useEffect } from 'react';
+import { api } from '../../services/api';
 
 interface IProps {
   analysis: DefaultResponse | MiningResponse | CompleteResponse

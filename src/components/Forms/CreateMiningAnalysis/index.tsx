@@ -115,7 +115,6 @@ const CreateMiningAnalysis: React.FC<IProps> = ({ videoId, setAnalysis }) => {
   console.log(videoId)
 
   const onSubmit: SubmitHandler<IInputs> = async data => {
-    setCreating(true)
 
     const { options, privacy, save } = data
 
@@ -153,11 +152,16 @@ const CreateMiningAnalysis: React.FC<IProps> = ({ videoId, setAnalysis }) => {
       save 
     }
 
-    console.log(finalData)
+    try {
+      setCreating(true)
+      const result = await api.post<MiningResponse>('/analysis', finalData)
 
-    const result = await api.post<MiningResponse>('/analysis', finalData)
-
-    setAnalysis({ created: true, content: result.data })
+      setAnalysis({ created: true, content: result.data })
+    } catch(error) {
+      setCreating(false)
+      alert('Não foi possível criar a análise')
+    }
+    
 
     // console.log(result)
   }

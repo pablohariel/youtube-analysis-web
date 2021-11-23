@@ -4,7 +4,7 @@ import { AiFillLike, AiFillDislike } from 'react-icons/ai'
 import { Text, Menu, MenuButton, MenuList, MenuItem, MenuDivider } from '@chakra-ui/react'
 
 import { AnalysisContext, IDefaultAnalysis, IMiningAnalysis, ICompleteAnalysis } from '../../contexts/analysis'
-import { ChevronDownIcon } from '@chakra-ui/icons'
+import { ChevronDownIcon, ViewIcon } from '@chakra-ui/icons'
 
 import { api } from '../../services/api'
 
@@ -16,7 +16,7 @@ interface IProps {
 }
 
 const Card: React.FC<IProps> = ({ analysis, isHistory }) => {
-  const { videoData, id } = analysis
+  const { videoData, id, viewCount } = analysis
 
   const { analysis: allAnalysis, setAnalysis } = useContext(AnalysisContext)
 
@@ -25,14 +25,27 @@ const Card: React.FC<IProps> = ({ analysis, isHistory }) => {
 
   const handleDelete = async () => {
     try {
-      const response = await api.delete(`/analysis/${analysis.id}`)
+      const result = await api.delete(`/analysis/${analysis.id}`)
       setAnalysis(allAnalysis.filter(a => a.id !== analysis.id))
     } catch(error) {
       alert('Não foi possível deletar a análise')
     }
-    console.log('handle delete')
   }
 
+  const handlePrivacy = async () => {
+    try {
+      const result = await api.patch<IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis>(`/analysis/${analysis.id}/privacy`, { privacy: analysis.privacy })
+      setAnalysis(allAnalysis.map(a => {
+        if(a.id === analysis.id) {
+          return result.data
+        } else {
+          return a
+        }
+      }))
+    } catch(error) {
+      alert('Não foi possível mudar a privacidade da análise')
+    }
+  }
   
   return (
     <div className={`${styles.cardWrapper}  ${isHistory === true && styles.historyCardWrapper}`}>
@@ -52,6 +65,7 @@ const Card: React.FC<IProps> = ({ analysis, isHistory }) => {
           </MenuButton>
           <MenuList>
             <MenuItem onClick={handleDelete}>Deletar</MenuItem>
+            <MenuItem onClick={handlePrivacy}>{analysis.privacy}</MenuItem>
           </MenuList>
         </Menu>
       </div>
@@ -71,8 +85,8 @@ const Card: React.FC<IProps> = ({ analysis, isHistory }) => {
           <span>{videoData.statistics.likeCount}</span>
         </div>
         <div>  
-          <AiFillDislike />
-          <span>{videoData.statistics.dislikeCount}</span>
+          <ViewIcon />
+          <span>{viewCount}</span>
         </div>
         <div>  
           <span>{videoData.statistics.viewCount}</span>

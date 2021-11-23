@@ -53,6 +53,8 @@ const AuthProvider: React.FC = ({ children }) => {
 
       const { token, user: userData } = result.data
 
+      api.defaults.headers.common.authorization = `Bearer ${token}`
+
       localStorage.setItem('@youmine:token', token)
       localStorage.setItem('@youmine:userId', userData.id)
 

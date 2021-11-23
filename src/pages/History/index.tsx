@@ -54,7 +54,6 @@ const History: React.FC = () => {
             popularity: false,
           }
         })
-        
         break
       }
       case 'popularity': {
