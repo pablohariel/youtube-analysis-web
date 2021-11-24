@@ -24,15 +24,18 @@ const Analysis: React.FC = () => {
   const analysis = analysisToShow.filter(a => a.id === id)[0]
 
   useEffect(() => {
-    api.patch<IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis>(`/analysis/${analysis.id}/views`, { views: analysis.viewCount }).then(result => {
-      setAnalysis(allAnalysis.map(a => {
-        if(a.id === analysis.id) {
-          return result.data
-        } else {
-          return a
-        }
-      }))
-    })
+    if(analysis) {
+      api.patch<IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis>(`/analysis/${analysis.id}/views`, { views: analysis.viewCount }).then(result => {
+        setAnalysis(allAnalysis.map(a => {
+          if(a.id === analysis.id) {
+            return result.data
+          } else {
+            return a
+          }
+        }))
+      })
+    }
+    
   }, [])
 
   return (

@@ -7,6 +7,7 @@ import { TopBar } from '../../components/TopBar'
 import { Divider } from '../../components/Divider'
 
 import { ConfirmationDialog } from '../../components/ConfirmationDialog'
+import { ErrorDialog } from '../../components/ErrorDialog'
 
 import { AuthContext } from '../../contexts/auth'
 
@@ -21,6 +22,7 @@ interface IInputs {
 
 const Contact: React.FC = () => {
   const [ confirmationDialogIsOpen, setConfirmationDialogIsOpen ] = useState<boolean>(false)
+  const [ errorDialogIsOpen, setErrorDialogIsOpen ] = useState<boolean>(false)
 
   const { register, handleSubmit, resetField, watch,  formState: { errors } } = useForm<IInputs>()
 
@@ -34,8 +36,12 @@ const Contact: React.FC = () => {
   }
 
   const onSubmit: SubmitHandler<IInputs> = async data => {
-    await api.post('/contact', data)
-    setConfirmationDialogIsOpen(true)
+    try {
+      await api.post('/contact', data)
+      setConfirmationDialogIsOpen(true)
+    } catch(error) {
+      setErrorDialogIsOpen(true)
+    }
   }
 
   return (
@@ -69,6 +75,7 @@ const Contact: React.FC = () => {
             </form>
 
             <ConfirmationDialog isOpen={confirmationDialogIsOpen} onClose={onConfirmationDialogCloses} />
+            <ErrorDialog isOpen={errorDialogIsOpen} onClose={() => setErrorDialogIsOpen(false)} />
           </div>
         </main>
       </div>

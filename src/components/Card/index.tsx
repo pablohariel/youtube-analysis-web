@@ -28,7 +28,7 @@ const Card: React.FC<IProps> = ({ analysis, isHistory }) => {
       const result = await api.delete(`/analysis/${analysis.id}`)
       setAnalysis(allAnalysis.filter(a => a.id !== analysis.id))
     } catch(error) {
-      alert('Não foi possível deletar a análise')
+      alert('Não foi possível deletar análise')
     }
   }
 
@@ -44,6 +44,21 @@ const Card: React.FC<IProps> = ({ analysis, isHistory }) => {
       }))
     } catch(error) {
       alert('Não foi possível mudar a privacidade da análise')
+    }
+  }
+
+  const handleUpdate = async () => {
+    try {
+      const result = await api.put<IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis>(`/analysis/${analysis.id}`)
+      setAnalysis(allAnalysis.map(a => {
+        if(a.id === analysis.id) {
+          return result.data
+        } else {
+          return a
+        }
+      }))
+    } catch(error) {
+      alert('Não foi possível atualizar análise')
     }
   }
   
@@ -64,8 +79,9 @@ const Card: React.FC<IProps> = ({ analysis, isHistory }) => {
             <ChevronDownIcon />
           </MenuButton>
           <MenuList>
-            <MenuItem onClick={handleDelete}>Deletar</MenuItem>
+            <MenuItem onClick={handleUpdate}>Atualizar</MenuItem>
             <MenuItem onClick={handlePrivacy}>{analysis.privacy}</MenuItem>
+            <MenuItem onClick={handleDelete}>Deletar</MenuItem>
           </MenuList>
         </Menu>
       </div>

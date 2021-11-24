@@ -42,20 +42,9 @@ body {
   }
 }
 
-.MuiSwitch-input PrivateSwitchBase-input css-1m9pwf3 {
-    color: green !important;
- }
-
- .MuiSwitch-switchBase MuiSwitch-colorPrimary MuiButtonBase-root MuiSwitch-switchBase MuiSwitch-colorPrimary PrivateSwitchBase-root Mui-checked css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase {
-    color: green !important;
- }
-
- .css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked {
-  color: #8981D8 !important;
- }
-
- .css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
-  background-color: #8981D8 !important;
- }
+/* make chakra modal centralized */
+.chakra-modal__content-container {
+  padding-left: 5rem;
+}
 
  
