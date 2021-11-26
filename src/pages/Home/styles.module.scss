@@ -6,6 +6,19 @@
 
   .main {
     width: 100%;
+    background-color: #F0F0F7;
+
+    .searching {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      background-color: #F0F0F7;
+    }
+
+    .pagination {
+      margin-bottom: 100px;
+    }
   }
 }
 
@@ -17,6 +30,8 @@
 
   .main {
     width: 100%;
+
+    
   }
 }
 

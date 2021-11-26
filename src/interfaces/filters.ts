@@ -1,12 +1,10 @@
-type IFilterOptions = 'time' | 'popularity' | 'own'
+type IListAnalysisOrderOptions = 'created_at' | 'viewCount'
 type IHistoryFilterOptions = 'time' | 'popularity'
 
-interface IFilters {
-  active: IFilterOptions
+interface IListAnalysisFilters {
   options: {
-    time: boolean
-    popularity: boolean
-    own: boolean
+    orderBy: IListAnalysisOrderOptions
+    pageNumber: number
   }
 }
 
@@ -18,4 +16,4 @@ interface IHistoryFilters {
   }
 }
 
-export { IFilters, IFilterOptions, IHistoryFilters, IHistoryFilterOptions }
+export { IListAnalysisFilters, IListAnalysisOrderOptions, IHistoryFilters, IHistoryFilterOptions }

@@ -2,65 +2,28 @@ import { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import { AiFillLike, AiFillDislike } from 'react-icons/ai'
 import { Text, Menu, MenuButton, MenuList, MenuItem, MenuDivider } from '@chakra-ui/react'
-
-import { AnalysisContext, IDefaultAnalysis, IMiningAnalysis, ICompleteAnalysis } from '../../contexts/analysis'
 import { ChevronDownIcon, ViewIcon } from '@chakra-ui/icons'
 
+
+import { AnalysisContext, IDefaultAnalysis, IMiningAnalysis, ICompleteAnalysis } from '../../contexts/analysis'
 import { api } from '../../services/api'
+
+import { IListAnalysis } from '../../pages/Home'
 
 import styles from './styles.module.scss'
 
 interface IProps {
   analysis: IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis
+  handlePrivacy: (id: string, privacy: string) => Promise<void>
+  handleDelete: (id: string) => Promise<void>
+  handleUpdate: (id: string) => Promise<void>
   isHistory: boolean
 }
 
-const Card: React.FC<IProps> = ({ analysis, isHistory }) => {
+const Card: React.FC<IProps> = ({ analysis, isHistory, handleDelete, handlePrivacy, handleUpdate }) => {
   const { videoData, id, viewCount } = analysis
 
-  const { analysis: allAnalysis, setAnalysis } = useContext(AnalysisContext)
-
   const history = useHistory()
-  console.log(isHistory)
-
-  const handleDelete = async () => {
-    try {
-      const result = await api.delete(`/analysis/${analysis.id}`)
-      setAnalysis(allAnalysis.filter(a => a.id !== analysis.id))
-    } catch(error) {
-      alert('Não foi possível deletar análise')
-    }
-  }
-
-  const handlePrivacy = async () => {
-    try {
-      const result = await api.patch<IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis>(`/analysis/${analysis.id}/privacy`, { privacy: analysis.privacy })
-      setAnalysis(allAnalysis.map(a => {
-        if(a.id === analysis.id) {
-          return result.data
-        } else {
-          return a
-        }
-      }))
-    } catch(error) {
-      alert('Não foi possível mudar a privacidade da análise')
-    }
-  }
-
-  const handleUpdate = async () => {
-    try {
-      const result = await api.put<IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis>(`/analysis/${analysis.id}`)
-      setAnalysis(allAnalysis.map(a => {
-        if(a.id === analysis.id) {
-          return result.data
-        } else {
-          return a
-        }
-      }))
-    } catch(error) {
-      alert('Não foi possível atualizar análise')
-    }
-  }
   
   return (
     <div className={`${styles.cardWrapper}  ${isHistory === true && styles.historyCardWrapper}`}>
@@ -79,9 +42,9 @@ const Card: React.FC<IProps> = ({ analysis, isHistory }) => {
             <ChevronDownIcon />
           </MenuButton>
           <MenuList>
-            <MenuItem onClick={handleUpdate}>Atualizar</MenuItem>
-            <MenuItem onClick={handlePrivacy}>{analysis.privacy}</MenuItem>
-            <MenuItem onClick={handleDelete}>Deletar</MenuItem>
+            <MenuItem onClick={() => handleUpdate(id)}>Atualizar</MenuItem>
+            <MenuItem onClick={() => handlePrivacy(id, analysis.privacy)}>{analysis.privacy}</MenuItem>
+            <MenuItem onClick={() => handleDelete(id)}>Deletar</MenuItem>
           </MenuList>
         </Menu>
       </div>

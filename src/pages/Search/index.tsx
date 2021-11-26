@@ -1,94 +1,65 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import ReactPaginate   from 'react-paginate'
+import { Spinner } from '@chakra-ui/react'
 
 import { LeftBar } from '../../components/LeftBar'
 import { TopBar } from '../../components/TopBar'
 import { SecondaryTopBar } from '../../components/SecondaryTopBar'
 import { CardList } from '../../components/CardList'
-
 import { AuthContext } from '../../contexts/auth'
-import { AnalysisContext, IDefaultAnalysis, IMiningAnalysis, ICompleteAnalysis } from '../../contexts/analysis'
-
-import { IFilters, IFilterOptions } from '../../interfaces/filters'
-
-import { useEffect } from 'react'
-import { filterAnalysis } from '../../utils/filterAnalysis'
+import { IListAnalysisFilters, IListAnalysisOrderOptions } from '../../interfaces/filters'
+import { IListAnalysis } from '../Home'
+import { api } from '../../services/api'
 
 import styles from './styles.module.scss'
 
-const Search: React.FC = (props) => {
-  const [ filters, setFilters ] = useState<IFilters>({ active: 'time', options: {
-    time: true,
-    popularity: false,
-    own: false
+const Search: React.FC = () => {
+  const [filters, setFilters] = useState<IListAnalysisFilters>({ options: {
+    orderBy: 'created_at',
+    pageNumber: 1
   }})
-  const [analysisFound, setAnalysisFound] = useState<(IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis)[]>([])
-  const [filteredAnalysis, setfilteredAnalysis] = useState<(IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis)[]>([])
+  const [analysis, setAnalysis] = useState<IListAnalysis>({
+    analysisCount: 0,
+    analysis: []
+  })
+  const [searching, setSearching] = useState<boolean>(false)
 
   const query = new URLSearchParams(useLocation().search)
   const queryValue = query.get('query')
 
-  const { user, signIn } = useContext(AuthContext)
-  const { analysis } = useContext(AnalysisContext)
-
-  const analysisToShow = analysis.filter(a => a.privacy === 'public')
+  const { user } = useContext(AuthContext)
 
   useEffect(() => {
-    if(queryValue) {
-      setAnalysisFound(analysisToShow.filter(a => a.videoData.title.toLowerCase().includes(queryValue.toLowerCase())))
-    } else {
-      setAnalysisFound([])
-    }
-  }, [queryValue])
+    setSearching(true)
+    api.get<IListAnalysis>(`/analysis?searchBy=videoTitle&videoTitle=${queryValue}&orderBy=${filters.options.orderBy}&pageNumber=${filters.options.pageNumber}`)
+      .then(result => {
+        setAnalysis({ 
+          analysisCount: result.data.analysisCount, 
+          analysis: [...result.data.analysis]
+        })
+        setSearching(false)
+      })
+      .catch(() => setSearching(false)) 
+  }, [filters, queryValue])
 
-  useEffect(() => {
-    switch(filters.active) {
-      case 'time': {
-        setfilteredAnalysis([...filterAnalysis({ analysis: analysisFound, orderBy: 'time', userId: user?.id }).filteredAnalysis])
-        break
-      }
-      case 'popularity': {
-        setfilteredAnalysis([...filterAnalysis({ analysis: analysisFound, orderBy: 'popularity', userId: user?.id }).filteredAnalysis])
-        break
-      }
-      case 'own': {
-        setfilteredAnalysis([...filterAnalysis({ analysis: analysisFound, orderBy: 'own', userId: user?.id }).filteredAnalysis])
-        break
-      }
-    }
-  }, [analysisFound, filters])
-
-  const handleFilterChange = (option: IFilterOptions) => {
+  const handleFilterChange = (option: IListAnalysisOrderOptions) => {
     switch(option) {
-      case 'time': {
+      case 'created_at': {
         setFilters({
-          active: 'time',
           options: {
-            time: true,
-            popularity: false,
-            own: false
+            orderBy: 'created_at',
+            pageNumber: 1
           }
         })
+        
         break
       }
-      case 'popularity': {
+      case 'viewCount': {
         setFilters({
-          active: 'popularity',
           options: {
-            time: false,
-            popularity: true,
-            own: false
-          }
-        })
-        break
-      }
-      case 'own': {
-        setFilters({
-          active: 'own',
-          options: {
-            time: false,
-            popularity: false,
-            own: true
+            orderBy: 'viewCount',
+            pageNumber: 1
           }
         })
         break
@@ -97,6 +68,17 @@ const Search: React.FC = (props) => {
         break
     }
   }
+  
+  const handlePageClick = (event: { selected: number }) => {
+    setFilters({
+      options: {
+        pageNumber: event.selected + 1,
+        orderBy: filters.options.orderBy
+      }
+    })
+  }
+
+  const pageCount = Math.ceil(analysis.analysisCount / 10)
 
   return (
     <div className={styles.searchWrapperClosed}>
@@ -112,7 +94,27 @@ const Search: React.FC = (props) => {
             }
           }}
         />
-        <CardList analysis={filteredAnalysis} isHistory={false} />
+        {searching && <div className={styles.searching}><Spinner size='xl' color='#8981D8' /></div>}
+        {!searching && <CardList data={{ analysisCount: analysis.analysisCount, analysis: analysis.analysis }} setAnalysis={setAnalysis} isHistory={false} selectedFilter={filters.options.orderBy} />}
+        {!searching && 
+          <div className={styles.pagination}>
+            <ReactPaginate
+              breakLabel="..."
+              nextLabel=">"
+              forcePage={filters.options.pageNumber - 1}
+              onPageChange={handlePageClick}
+              pageCount={pageCount}
+              previousLabel="<"
+              pageRangeDisplayed={5}
+              containerClassName='paginate-container'
+              activeLinkClassName='paginate-link-active'
+              marginPagesDisplayed={50}
+              nextClassName='paginate-next'
+              previousClassName='paginate-previous'
+              pageLinkClassName='paginate-page-link'
+            />
+          </div>
+        } 
       </main>
     </div>
   )

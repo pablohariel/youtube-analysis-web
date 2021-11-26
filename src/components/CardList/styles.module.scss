@@ -1,7 +1,7 @@
 .cardListWrapper {
   display: flex;
   flex-direction: column;
-  padding: 3rem 5rem 3rem 5rem;
+  padding: 3rem 5rem 1rem 5rem;
 
   .header {
     display: flex;
@@ -23,10 +23,6 @@
       background-color: #8981D8;
       height: 0.813rem;
       width: 0.063rem;
-    }
-
-    .selectedFilter {
-
     }
   }
 

@@ -47,4 +47,29 @@ body {
   padding-left: 5rem;
 }
 
- 
+.paginate-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10rem 0 10rem;
+  list-style: none;
+  color: #7E7E7E;
+}
+
+.paginate-link-active {
+  color: #fff;
+  background-color: #8981D8;
+}
+
+.paginate-next {
+  padding: 10px;
+}
+
+.paginate-previous {
+  padding: 10px;
+}
+
+.paginate-page-link {
+  padding: 10px;
+  border: 1px solid #8981D8;
+}

@@ -1,67 +1,65 @@
 import { useEffect, useContext, useState } from 'react'
+import ReactPaginate   from 'react-paginate'
+import { Spinner } from '@chakra-ui/react'
 
-import { AnalysisContext, ICompleteAnalysis, IDefaultAnalysis, IMiningAnalysis } from "../../contexts/analysis"
 import { AuthContext } from "../../contexts/auth"
 
 import { LeftBar } from '../../components/LeftBar'
 import { TopBar } from '../../components/TopBar'
 import { SecondaryTopBar } from '../../components/SecondaryTopBar'
 import { CardList } from '../../components/CardList'
+import { IListAnalysisFilters, IListAnalysisOrderOptions } from '../../interfaces/filters'
+import { api } from '../../services/api'
+import { IListAnalysis } from '../Home'
 
 import styles from './styles.module.scss'
-import { IHistoryFilterOptions, IHistoryFilters } from '../../interfaces/filters'
-import { filterAnalysis } from '../../utils/filterAnalysis'
 
 const History: React.FC = () => {
-  const [history, setHistory] = useState<(IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis)[]>([])
-  const [filteredAnalysis, setfilteredAnalysis] = useState<(IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis)[]>([])
-  const [ filters, setFilters ] = useState<IHistoryFilters>({ active: 'time', options: {
-    time: true,
-    popularity: false
+  const [filters, setFilters] = useState<IListAnalysisFilters>({ options: {
+    orderBy: 'created_at',
+    pageNumber: 1
   }})
 
-  const { analysis: allAnalysis } = useContext(AnalysisContext)
-  const { user } = useContext(AuthContext)
+  const [analysis, setAnalysis] = useState<IListAnalysis>({
+    analysisCount: 0,
+    analysis: []
+  })
+
+  const [searching, setSearching] = useState<boolean>(false)
+
+  const { user, signOut } = useContext(AuthContext)
 
   useEffect(() => {
-    const result = allAnalysis.filter((analysis) => analysis.userId === user?.id)
-    setHistory(result)
-  }, [allAnalysis])
+    setSearching(true)
+    api.get<IListAnalysis>(`/analysis/history?orderBy=${filters.options.orderBy}&pageNumber=${filters.options.pageNumber}`)
+      .then(result => {
+        console.log(result.data.analysis)
+        setAnalysis({ 
+          analysisCount: result.data.analysisCount, 
+          analysis: [...result.data.analysis]
+        })
+        setSearching(false)
+      })
+      .catch(() => setSearching(false)) 
+  }, [filters])
 
-  useEffect(() => {
-    switch(filters.active) {
-      case 'time': {
-        setfilteredAnalysis([...filterAnalysis({ analysis: history, orderBy: 'time', userId: user?.id }).filteredAnalysis])
-        console.log('filtered', filteredAnalysis)
-        break
-      }
-      case 'popularity': {
-        setfilteredAnalysis([...filterAnalysis({ analysis: history, orderBy: 'popularity', userId: user?.id }).filteredAnalysis])
-        break
-      }
-    }
-  
-  }, [history, filters])
-
-  
-  const handleFilterChange = (option: IHistoryFilterOptions) => {
+  const handleFilterChange = (option: IListAnalysisOrderOptions) => {
     switch(option) {
-      case 'time': {
+      case 'created_at': {
         setFilters({
-          active: 'time',
           options: {
-            time: true,
-            popularity: false,
+            orderBy: 'created_at',
+            pageNumber: 1
           }
         })
+        
         break
       }
-      case 'popularity': {
+      case 'viewCount': {
         setFilters({
-          active: 'popularity',
           options: {
-            time: false,
-            popularity: true,
+            orderBy: 'viewCount',
+            pageNumber: 1
           }
         })
         break
@@ -70,6 +68,17 @@ const History: React.FC = () => {
         break
     }
   }
+  
+  const handlePageClick = (event: { selected: number }) => {
+    setFilters({
+      options: {
+        pageNumber: event.selected + 1,
+        orderBy: filters.options.orderBy
+      }
+    })
+  }
+
+  const pageCount = Math.ceil(analysis.analysisCount / 10)
 
   return (
     <div className={styles.historyWrapper}>
@@ -83,15 +92,27 @@ const History: React.FC = () => {
             handleFilterChange: handleFilterChange
           }}} 
         />
-        <div>
-          {filteredAnalysis.length > 0 ? 
-            <CardList analysis={filteredAnalysis} isHistory />
-              :
-            (
-              <h1>No analysis found</h1>
-            )
-          }
-        </div>
+        {searching && <div className={styles.searching}><Spinner size='xl' color='#8981D8' /></div>}
+        {!searching && <CardList data={analysis} selectedFilter={filters.options.orderBy} setAnalysis={setAnalysis} isHistory />}
+        {!searching && 
+          <div className={styles.pagination}>
+            <ReactPaginate
+              breakLabel="..."
+              nextLabel=">"
+              forcePage={filters.options.pageNumber - 1}
+              onPageChange={handlePageClick}
+              pageCount={pageCount}
+              previousLabel="<"
+              pageRangeDisplayed={5}
+              containerClassName='paginate-container'
+              activeLinkClassName='paginate-link-active'
+              marginPagesDisplayed={50}
+              nextClassName='paginate-next'
+              previousClassName='paginate-previous'
+              pageLinkClassName='paginate-page-link'
+            />
+          </div>
+        } 
       </div>
     </div>
   )
