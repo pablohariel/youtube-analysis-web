@@ -23,14 +23,11 @@ const Analysis: React.FC = () => {
 
   const { user } = useContext(AuthContext)
 
-
   useEffect(() => {
     if(analysis) {
-      api.patch<IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis>(`/analysis/${analysis.id}/views`, { views: analysis.viewCount }).then(result => {
-      })
+      api.patch<IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis>(`/analysis/${analysis.id}/views`, { views: analysis.viewCount })
     }
-
-  }, [])
+  }, [analysis])
 
   useEffect(() => {
     api.get<IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis>(`/analysis/${id}`).then(result => {
