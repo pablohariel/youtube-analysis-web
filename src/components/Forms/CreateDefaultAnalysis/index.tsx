@@ -40,9 +40,7 @@ export interface IInputs {
     wordCount: {
       checked: boolean
       includeCommentReplies: boolean
-      avoidAccentuation: boolean
-      caseSensitive: boolean
-      includeRepeatedWords: boolean
+      countRepeatedWords: boolean
     }
     topWords: {
       checked: boolean
@@ -121,9 +119,7 @@ const CreateDefaultAnalysis: React.FC<IProps> = ({ videoId, setAnalysis }) => {
         wordCount: {
           checked: false,
           includeCommentReplies: false,
-          avoidAccentuation: false,
-          caseSensitive: false,
-          includeRepeatedWords: false
+          countRepeatedWords: false
         },
         topWords: {
           checked: false,
@@ -329,25 +325,7 @@ const CreateDefaultAnalysis: React.FC<IProps> = ({ videoId, setAnalysis }) => {
             <div>
               <Controller 
                 control={control}
-                name='options.wordCount.avoidAccentuation'
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <Checkbox text='Ignorar acentuação' onChange={onChange} onBlur={onBlur} checked={value} />
-                )}
-              />
-            </div>
-            <div>
-              <Controller 
-                control={control}
-                name='options.wordCount.caseSensitive'
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <Checkbox text='Diferenciar letras maiusculas de minusculas' onChange={onChange} onBlur={onBlur} checked={value} />
-                )}
-              />
-            </div>
-            <div>
-              <Controller 
-                control={control}
-                name='options.wordCount.includeRepeatedWords'
+                name='options.wordCount.countRepeatedWords'
                 render={({ field: { onChange, onBlur, value } }) => (
                   <Checkbox text='Contar palavras repetidas' onChange={onChange} onBlur={onBlur} checked={value} />
                 )}

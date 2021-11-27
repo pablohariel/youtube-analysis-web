@@ -1,12 +1,27 @@
 import { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import { AiFillLike, AiFillDislike } from 'react-icons/ai'
-import { Text, Menu, MenuButton, MenuList, MenuItem, MenuDivider } from '@chakra-ui/react'
-import { ChevronDownIcon, ViewIcon } from '@chakra-ui/icons'
+import { 
+  Text, 
+  Menu,
+  MenuButton, 
+  MenuList, 
+  MenuItem, 
+  Popover, 
+  PopoverTrigger, 
+  Button, 
+  PopoverContent, 
+  PopoverArrow, 
+  PopoverCloseButton ,
+  PopoverHeader,
+  PopoverBody
+} from '@chakra-ui/react'
+import { ChevronDownIcon, ViewIcon, InfoIcon } from '@chakra-ui/icons'
 
 
 import { AnalysisContext, IDefaultAnalysis, IMiningAnalysis, ICompleteAnalysis } from '../../contexts/analysis'
 import { api } from '../../services/api'
+import { formatDate } from '../../utils/formatDate'
 
 import { IListAnalysis } from '../../pages/Home'
 
@@ -28,6 +43,17 @@ const Card: React.FC<IProps> = ({ analysis, isHistory, handleDelete, handlePriva
   return (
     <div className={`${styles.cardWrapper}  ${isHistory === true && styles.historyCardWrapper}`}>
       <div className={styles.analysisHandler}>
+        <Popover>
+          <PopoverTrigger>
+            <Button><InfoIcon /></Button>
+          </PopoverTrigger>
+          <PopoverContent>
+            <PopoverArrow />
+            <PopoverCloseButton />
+            <PopoverHeader>{`Análise do tipo ${analysis.requestData.type}`}</PopoverHeader>
+            <PopoverBody>{JSON.stringify(analysis.requestData.options)}</PopoverBody>
+          </PopoverContent> 
+        </Popover>
         <Menu>
           <MenuButton
             px={4}
@@ -49,7 +75,7 @@ const Card: React.FC<IProps> = ({ analysis, isHistory, handleDelete, handlePriva
         </Menu>
       </div>
       <header className={styles.header}>
-        <span className={styles.analysisData}>{analysis.created_at}</span>
+        <span className={styles.analysisData}>{formatDate(analysis.created_at)}</span>
         <span className={styles.analysisUser}>{analysis.user.name}</span>
       </header>
       <main className={styles.main}>

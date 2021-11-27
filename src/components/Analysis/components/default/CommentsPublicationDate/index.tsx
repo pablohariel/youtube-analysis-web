@@ -76,16 +76,16 @@ const CommentsPublicationDate: React.FC<IProps> = ({ dates }) => {
           dayBorderWidth={1}
           dayBorderColor="#fff"
           legends={[
-              {
-                  anchor: 'bottom-right',
-                  direction: 'row',
-                  translateY: 36,
-                  itemCount: 4,
-                  itemWidth: 42,
-                  itemHeight: 36,
-                  itemsSpacing: 14,
-                  itemDirection: 'right-to-left'
-              }
+            {
+              anchor: 'bottom-right',
+              direction: 'row',
+              translateY: 36,
+              itemCount: 4,
+              itemWidth: 42,
+              itemHeight: 36,
+              itemsSpacing: 14,
+              itemDirection: 'right-to-left'
+            }
           ]}
         />
       </div>

@@ -26,24 +26,24 @@ interface MiningRequest {
     wordsToFindWords?: {
       content: string[]
       filters: MiningRequestWordFilters
-    },
+    }
     wordsToFindComments?: {
       content: string[]
       filters: MiningRequestWordFilters
-    },
+    }
     phrasesToFindPhrases?: {
       content: string[]
       filters: MiningRequestPhraseFilters
-    },
+    }
     phrasesToFindComments?: {
       content: string[]
       filters: MiningRequestPhraseFilters
-    },
+    }
     usersToFindComments?: {
       content: string[]
       filters: MiningRequestUserFilters
-    },
-  },
+    }
+  }
   privacy: 'public' | 'private'
   save: boolean
 }
@@ -69,14 +69,18 @@ interface DefaultRequest {
     topNegativeComments?: DefaultRequestCommentFilters
     mostLikedComment?: DefaultRequestCommentFilters
     mostRepliesComment?: boolean
-    wordCount?: DefaultRequestWordFilters
+    wordCount?: {
+      checked: boolean
+      includeCommentReplies: boolean
+      countRepeatedWords: boolean
+    }
     topWords?: DefaultRequestWordFilters
     topWordsUsedTogether?: DefaultRequestWordFilters
     wordsRelatedToVideoTitle?: DefaultRequestWordFilters
     topComentingUser?: DefaultRequestCommentFilters
     commentsLanguage?: DefaultRequestCommentFilters
     commentsPublicationDate?: DefaultRequestCommentFilters
-  },
+  }
   privacy: 'public' | 'private'
   save: boolean
 }
@@ -92,7 +96,11 @@ interface CompleteRequest {
     topNegativeComments?: DefaultRequestCommentFilters
     mostLikedComment?: DefaultRequestCommentFilters
     mostRepliesComment?: boolean
-    wordCount?: DefaultRequestWordFilters
+    wordCount?: {
+      checked: boolean
+      includeCommentReplies: boolean
+      countRepeatedWords: boolean
+    }
     topWords?: DefaultRequestWordFilters
     topWordsUsedTogether?: DefaultRequestWordFilters
     wordsRelatedToVideoTitle?: DefaultRequestWordFilters
@@ -102,24 +110,24 @@ interface CompleteRequest {
     wordsToFindWords?: {
       content: string[]
       filters: MiningRequestWordFilters
-    },
+    }
     wordsToFindComments?: {
       content: string[]
       filters: MiningRequestWordFilters
-    },
+    }
     phrasesToFindPhrases?: {
       content: string[]
       filters: MiningRequestPhraseFilters
-    },
+    }
     phrasesToFindComments?: {
       content: string[]
       filters: MiningRequestPhraseFilters
-    },
+    }
     usersToFindComments?: {
       content: string[]
       filters: MiningRequestUserFilters
-    },
-  },
+    }
+  }
   privacy: 'public' | 'private'
   save: boolean
 }

@@ -20,7 +20,7 @@ import { CommentsFromWords } from './components/mining/CommentsFromWords'
 import { CommentsFromPhrases } from './components/mining/CommentsFromPhrases'
 import { ListPhrases } from './components/mining/ListPhrases'
 import { CommentsFromUsers } from './components/mining/CommentsFromUsers'
-import { CommentsPublicationDate } from './components/default/CommentsPublicationDate';
+import { CommentsPublicationDate } from './components/default/CommentsPublicationDate'
 
 import styles from './styles.module.scss'
 import { useEffect } from 'react';
@@ -163,7 +163,8 @@ const Analysis: React.FC<IProps> = ({ analysis }) => {
 
             {/* Data de publicação dos comentários */}
             { options.commentsPublicationDate && (
-              <CommentsPublicationDate dates={commentsPublicationDate} />
+              <h1>Mapa de calor dos comentários não funcionando</h1>
+              // <CommentsPublicationDate dates={commentsPublicationDate} />
             )}
           </div>
         )}
@@ -370,7 +371,8 @@ const Analysis: React.FC<IProps> = ({ analysis }) => {
 
           {/* Data de publicação dos comentários */}
           { options.commentsPublicationDate && (
-            <CommentsPublicationDate dates={commentsPublicationDate} />
+            <h1>Mapa de calor dos comentários não funcionando</h1>
+            // <CommentsPublicationDate dates={commentsPublicationDate} />
           )}
 
           {/* Palavras mineradas */}

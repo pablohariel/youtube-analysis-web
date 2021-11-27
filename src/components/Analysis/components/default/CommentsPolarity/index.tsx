@@ -19,15 +19,15 @@ const CommentsPolarity: React.FC<IProps> = ({ commentsPolarity }) => {
 
   const { positive, neutral, negative } = commentsPolarity
 
-  const commentCount = positive.count + neutral.count + negative.count
+  const commentCount = positive.totalCount + neutral.totalCount + negative.totalCount
 
   return (
     <div className={styles.commentsPolarityWrapper}>
       <h3>Polaridade dos comentários</h3>
       <p>Baseado em {commentCount} comentários</p>
-      <span>Positivos: {positive.count}</span>
-      <span>Neutros: {neutral.count}</span>
-      <span>Negativos: {negative.count}</span>
+      <span>Positivos: {positive.totalCount}</span>
+      <span>Neutros: {neutral.totalCount}</span>
+      <span>Negativos: {negative.totalCount}</span>
     </div>
   )
 }
