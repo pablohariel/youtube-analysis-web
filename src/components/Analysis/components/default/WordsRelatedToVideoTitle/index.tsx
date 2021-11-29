@@ -23,7 +23,7 @@ const WordsRelatedToVideoTitle: React.FC<IProps> = ({ words }) => {
       <h3>Palavras relacionadas ao titulo do vídeo</h3>
       <ul>
         {topWords.map(word => (
-          <li>{word.word}</li>
+          <li>{word.word} - utilizada - {word.timesUsed} vezes</li>
         ))}
       </ul>
     </div>
