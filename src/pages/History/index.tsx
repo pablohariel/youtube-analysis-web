@@ -94,7 +94,7 @@ const History: React.FC = () => {
         />
         {searching && <div className={styles.searching}><Spinner size='xl' color='#8981D8' /></div>}
         {!searching && <CardList data={analysis} selectedFilter={filters.options.orderBy} setAnalysis={setAnalysis} isHistory />}
-        {!searching && 
+        {(analysis.analysisCount > 0 && !searching) && 
           <div className={styles.pagination}>
             <ReactPaginate
               breakLabel="..."

@@ -1,10 +1,10 @@
-import { Comment as IComment } from '../../../../../interfaces/comment'
+import { Comment as IComment, Reply as IReply } from '../../../../../interfaces/comment'
 import { Comment } from '../Comment'
 
 import styles from './styles.module.scss'
 
 interface IProps {
-  comment: IComment | undefined
+  comment: IComment | IReply | undefined
 }
 
 const MostRepliesComment: React.FC<IProps> = ({ comment }) => {

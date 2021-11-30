@@ -54,17 +54,17 @@ const Contact: React.FC = () => {
           <div className={styles.card}>
             <h2 className={styles.subtitle}>Informações</h2>
             <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-              <label>
+              <label className={styles.label}>
                 Nome
-                <Input className={styles.input} type='text' {...register('name')} />
+                <Input className={styles.input} type='text' {...register('name')} placeholder='Digite seu nome...' />
               </label>
-              <label>
+              <label className={styles.label}>
                 E-mail
-                <Input className={styles.input} type='email' {...register('email')} />
+                <Input className={styles.input} type='email' {...register('email')} placeholder='Digite seu e-mail...' />
               </label>
-              <label>
+              <label className={styles.label}>
                 Mensagem  
-                <Textarea className={styles.textarea} type='text' {...register('message')} />
+                <Textarea className={styles.textarea} type='text' {...register('message')} placeholder='Digite sua mensagem...' />
               </label>
 
               <Button className={styles.btnSubmit} type='submit' variant='fill' >Enviar</Button>

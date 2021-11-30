@@ -1,0 +1,26 @@
+.wordCountWrapper {
+  padding: 1rem;
+
+  .titleWrapper {
+    display: flex;
+    align-items: flex-end;
+    padding: 0;
+
+    .infoBtn {
+      height: 1.875rem;
+      margin-left: 0.2rem;
+      padding: 0;
+    }
+  }
+
+  .text {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #34495E;
+
+    .wordCount {
+      color: #8981D8;
+      font-weight: normal;
+    }
+  }
+}

@@ -1,3 +1,19 @@
+.btnOpenComment {
+  font-size: 0.75rem;
+  color: #8981D8;
+  margin-left: 1rem;
+
+  &:hover {
+    background-color: #fff;
+  }
+}
+
+.btnModalClose {
+  margin-right: 0 !important;
+  background-color: #fff;
+  color: #8981D8;
+}
+
 .commentWrapper {
   display: flex;
 

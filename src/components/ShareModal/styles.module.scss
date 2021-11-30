@@ -1,0 +1,38 @@
+.btnShare {
+  margin-right: 2rem;
+  color: #fff;
+  background-color: #D4C2FF !important;
+  font-weight: normal !important;
+
+  &:hover {
+    background-color: #D4C2FF;
+  }
+}
+
+.modalTitle {
+  color: #34495E;
+}
+
+.btnModalClose {
+  margin-right: 0 !important;
+  background-color: #fff;
+  color: #8981D8;
+}
+
+.socialMediaBtns {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2rem;
+
+  .btnFacebook, .btnTwitter, .btnWhatsapp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .text {
+      color: #34495E;
+    }
+  }
+}

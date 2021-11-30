@@ -35,7 +35,9 @@
         flex-direction: column;
         align-items: center;
 
-        label {
+        .label {
+          color: #34495E;
+
           &:not(:first-child) {
             margin-top: 2.5rem;
           }

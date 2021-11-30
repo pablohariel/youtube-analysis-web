@@ -1,16 +1,15 @@
 import { useState } from 'react'
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
-// import { Switch } from '@mui/material'
 import { Switch, Button, Select } from '@chakra-ui/react'
 
 import { DefaultResponse, MiningResponse } from '../../../interfaces/responseData'
+import { VideoData } from '../../../interfaces/videoData'
 
 import { Checkbox } from '../../../components/Checkbox'
 
 import { api } from '../../../services/api'
 
 import styles from './styles.module.scss'
-import { useEffect } from 'react'
 
 export interface IInputs {
   options: {
@@ -83,9 +82,15 @@ interface IProps {
     created: boolean;
     content?: DefaultResponse | MiningResponse | undefined;
   }>>
+  setVideo: React.Dispatch<React.SetStateAction<{
+    isLoading: boolean;
+    isValid: boolean;
+    id: string;
+    content?: VideoData | undefined;
+  }>>
 }
 
-const CreateDefaultAnalysis: React.FC<IProps> = ({ videoId, setAnalysis }) => {
+const CreateDefaultAnalysis: React.FC<IProps> = ({ videoId, setAnalysis, setVideo }) => {
   const { handleSubmit, watch, control } = useForm<IInputs>({
     defaultValues: {
       options: {
@@ -170,7 +175,14 @@ const CreateDefaultAnalysis: React.FC<IProps> = ({ videoId, setAnalysis }) => {
       setCreating(false)
       alert('Não foi possível criar a análise')
     }
-    
+  }
+
+  const handleCancel = () => {
+    setVideo({
+      isLoading: false,
+      isValid: false,
+      id: ''
+    })
   }
 
   return (
@@ -561,13 +573,13 @@ const CreateDefaultAnalysis: React.FC<IProps> = ({ videoId, setAnalysis }) => {
           control={control}
           name='save'
           render={({ field: { onChange, onBlur, value } }) => (
-            <Switch onChange={onChange} checked={value} />
+            <Switch onChange={onChange} colorScheme='newPurple' checked={value} />
           )}
         />
       </div>  
       
       <Button className={styles.submitBtn} _hover={{ backgroundColor: '#8981D8 '}} isLoading={creating} type='submit'>Enviar</Button>
-      <Button className={styles.resetBtn} _hover={{ backgroundColor: '#D4C2FF '}} type='reset'>Resetar</Button>
+      <Button className={styles.resetBtn} onClick={handleCancel} _hover={{ backgroundColor: '#D4C2FF '}} type='button'>Cancelar</Button>
     </form>
   )
 }

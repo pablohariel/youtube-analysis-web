@@ -1,6 +1,4 @@
-import { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
-import { AiFillLike, AiFillDislike } from 'react-icons/ai'
 import { 
   Text, 
   Menu,
@@ -16,11 +14,11 @@ import {
   PopoverHeader,
   PopoverBody
 } from '@chakra-ui/react'
-import { ChevronDownIcon, ViewIcon, InfoIcon } from '@chakra-ui/icons'
+import { RiThumbUpFill, RiQuestionAnswerFill } from 'react-icons/ri'
+import { ChevronDownIcon, ViewIcon, DeleteIcon, ViewOffIcon, RepeatClockIcon } from '@chakra-ui/icons'
 
 
 import { AnalysisContext, IDefaultAnalysis, IMiningAnalysis, ICompleteAnalysis } from '../../contexts/analysis'
-import { api } from '../../services/api'
 import { formatDate } from '../../utils/formatDate'
 
 import { IListAnalysis } from '../../pages/Home'
@@ -43,7 +41,7 @@ const Card: React.FC<IProps> = ({ analysis, isHistory, handleDelete, handlePriva
   return (
     <div className={`${styles.cardWrapper}  ${isHistory === true && styles.historyCardWrapper}`}>
       <div className={styles.analysisHandler}>
-        <Popover>
+        {/* <Popover>
           <PopoverTrigger>
             <Button><InfoIcon /></Button>
           </PopoverTrigger>
@@ -53,7 +51,7 @@ const Card: React.FC<IProps> = ({ analysis, isHistory, handleDelete, handlePriva
             <PopoverHeader>{`Análise do tipo ${analysis.requestData.type}`}</PopoverHeader>
             <PopoverBody>{JSON.stringify(analysis.requestData.options)}</PopoverBody>
           </PopoverContent> 
-        </Popover>
+        </Popover> */}
         <Menu>
           <MenuButton
             px={4}
@@ -61,16 +59,43 @@ const Card: React.FC<IProps> = ({ analysis, isHistory, handleDelete, handlePriva
             transition="all 0.2s"
             borderRadius="md"
             borderWidth="1px"
-            _hover={{ bg: "gray.400" }}
-            _expanded={{ bg: "blue.400" }}
-            _focus={{ boxShadow: "outline" }}
           >
             <ChevronDownIcon />
           </MenuButton>
-          <MenuList>
-            <MenuItem onClick={() => handleUpdate(id)}>Atualizar</MenuItem>
-            <MenuItem onClick={() => handlePrivacy(id, analysis.privacy)}>{analysis.privacy}</MenuItem>
-            <MenuItem onClick={() => handleDelete(id)}>Deletar</MenuItem>
+          <MenuList className={styles.menuList}>
+            <MenuItem 
+              className={styles.listItem} 
+              onClick={() => handleUpdate(id)}
+            > 
+              <div>
+                <RepeatClockIcon />
+                <span>Atualizar</span>
+              </div>
+            </MenuItem>
+            <MenuItem 
+              className={styles.listItem} 
+              onClick={() => handlePrivacy(id, analysis.privacy)}
+            >
+              {analysis.privacy === 'public' ? 
+                <div>
+                  <ViewIcon />
+                  <span>Privar</span>
+                </div> : 
+                <div>
+                  <ViewOffIcon /> 
+                  <span>Publicar</span>
+                </div>
+              }
+            </MenuItem>
+            <MenuItem 
+              className={styles.listItem} 
+              onClick={() => handleDelete(id)}
+            >
+              <div>
+                <DeleteIcon />
+                <span>Deletar</span>
+              </div>
+            </MenuItem>
           </MenuList>
         </Menu>
       </div>
@@ -86,15 +111,16 @@ const Card: React.FC<IProps> = ({ analysis, isHistory, handleDelete, handlePriva
       </main>
       <footer className={styles.footer}>
         <div>
-          <AiFillLike />
+          <RiThumbUpFill />
           <span>{videoData.statistics.likeCount}</span>
         </div>
         <div>  
           <ViewIcon />
-          <span>{viewCount}</span>
+          <span>{videoData.statistics.viewCount}</span>
         </div>
         <div>  
-          <span>{videoData.statistics.viewCount}</span>
+          <RiQuestionAnswerFill />
+          <span>{videoData.statistics.commentCount}</span>
         </div>
       </footer>
     </div>

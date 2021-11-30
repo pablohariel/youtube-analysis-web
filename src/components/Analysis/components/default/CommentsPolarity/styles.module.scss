@@ -1,0 +1,63 @@
+.commentsPolarityWrapper {
+  padding: 1rem;
+
+  .main {
+    margin-top: 1rem;
+
+    .ratingWrapper {
+      display: flex;
+      align-items: center;
+      color: #34495E;
+
+      .ratingNumber {
+        padding: 0;
+        font-size: 3rem;
+      }
+
+      .starsWrapper {
+        margin-left: 1.875rem;
+        display: flex;
+        flex-direction: column; 
+
+        .stars {
+          display: flex;
+  
+          .star {
+            &:not(:first-child) {
+              margin-left: 0.375rem;
+            }
+          }
+        }
+
+        .result {
+          opacity: 0.6;
+          font-size: 0.75rem;
+          margin-top: 0.4rem;
+        }
+      }
+    }
+
+    .polarities { 
+      margin-top: 0.5rem;
+      max-width: 22rem;
+      display: flex;
+      flex-direction: column;
+
+      .polarity {
+        color: #34495E;
+        display: flex;
+
+        &:not(:first-child) {
+          margin-top: 0.2rem;
+        }
+
+        .polarityName {
+          width: 4rem;
+          margin-right: 2rem;
+        }
+
+      }
+    }
+  }
+ 
+}

@@ -6,6 +6,7 @@ import { AddIcon } from '@chakra-ui/icons'
 import { api } from '../../../services/api'
 
 import { DefaultResponse, MiningResponse } from '../../../interfaces/responseData'
+import { VideoData } from '../../../interfaces/videoData'
 
 import { Checkbox } from '../../Checkbox'
 
@@ -54,9 +55,15 @@ interface IProps {
     created: boolean;
     content?: DefaultResponse | MiningResponse | undefined;
   }>>
+  setVideo: React.Dispatch<React.SetStateAction<{
+    isLoading: boolean;
+    isValid: boolean;
+    id: string;
+    content?: VideoData | undefined;
+  }>>
 }
 
-const CreateMiningAnalysis: React.FC<IProps> = ({ videoId, setAnalysis }) => {
+const CreateMiningAnalysis: React.FC<IProps> = ({ videoId, setAnalysis, setVideo }) => {
   const { register, handleSubmit, watch, control } = useForm<IInputs>({
     defaultValues: {
       options: {
@@ -112,8 +119,6 @@ const CreateMiningAnalysis: React.FC<IProps> = ({ videoId, setAnalysis }) => {
   const [userToFindComments, setUserToFindComments] = useState<string>('')
   const [usersToFindComments, setUsersToFindComments] = useState<string[]>([])
 
-  console.log(videoId)
-
   const onSubmit: SubmitHandler<IInputs> = async data => {
 
     const { options, privacy, save } = data
@@ -161,9 +166,14 @@ const CreateMiningAnalysis: React.FC<IProps> = ({ videoId, setAnalysis }) => {
       setCreating(false)
       alert('Não foi possível criar a análise')
     }
-    
+  }
 
-    // console.log(result)
+  const handleCancel = () => {
+    setVideo({
+      isLoading: false,
+      isValid: false,
+      id: ''
+    })
   }
 
   return (
@@ -522,13 +532,13 @@ const CreateMiningAnalysis: React.FC<IProps> = ({ videoId, setAnalysis }) => {
           control={control}
           name='save'
           render={({ field: { onChange, value } }) => (
-            <Switch onChange={onChange} checked={value} />
+            <Switch onChange={onChange} colorScheme='newPurple' checked={value} />
           )}
         />
       </div> 
 
       <Button className={styles.submitBtn} _hover={{ backgroundColor: '#8981D8 '}} isLoading={creating} type='submit'>Enviar</Button>
-      <Button className={styles.resetBtn} _hover={{ backgroundColor: '#D4C2FF '}} type='reset'>Resetar</Button>
+      <Button className={styles.resetBtn} onClick={handleCancel} _hover={{ backgroundColor: '#D4C2FF '}} type='button'>Cancelar</Button>
     </form>
   )
 }

@@ -140,9 +140,9 @@ const CreateAnalysis: React.FC = () => {
                     <label className={styles.label}>
                       <span className={styles.name}>Filtros</span><span className={styles.info}>Diversas opções selecionáveis</span>
                     </label>
-                    {typeSelected === 'default' && <CreateDefaultAnalysis videoId={video.id} setAnalysis={setAnalysis} />}
-                    {typeSelected === 'mining' && <CreateMiningAnalysis videoId={video.id} setAnalysis={setAnalysis} />}
-                    {typeSelected === 'complete' && <CreateCompleteAnalysis videoId={video.id} setAnalysis={setAnalysis} />}
+                    {typeSelected === 'default' && <CreateDefaultAnalysis videoId={video.id} setAnalysis={setAnalysis} setVideo={setVideo} />}
+                    {typeSelected === 'mining' && <CreateMiningAnalysis videoId={video.id} setAnalysis={setAnalysis} setVideo={setVideo} />}
+                    {typeSelected === 'complete' && <CreateCompleteAnalysis videoId={video.id} setAnalysis={setAnalysis} setVideo={setVideo} />}
                   </div>
                   
                 </>

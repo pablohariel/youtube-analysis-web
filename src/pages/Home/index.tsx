@@ -101,25 +101,25 @@ const Home: React.FC = () => {
         />
         {searching && <div className={styles.searching}><Spinner size='xl' color='#8981D8' /></div>}
         {!searching && <CardList data={{ analysisCount: analysis.analysisCount, analysis: analysis.analysis }} setAnalysis={setAnalysis} isHistory={false} selectedFilter={filters.options.orderBy} />}
-        {!searching && 
-          <div className={styles.pagination}>
-            <ReactPaginate
-              breakLabel="..."
-              nextLabel=">"
-              forcePage={filters.options.pageNumber - 1}
-              onPageChange={handlePageClick}
-              pageCount={pageCount}
-              previousLabel="<"
-              pageRangeDisplayed={5}
-              containerClassName='paginate-container'
-              activeLinkClassName='paginate-link-active'
-              marginPagesDisplayed={50}
-              nextClassName='paginate-next'
-              previousClassName='paginate-previous'
-              pageLinkClassName='paginate-page-link'
-            />
-          </div>
-        } 
+        {(analysis.analysisCount > 0 && !searching) && (
+            <div className={styles.pagination}>
+              <ReactPaginate
+                breakLabel="..."
+                nextLabel=">"
+                forcePage={filters.options.pageNumber - 1}
+                onPageChange={handlePageClick}
+                pageCount={pageCount}
+                previousLabel="<"
+                pageRangeDisplayed={5}
+                containerClassName='paginate-container'
+                activeLinkClassName='paginate-link-active'
+                marginPagesDisplayed={50}
+                nextClassName='paginate-next'
+                previousClassName='paginate-previous'
+                pageLinkClassName='paginate-page-link'
+              />
+            </div>
+        )}
       </div>
     </div>
   )

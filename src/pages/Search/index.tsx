@@ -81,9 +81,9 @@ const Search: React.FC = () => {
   const pageCount = Math.ceil(analysis.analysisCount / 10)
 
   return (
-    <div className={styles.searchWrapperClosed}>
+    <div className={styles.searchWrapper}>
       <LeftBar user={user} />
-      <main>
+      <main className={styles.main}>
         <TopBar user={user} />
         <SecondaryTopBar 
           title={`Análises encontradas`} 
@@ -96,7 +96,7 @@ const Search: React.FC = () => {
         />
         {searching && <div className={styles.searching}><Spinner size='xl' color='#8981D8' /></div>}
         {!searching && <CardList data={{ analysisCount: analysis.analysisCount, analysis: analysis.analysis }} setAnalysis={setAnalysis} isHistory={false} selectedFilter={filters.options.orderBy} />}
-        {!searching && 
+        {(analysis.analysisCount > 0 && !searching) && 
           <div className={styles.pagination}>
             <ReactPaginate
               breakLabel="..."

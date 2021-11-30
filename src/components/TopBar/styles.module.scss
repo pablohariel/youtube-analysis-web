@@ -43,16 +43,15 @@
     align-items: center;
 
     .userInfoWrapper {
-      width: 9.375rem;
       display: flex;
       align-items: center;
-      margin-right: 0.875rem;
+      margin-right: 2rem;
 
       .userImg {
         height: 2.688rem;
         width: 2.688rem;
         border-radius: 50%;
-        margin-right: 0.875rem;
+        margin-right: 0.5rem;
       }
 
       .userName {
@@ -75,6 +74,9 @@
       border: none;
       cursor: pointer;
       transition: 0.2s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .btnSignUp {

@@ -1,10 +1,13 @@
-import { CommentAnalyzed, Comment as IComment } from '../../../../../interfaces/comment'
-import styles from './styles.module.scss'
+import { Text, Avatar } from '@chakra-ui/react'
 
 import { RepliesModal } from '../RepliesModal'
+import { CommentModal } from '../CommentModal'
+import { CommentAnalyzed, Comment as IComment, Reply as IReply } from '../../../../../interfaces/comment'
+
+import styles from './styles.module.scss'
 
 interface IProps {
-  comment: CommentAnalyzed | IComment
+  comment: CommentAnalyzed | IComment | IReply
 }
 
 const Comment: React.FC<IProps> = ({ comment }) => {
@@ -16,16 +19,17 @@ const Comment: React.FC<IProps> = ({ comment }) => {
 
   return (
     <div className={styles.commentWrapper}>
-      <img src={author.profileImage} />
+      <Avatar src={author.profileImage} />
       <div className={styles.content}>
-        <div>
-          <span>{author.name}</span> <span>{published_at}</span>
+        <div className={styles.header}>
+          <span className={styles.authorName}>{author.name}</span> <span className={styles.commentDate}>{published_at}</span>
         </div>
-        <p>{content}</p>
-        <div>
-          <span>{likeCount} curtidas</span>
-          {'replies' in comment && <span>{comment.replyCount} respostas</span>}
-          {'replies' in comment && <RepliesModal replies={comment.replies} />}
+        <Text className={styles.main} noOfLines={4}>{content}</Text>
+        <div className={styles.footer}>
+          <span className={styles.likeCount}>{likeCount} curtidas</span>
+          {content.length > 140 && <CommentModal comment={comment} />}
+          {/* {'replies' in comment && <span>{comment.replyCount} respostas</span>}
+          {'replies' in comment && <RepliesModal replies={comment.replies} />} */}
         </div>
       </div>  
     </div>

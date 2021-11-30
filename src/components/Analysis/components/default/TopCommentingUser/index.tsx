@@ -1,3 +1,5 @@
+import { Avatar } from '@chakra-ui/react'
+
 import { CommentUser } from '../../../../../interfaces/commentUser'
 
 import styles from './styles.module.scss'
@@ -21,10 +23,10 @@ const TopCommentingUser: React.FC<IProps> = ({ user }) => {
   return (
     <div className={styles.topCommentingUserWrapper}>
       <h3>Usuário com mais comentários</h3>
-      <div>
-        <img src={profileImage} />
-        <span>{name}</span>
-        <p>Com um total de <strong>{commentCount}</strong> comentários</p>
+      <div className={styles.content}>
+        <Avatar src={profileImage} />
+        <span className={styles.authorName}>{name}</span>
+        <p className={styles.text}>Com um total de <strong className={styles.commentCount}>{commentCount}</strong> comentários</p>
       </div>
 
     </div>

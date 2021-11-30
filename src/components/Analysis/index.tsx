@@ -1,5 +1,7 @@
 import { RiThumbUpFill, RiThumbDownFill, RiQuestionAnswerFill, RiCalendarFill } from 'react-icons/ri'
+import { Button } from '@chakra-ui/react'
 import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
+import dateFormat, { i18n } from "dateformat";
 
 import { CompleteResponse, DefaultResponse, MiningResponse } from '../../interfaces/responseData'
 
@@ -21,17 +23,31 @@ import { CommentsFromPhrases } from './components/mining/CommentsFromPhrases'
 import { ListPhrases } from './components/mining/ListPhrases'
 import { CommentsFromUsers } from './components/mining/CommentsFromUsers'
 import { CommentsPublicationDate } from './components/default/CommentsPublicationDate'
+import { ShareModal } from '../ShareModal'
 
 import styles from './styles.module.scss'
-import { useEffect } from 'react';
-import { api } from '../../services/api';
+import { ViewIcon } from '@chakra-ui/icons';
+
+function titleCase(str: string) {
+  var splitStr = str.toLowerCase().split(' ');
+  for (var i = 0; i < splitStr.length; i++) {
+      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
+  }
+  return splitStr.join(' '); 
+}
 
 interface IProps {
   analysis: DefaultResponse | MiningResponse | CompleteResponse
 }
 
+function formatDate(date: string) {
+  const dateObject = new Date(date)
+  const dateFormatted = dateFormat(dateObject, 'dd / mm / yyyy')
+  return dateFormatted
+}
+
 const Analysis: React.FC<IProps> = ({ analysis }) => {
-  const { type } = analysis.requestData
+  const { type, options } = analysis.requestData
 
   const handleDownload = () => {
     let element = document.getElementById("analysisCardWrapper") || document.body;
@@ -46,6 +62,7 @@ const Analysis: React.FC<IProps> = ({ analysis }) => {
     const { content, requestData, videoData } = analysis as DefaultResponse
 
     const { options } = requestData
+
     const { 
       commentsPolarity, 
       commentCount, 
@@ -71,7 +88,7 @@ const Analysis: React.FC<IProps> = ({ analysis }) => {
           <img className={styles.videoImg} src={videoData.thumbnail} />
           <div className={styles.videoInfo}>
             <div>
-              <h2 className={styles.title}>{videoData.title}</h2>
+              <h2 className={styles.title}>{titleCase(videoData.title)}</h2>
               <div className={styles.channelInfoWrapper}> 
                 <img className={styles.channelImg} src={videoData.channelDetails.thumbnail} />
                 <h3 className={styles.channelTitle}>{videoData.channelDetails.title}</h3>
@@ -83,9 +100,9 @@ const Analysis: React.FC<IProps> = ({ analysis }) => {
                 <RiThumbUpFill />
                 <span>{videoData.statistics.likeCount}</span>
               </div>
-              <div className={styles.dislikeCount}>
-                <RiThumbDownFill />
-                <span>{videoData.statistics.dislikeCount}</span>
+              <div className={styles.viewCount}>
+                <ViewIcon />
+                <span>{videoData.statistics.viewCount}</span>
               </div>
               <div className={styles.commentCount}>
                 <RiQuestionAnswerFill />
@@ -93,81 +110,85 @@ const Analysis: React.FC<IProps> = ({ analysis }) => {
               </div>
               <div className={styles.videoDate}>
                 <RiCalendarFill />
-                <span>{videoData.published_at}</span>
+                <span>{formatDate(videoData.published_at)}</span>
               </div>
             </div>
           </div>
         </header>
-        {type === 'default' && (
-          <div className={styles.content}>
+        <div className={styles.content}>
+          <ul className={styles.optionList}>
             {/* Polaridade dos comentários */}
             { options.commentsPolarity && (
-              <CommentsPolarity commentsPolarity={commentsPolarity} />
+              <li className={styles.option}><CommentsPolarity commentsPolarity={commentsPolarity} /></li>
             )}
 
             {/* Principais comentários positivos */}
             { options.topPositiveComments && (
-              <TopPositiveComments comments={topPositiveComments} />
+              <li className={styles.option}><TopPositiveComments comments={topPositiveComments} /></li>
             )}
 
             {/* Principais comentários negativos */}
             { options.topNegativeComments && (
-              <TopNegativeComments comments={topNegativeComments} />
+              <li className={styles.option}><TopNegativeComments comments={topNegativeComments} /></li>
             )}
 
             {/* Contagem de comentários */}
             { options.commentCount && (
-              <CommentCount count={commentCount} />
+              <li className={styles.option}><CommentCount count={commentCount} requestData={options.commentCount} /></li>
             )}
 
             {/* Comentário com mais curtidas */}
             { options.mostLikedComment && (
-              <MostLikedComment comment={mostLikedComment} />
+              <li className={styles.option}><MostLikedComment comment={mostLikedComment} /></li>
             )}
 
             {/* Idioma dos comentários */}
             { options.commentsLanguage && (
-              <CommentsLanguage languages={commentsLanguage} />
+              <li className={styles.option}><CommentsLanguage languages={commentsLanguage} /></li>
             )}
 
 
             {/* Comentário com mais respostas */}
             { options.mostRepliesComment && (
-              <MostRepliesComment comment={mostRepliesComment} />
+              <li className={styles.option}><MostRepliesComment comment={mostRepliesComment} /></li>
             )}
 
             {/* Usuário com mais comentários */}
             { options.topComentingUser && (
-              <TopCommentingUser user={topComentingUser} />
+              <li className={styles.option}><TopCommentingUser user={topComentingUser} /></li>
             )}
 
             {/* Contagem de palavras */}
             { options.wordCount && (
-              <WordCount count={wordCount} />
+              <li className={styles.option}><WordCount count={wordCount} requestData={options.wordCount} /></li>
             )}
 
             {/* Principais palavras */}
             { options.topWords && (
-              <TopWords words={topWords} />
+              <li className={styles.option}><TopWords words={topWords} /> </li>
             )}
 
             {/* Principais palavras usadas em conjunto */}
             { options.topWordsUsedTogether && (
-              <TopWordsUsedTogether words={topWordsUsedTogether} />
+              <li className={styles.option}><TopWordsUsedTogether words={topWordsUsedTogether} /></li>
             )}
 
             {/* Palavras relacionadas ao título do vídeo */}
             { options.wordsRelatedToVideoTitle && (
-              <WordsRelatedToVideoTitle words={wordsRelatedToVideoTitle} />
+              <li className={styles.option}><WordsRelatedToVideoTitle words={wordsRelatedToVideoTitle} /></li>
             )}
 
             {/* Data de publicação dos comentários */}
             { options.commentsPublicationDate && (
-              <h1>Mapa de calor dos comentários não funcionando</h1>
+              <li className={styles.option}><h1>Mapa de calor dos comentários não funcionando</h1></li>
               // <CommentsPublicationDate dates={commentsPublicationDate} />
             )}
-          </div>
-        )}
+            </ul>
+        </div>
+        <div className={styles.btns}>
+          <Button className={styles.btnDownload} onClick={handleDownload}>Baixar</Button>
+          <ShareModal>Compartilhar</ShareModal>
+        </div>
       </div>
     )
   } 
@@ -189,7 +210,7 @@ const Analysis: React.FC<IProps> = ({ analysis }) => {
           <img className={styles.videoImg} src={videoData.thumbnail} />
           <div className={styles.videoInfo}>
             <div>
-              <h2 className={styles.title}>{videoData.title}</h2>
+              <h2 className={styles.title}>{titleCase(videoData.title)}</h2>
               <div className={styles.channelInfoWrapper}> 
                 <img className={styles.channelImg} src={videoData.channelDetails.thumbnail} />
                 <h3 className={styles.channelTitle}>{videoData.channelDetails.title}</h3>
@@ -200,9 +221,9 @@ const Analysis: React.FC<IProps> = ({ analysis }) => {
                 <RiThumbUpFill />
                 <span>{videoData.statistics.likeCount}</span>
               </div>
-              <div className={styles.dislikeCount}>
-                <RiThumbDownFill />
-                <span>{videoData.statistics.dislikeCount}</span>
+              <div className={styles.viewCount}>
+                <ViewIcon />
+                <span>{videoData.statistics.viewCount}</span>
               </div>
               <div className={styles.commentCount}>
                 <RiQuestionAnswerFill />
@@ -210,38 +231,43 @@ const Analysis: React.FC<IProps> = ({ analysis }) => {
               </div>
               <div className={styles.videoDate}>
                 <RiCalendarFill />
-                <span>{videoData.published_at}</span>
+                <span>{formatDate(videoData.published_at)}</span>
               </div>
             </div>
           </div>
         </header>
         <div className={styles.content}>
-          {/* Palavras mineradas */}
-          { options.wordsToFindWords && (
-            <ListWords words={words} />
-          )}
+          <ul className={styles.optionList}>
+            {/* Palavras mineradas */}
+            { options.wordsToFindWords && (
+              <li className={styles.option}><ListWords words={words} /></li>
+            )}
 
-          {/* Frases mineradas */}
-          { options.phrasesToFindPhrases && (
-            <ListPhrases phrases={phrases} />
-          )}
+            {/* Frases mineradas */}
+            { options.phrasesToFindPhrases && (
+              <li className={styles.option}><ListPhrases phrases={phrases} /></li>
+            )}
 
-          {/* Comentários de palavras específicas */}
-          { options.wordsToFindComments && (
-            <CommentsFromWords comments={commentsFromWords} />
-          )}
+            {/* Comentários de palavras específicas */}
+            { options.wordsToFindComments && (
+              <li className={styles.option}><CommentsFromWords comments={commentsFromWords} /></li>
+            )}
 
-          {/* Comentário  s de frases específicas */}
-          { options.phrasesToFindComments && (
-            <CommentsFromPhrases comments={commentsFromPhrases} />
-          )}
+            {/* Comentário  s de frases específicas */}
+            { options.phrasesToFindComments && (
+              <li className={styles.option}><CommentsFromPhrases comments={commentsFromPhrases} /></li>
+            )}
 
-            {/* Comentários de usuários específicos */}
-          { options.usersToFindComments && (
-            <CommentsFromUsers comments={commentsFromUsers} />
-          )}
+              {/* Comentários de usuários específicos */}
+            { options.usersToFindComments && (
+              <li className={styles.option}><CommentsFromUsers comments={commentsFromUsers} /></li>
+            )}
+          </ul>
         </div>
-        <button onClick={handleDownload}>Download</button>
+        <div className={styles.btns}>
+          <Button className={styles.btnDownload} onClick={handleDownload}>Baixar</Button>
+          <ShareModal>Compartilhar</ShareModal>
+        </div>
       </div>
     )
 
@@ -280,7 +306,7 @@ const Analysis: React.FC<IProps> = ({ analysis }) => {
           <img className={styles.videoImg} src={videoData.thumbnail} />
           <div className={styles.videoInfo}>
             <div>
-              <h2 className={styles.title}>{videoData.title}</h2>
+              <h2 className={styles.title}>{titleCase(videoData.title)}</h2>
               <div className={styles.channelInfoWrapper}> 
                 <img className={styles.channelImg} src={videoData.channelDetails.thumbnail} />
                 <h3 className={styles.channelTitle}>{videoData.channelDetails.title}</h3>
@@ -292,9 +318,9 @@ const Analysis: React.FC<IProps> = ({ analysis }) => {
                 <RiThumbUpFill />
                 <span>{videoData.statistics.likeCount}</span>
               </div>
-              <div className={styles.dislikeCount}>
-                <RiThumbDownFill />
-                <span>{videoData.statistics.dislikeCount}</span>
+              <div className={styles.viewCount}>
+                <ViewIcon />
+                <span>{videoData.statistics.viewCount}</span>
               </div>
               <div className={styles.commentCount}>
                 <RiQuestionAnswerFill />
@@ -302,103 +328,108 @@ const Analysis: React.FC<IProps> = ({ analysis }) => {
               </div>
               <div className={styles.videoDate}>
                 <RiCalendarFill />
-                <span>{videoData.published_at}</span>
+                <span>{formatDate(videoData.published_at)}</span>
               </div>
             </div>
           </div>
         </header>
         <div className={styles.content}>
-          {/* Polaridade dos comentários */}
-          { options.commentsPolarity && (
-            <CommentsPolarity commentsPolarity={commentsPolarity} />
-          )}
+          <ul className={styles.optionList}>
+            {/* Polaridade dos comentários */}
+            { options.commentsPolarity && (
+              <li className={styles.option}><CommentsPolarity commentsPolarity={commentsPolarity} /></li>
+            )}
 
-          {/* Principais comentários positivos */}
-          { options.topPositiveComments && (
-            <TopPositiveComments comments={topPositiveComments} />
-          )}
+            {/* Principais comentários positivos */}
+            { options.topPositiveComments && (
+              <li className={styles.option}><TopPositiveComments comments={topPositiveComments} /></li>
+            )}
 
-          {/* Principais comentários negativos */}
-          { options.topNegativeComments && (
-            <TopNegativeComments comments={topNegativeComments} />
-          )}
+            {/* Principais comentários negativos */}
+            { options.topNegativeComments && (
+              <li className={styles.option}><TopNegativeComments comments={topNegativeComments} /></li>
+            )}
 
-          {/* Contagem de comentários */}
-          { options.commentCount && (
-            <CommentCount count={commentCount} />
-          )}
+            {/* Contagem de comentários */}
+            { options.commentCount && (
+              <li className={styles.option}><CommentCount count={commentCount} requestData={options.commentCount} /></li>
+            )}
 
-          {/* Comentário com mais curtidas */}
-          { options.mostLikedComment && (
-            <MostLikedComment comment={mostLikedComment} />
-          )}
+            {/* Comentário com mais curtidas */}
+            { options.mostLikedComment && (
+              <li className={styles.option}><MostLikedComment comment={mostLikedComment} /></li>
+            )}
 
-          {/* Idioma dos comentários */}
-          { options.commentsLanguage && (
-            <CommentsLanguage languages={commentsLanguage} />
-          )}
+            {/* Idioma dos comentários */}
+            { options.commentsLanguage && (
+              <li className={styles.option}><CommentsLanguage languages={commentsLanguage} /></li>
+            )}
 
+            {/* Comentário com mais respostas */}
+            { options.mostRepliesComment && (
+              <li className={styles.option}><MostRepliesComment comment={mostRepliesComment} /></li>
+            )}
 
-          {/* Comentário com mais respostas */}
-          { options.mostRepliesComment && (
-            <MostRepliesComment comment={mostRepliesComment} />
-          )}
+            {/* Usuário com mais comentários */}
+            { options.topComentingUser && (
+              <li className={styles.option}><TopCommentingUser user={topComentingUser} /></li>
+            )}
 
-          {/* Usuário com mais comentários */}
-          { options.topComentingUser && (
-            <TopCommentingUser user={topComentingUser} />
-          )}
+            {/* Contagem de palavras */}
+            { options.wordCount && (
+              <li className={styles.option}><WordCount count={wordCount} requestData={options.wordCount} /></li>
+            )}
 
-          {/* Contagem de palavras */}
-          { options.wordCount && (
-            <WordCount count={wordCount} />
-          )}
+            {/* Principais palavras */}
+            { options.topWords && (
+              <li className={styles.option}><TopWords words={topWords} /></li>
+            )}
 
-          {/* Principais palavras */}
-          { options.topWords && (
-            <TopWords words={topWords} />
-          )}
+            {/* Principais palavras usadas em conjunto */}
+            { options.topWordsUsedTogether && (
+              <li className={styles.option}><TopWordsUsedTogether words={topWordsUsedTogether} /></li>
+            )}
 
-          {/* Principais palavras usadas em conjunto */}
-          { options.topWordsUsedTogether && (
-            <TopWordsUsedTogether words={topWordsUsedTogether} />
-          )}
+            {/* Palavras relacionadas ao título do vídeo */}
+            { options.wordsRelatedToVideoTitle && (
+              <li className={styles.option}><WordsRelatedToVideoTitle words={wordsRelatedToVideoTitle} /></li>
+            )}
 
-          {/* Palavras relacionadas ao título do vídeo */}
-          { options.wordsRelatedToVideoTitle && (
-            <WordsRelatedToVideoTitle words={wordsRelatedToVideoTitle} />
-          )}
+            {/* Data de publicação dos comentários */}
+            { options.commentsPublicationDate && (
+              <h1>Mapa de calor dos comentários não funcionando</h1>
+              // <CommentsPublicationDate dates={commentsPublicationDate} />
+            )}
 
-          {/* Data de publicação dos comentários */}
-          { options.commentsPublicationDate && (
-            <h1>Mapa de calor dos comentários não funcionando</h1>
-            // <CommentsPublicationDate dates={commentsPublicationDate} />
-          )}
+            {/* Palavras mineradas */}
+            { options.wordsToFindWords && (
+              <li className={styles.option}><ListWords words={words} /></li>
+            )}
 
-          {/* Palavras mineradas */}
-          { options.wordsToFindWords && (
-            <ListWords words={words} />
-          )}
+            {/* Frases mineradas */}
+            { options.phrasesToFindPhrases && (
+              <li className={styles.option}><ListPhrases phrases={phrases} /></li>
+            )}
 
-          {/* Frases mineradas */}
-          { options.phrasesToFindPhrases && (
-            <ListPhrases phrases={phrases} />
-          )}
+            {/* Comentários de palavras específicas */}
+            { options.wordsToFindComments && (
+              <li className={styles.option}><CommentsFromWords comments={commentsFromWords} /></li>
+            )}
 
-          {/* Comentários de palavras específicas */}
-          { options.wordsToFindComments && (
-            <CommentsFromWords comments={commentsFromWords} />
-          )}
+            {/* Comentário  s de frases específicas */}
+            { options.phrasesToFindComments && (
+              <li className={styles.option}><CommentsFromPhrases comments={commentsFromPhrases} /></li>
+            )}
 
-          {/* Comentário  s de frases específicas */}
-          { options.phrasesToFindComments && (
-            <CommentsFromPhrases comments={commentsFromPhrases} />
-          )}
-
-            {/* Comentários de usuários específicos */}
-          { options.usersToFindComments && (
-            <CommentsFromUsers comments={commentsFromUsers} />
-          )}
+              {/* Comentários de usuários específicos */}
+            { options.usersToFindComments && (
+              <li className={styles.option}><CommentsFromUsers comments={commentsFromUsers} /></li>
+            )}
+          </ul>
+        </div>
+        <div className={styles.btns}>
+          <Button className={styles.btnDownload} onClick={handleDownload}>Baixar</Button>
+          <ShareModal>Compartilhar</ShareModal>
         </div>
       </div>
     )
@@ -408,8 +439,8 @@ const Analysis: React.FC<IProps> = ({ analysis }) => {
       <h1>Tipo de análise não suportado</h1>
     )
   }
-
-  
 }
+
+
 
 export { Analysis }

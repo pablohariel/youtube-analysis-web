@@ -12,8 +12,10 @@
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@mui/material": "^5.1.0",
+    "@nivo/bar": "^0.74.0",
     "@nivo/calendar": "^0.74.0",
     "@nivo/core": "^0.74.0",
+    "@nivo/pie": "^0.74.0",
     "@progress/kendo-drawing": "^1.16.0",
     "@progress/kendo-licensing": "^1.2.1",
     "@progress/kendo-react-pdf": "^4.11.0",
@@ -27,6 +29,7 @@
     "react-icons": "^4.3.1",
     "react-paginate": "^8.0.1",
     "react-router-dom": "^5.3.0",
+    "react-share": "^4.4.0",
     "sass": "^1.43.3"
   },
   "devDependencies": {

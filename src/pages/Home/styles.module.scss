@@ -3,35 +3,23 @@
   padding-left: 5rem;
   transition: 0.5s;
   background-color: #F0F0F7;
+  min-height: 100vh;
 
   .main {
     width: 100%;
     background-color: #F0F0F7;
 
     .searching {
+      margin-top: 5rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100%;
       background-color: #F0F0F7;
     }
 
     .pagination {
-      margin-bottom: 100px;
+      margin-bottom: 3.75rem;
     }
-  }
-}
-
-.homeWrapperOpen {
-  display: flex;
-  padding-left: 5rem;
-  transition: 0.5s;
-  background-color: #F0F0F7;
-
-  .main {
-    width: 100%;
-
-    
   }
 }
 

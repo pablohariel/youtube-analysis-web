@@ -47,6 +47,10 @@ body {
   padding-left: 5rem;
 }
 
+.chakra-toast__inner {
+  padding-left: 5rem;
+}
+
 .paginate-container {
   display: flex;
   justify-content: center;
@@ -59,6 +63,7 @@ body {
 .paginate-link-active {
   color: #fff;
   background-color: #8981D8;
+  border-radius:  5px;
 }
 
 .paginate-next {
@@ -71,5 +76,4 @@ body {
 
 .paginate-page-link {
   padding: 10px;
-  border: 1px solid #8981D8;
 }

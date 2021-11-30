@@ -1,5 +1,8 @@
 .createAnalysisWrapper {
-  margin-left: 5rem;
+  padding-left: 5rem;
+  background-color: #F0F0F7;
+  min-height: 100vh;
+  
   .main {
     width: 100%;
 
@@ -50,7 +53,6 @@
         }
 
         .videoUrlForm {
-          margin-top: 2.5rem;
           margin-bottom: 2.5rem;
 
           .btnWrapper {

@@ -3,6 +3,7 @@
   background: #FFFFFF;
   box-shadow: 0.25rem 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
   border-radius: 0.313rem;
+  margin-bottom: 100px;
 
   .header {
     display: flex;
@@ -11,13 +12,13 @@
       border-radius: 0.313rem;
       width: 33.875rem;
       min-width: 33.875rem;
-      height: 23rem;
+      height: 20.8rem;
       max-height: 23rem;
     }
 
     .videoInfo {
       border-bottom: 1px solid rgba(212, 194, 255, 0.5) ;
-      padding: 1rem 1rem 0rem 1rem;
+      padding: 1rem 2rem 0rem 2rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -51,7 +52,7 @@
       .videoStatistics {
         display: flex;
         justify-content: center;
-        margin-bottom: 10px;
+        margin-bottom: 0.2rem;
 
         div {
           margin-right: 1.25rem;
@@ -74,12 +75,162 @@
   }
 
   .content {
-    padding: 4.375rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .optionList {
+      max-width: 62rem;
+      margin: 2rem auto;
+      column-count: 2;
+      column-gap: 2rem;
+      row-gap: 10rem;
+      padding: 2rem;
+      column-width: 27rem;
+      
+      .option {
+        overflow: hidden;
+        break-inside: avoid-column;
+
+        &:not(:first-child) {
+          margin-top: 2rem;
+
+        }
+      }
+    }
 
     h3 {
       font-size: 1.875rem;
       color: #34495E;
       font-weight: bold;
+      line-height: 2rem;
+
+    }
+  }
+
+  .btns {
+    margin-top: 2rem;
+    border-top: 1px solid #D4C2FF;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 8rem;
+
+    .btnDownload {
+      margin-right: 0.5rem;
+      color: #fff;
+      background-color: #8981D8;
+      font-weight: normal;
+    }
+
+    .btnShare {
+      margin-right: 2rem;
+      color: #fff;
+      background-color: #D4C2FF;
+      font-weight: normal;
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .analysisCardWrapper {
+    width: 34rem;
+    background: #FFFFFF;
+    box-shadow: 0.25rem 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
+    border-radius: 0.313rem;
+  
+    .header {
+      display: flex;
+      flex-direction: column;
+  
+      .videoImg {
+        border-radius: 0.313rem;
+        width: 100%;
+        min-width: 33.875rem;
+        height: 23rem;
+        max-height: 23rem;
+      }
+  
+      .videoInfo {
+        border-bottom: 1px solid rgba(212, 194, 255, 0.5) ;
+        padding: 1rem 1rem 0rem 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+  
+        .title {
+          line-height: 2.75rem;
+          font-size: 2.5rem;
+          color: #34495E;
+          font-weight: bold;
+        }
+  
+        .channelInfoWrapper {
+          display: flex;
+          margin-top: 0.625rem;
+  
+          .channelImg {
+            width: 25px;
+            max-width: 1.563rem;
+            height: 25px;
+            border-radius: 50%;
+          }
+  
+          .channelTitle {
+            font-size: 0.875rem;
+            font-weight: normal;
+            color: #34495E;
+            margin-left: 0.375rem;
+          }
+        }
+  
+        .videoStatistics {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 10px;
+  
+          div {
+            margin-right: 1.25rem;
+            display: flex;
+            align-items: center;
+  
+            svg {
+              color: #D4C2FF;
+            }
+  
+            span {
+              color: #34495E;
+              margin-left: 0.5rem;
+              font-size: 0.75rem;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  
+    .content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+      .optionList {
+        max-width: 62rem;
+        margin: 50px auto;
+        column-count: 1;
+        column-gap: 1rem;
+        
+        li {
+          overflow: hidden;
+          break-inside: avoid-column;
+        }
+      }
+  
+      h3 {
+        font-size: 1.875rem;
+        color: #34495E;
+        font-weight: bold;
+      }
     }
   }
 }

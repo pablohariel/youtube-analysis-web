@@ -1,10 +1,10 @@
-import { Comment as IComment } from '../../../../../interfaces/comment'
+import { Comment as IComment, Reply as IReply } from '../../../../../interfaces/comment'
 import { Comment } from '../Comment'
 
 import styles from './styles.module.scss'
 
 interface IProps {
-  comment: IComment | undefined
+  comment: IComment | IReply | undefined
 }
 
 const MostLikedComment: React.FC<IProps> = ({ comment }) => {
@@ -19,7 +19,7 @@ const MostLikedComment: React.FC<IProps> = ({ comment }) => {
 
   return (
     <div className={styles.mostLikedCommentWrapper}>
-      <h3>Comentário com mais curtidas</h3>
+      <h3 className={styles.title}>Comentário com mais curtidas</h3>
       <Comment comment={comment} />
     </div>
   )

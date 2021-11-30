@@ -48,11 +48,11 @@ interface MiningRequest {
   save: boolean
 }
 
-interface DefaultRequestCommentFilters {
+export interface DefaultRequestCommentFilters {
   includeCommentReplies: boolean
 }
 
-interface DefaultRequestWordFilters {
+export interface DefaultRequestWordFilters {
   includeCommentReplies: boolean
   avoidAccentuation: boolean
   caseSensitive: boolean
