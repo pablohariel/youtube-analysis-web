@@ -38,7 +38,7 @@ const CommentsPolarity: React.FC<IProps> = ({ commentsPolarity }) => {
             <ImStarEmpty className={styles.star} size={'1.75rem'} />
             <ImStarEmpty className={styles.star} size={'1.75rem'} />
           </div>
-          <p className={styles.result}>Baseado em {commentCount} comentários</p>
+          <p className={styles.result}>Baseado em {totalValid} comentários</p>
         </div>
       </div>
     } else if(rating > 0.5 && rating <= 1) {
@@ -52,7 +52,7 @@ const CommentsPolarity: React.FC<IProps> = ({ commentsPolarity }) => {
             <ImStarEmpty className={styles.star} size={'1.75rem'} />
             <ImStarEmpty className={styles.star} size={'1.75rem'} />
           </div>
-          <p className={styles.result}>Baseado em {commentCount} comentários</p>
+          <p className={styles.result}>Baseado em {totalValid} comentários</p>
         </div>
       </div>
     } else if(rating > 1 && rating <= 1.5) {
@@ -66,7 +66,7 @@ const CommentsPolarity: React.FC<IProps> = ({ commentsPolarity }) => {
             <ImStarEmpty className={styles.star} size={'1.75rem'} />
             <ImStarEmpty className={styles.star} size={'1.75rem'} />
           </div>
-          <p className={styles.result}>Baseado em {commentCount} comentários</p>
+          <p className={styles.result}>Baseado em {totalValid} comentários</p>
         </div>
       </div>
     } else if(rating > 1.5 && rating <= 2) {
@@ -81,7 +81,7 @@ const CommentsPolarity: React.FC<IProps> = ({ commentsPolarity }) => {
             <ImStarEmpty className={styles.star} size={'1.75rem'} />
             <ImStarEmpty className={styles.star} size={'1.75rem'} />
           </div>
-          <p className={styles.result}>Baseado em {commentCount} comentários</p>
+          <p className={styles.result}>Baseado em {totalValid} comentários</p>
         </div>
       </div>
     } else if(rating > 2 && rating <= 2.5) {
@@ -95,7 +95,7 @@ const CommentsPolarity: React.FC<IProps> = ({ commentsPolarity }) => {
             <ImStarEmpty className={styles.star} size={'1.75rem'} />
             <ImStarEmpty className={styles.star} size={'1.75rem'} />
           </div>
-          <p className={styles.result}>Baseado em {commentCount} comentários</p>
+          <p className={styles.result}>Baseado em {totalValid} comentários</p>
         </div>
       </div>
     } else if(rating > 2.5 && rating <= 3) {
@@ -109,7 +109,7 @@ const CommentsPolarity: React.FC<IProps> = ({ commentsPolarity }) => {
             <ImStarEmpty className={styles.star} size={'1.75rem'} />
             <ImStarEmpty className={styles.star} size={'1.75rem'} />
           </div>
-          <p className={styles.result}>Baseado em {commentCount} comentários</p>
+          <p className={styles.result}>Baseado em {totalValid} comentários</p>
         </div>
       </div>
     } else if(rating > 3 && rating <= 3.5) {
@@ -123,7 +123,7 @@ const CommentsPolarity: React.FC<IProps> = ({ commentsPolarity }) => {
             <ImStarEmpty className={styles.star} size={'1.75rem'} />
             <ImStarEmpty className={styles.star} size={'1.75rem'} />
           </div>
-          <p className={styles.result}>Baseado em {commentCount} comentários</p>
+          <p className={styles.result}>Baseado em {totalValid} comentários</p>
         </div>
       </div>
     } else if(rating > 3.5 && rating <= 4) {
@@ -137,7 +137,7 @@ const CommentsPolarity: React.FC<IProps> = ({ commentsPolarity }) => {
             <ImStarHalf className={styles.star} size={'1.75rem'} />
             <ImStarEmpty className={styles.star} size={'1.75rem'} />
           </div>
-          <p className={styles.result}>Baseado em {commentCount} comentários</p>
+          <p className={styles.result}>Baseado em {totalValid} comentários</p>
         </div>
       </div>
     } else if(rating > 4 && rating <= 4.5) {
@@ -151,7 +151,7 @@ const CommentsPolarity: React.FC<IProps> = ({ commentsPolarity }) => {
             <ImStarFull className={styles.star} size={'1.75rem'} />
             <ImStarEmpty className={styles.star} size={'1.75rem'} />
           </div>
-          <p className={styles.result}>Baseado em {commentCount} comentários</p>
+          <p className={styles.result}>Baseado em {totalValid} comentários</p>
         </div>
       </div>
     } else if(rating > 4.5 && rating <= 5) {
@@ -165,7 +165,7 @@ const CommentsPolarity: React.FC<IProps> = ({ commentsPolarity }) => {
             <ImStarFull className={styles.star} size={'1.75rem'} />
             <ImStarHalf className={styles.star} size={'1.75rem'} />
           </div>
-          <p className={styles.result}>Baseado em {commentCount} comentários</p>
+          <p className={styles.result}>Baseado em {totalValid} comentários</p>
         </div>
       </div>
     } else {
@@ -179,7 +179,7 @@ const CommentsPolarity: React.FC<IProps> = ({ commentsPolarity }) => {
             <ImStarFull className={styles.star} size={'1.75rem'} />
             <ImStarFull className={styles.star} size={'1.75rem'} />
           </div>
-          <p className={styles.result}>Baseado em {commentCount} comentários</p>
+          <p className={styles.result}>Baseado em {totalValid} comentários</p>
         </div>
       </div>
     }

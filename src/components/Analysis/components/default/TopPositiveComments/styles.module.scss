@@ -1,6 +1,11 @@
 .topPositiveCommentsWrapper {
   padding: 1rem;
 
+  .noCommentsText {
+    margin-top: 1rem;
+    color: #34495E;
+  }
+
   .commentList {
     display: flex;
     flex-direction: column;

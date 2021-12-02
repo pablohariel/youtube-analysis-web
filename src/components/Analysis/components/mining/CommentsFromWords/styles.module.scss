@@ -1,3 +1,29 @@
 .commentsFromWordsWrapper {
   padding: 1rem;
+
+  .noCommentsText {
+    margin-top: 1rem;
+    color: #34495E;
+  }
+
+  .commentList {
+    list-style: none;
+    margin-top: 1rem;
+
+    .comment {
+      .text {
+        font-size: 1rem;
+        color: #34495E;
+
+        .commentCount {
+          color: #8981D8;
+          font-weight: normal;
+        }
+      }
+
+      &:not(:first-child) {
+        margin-top: 0.2rem;
+      }
+    }
+  }
 }

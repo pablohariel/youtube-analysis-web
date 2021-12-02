@@ -13,7 +13,7 @@ const TopCommentingUser: React.FC<IProps> = ({ user }) => {
     return (
       <div className={styles.topCommentingUserWrapper}>
         <h3>Usuário com mais comentários</h3>
-        <p>Usuário com mais respostas não encontrado.</p>
+        <p className={styles.noUserText}>Usuário com mais respostas não encontrado.</p>
     </div>
     )
   }

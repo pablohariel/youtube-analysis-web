@@ -1,8 +1,12 @@
 .commentsLanguageWrapper {
   padding: 1rem;
 
+  .noCommentsText {
+    margin-top: 1rem;
+  }
+
   .chart {
-    width: 28rem;
+    width: 26rem;
     height: 20rem;
   }
 }

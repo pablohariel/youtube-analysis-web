@@ -1,14 +1,24 @@
 .topWordsWrapper {
   padding: 1rem;
 
-  .chart {
-    width: 28rem;
-    height: 20rem;
+  .noWordsText {
+    margin-top: 1rem;
   }
 
-  .wordList {
-    .word {
+  .chart {
+    width: 26rem;
+    height: 20rem;
+    max-height: 20rem;
+  }
+}
 
+@media only screen and (max-width: 1200px) {
+  .topWordsWrapper {
+
+    .chart {
+      width: 26rem;
+      height: 20rem;
+      max-height: 20rem;
     }
   }
 }

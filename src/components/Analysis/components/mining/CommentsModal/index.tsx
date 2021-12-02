@@ -11,7 +11,9 @@ import {
   useDisclosure,
   Button
 } from "@chakra-ui/react"
-import { Comment } from '../Comment'
+import { Comment } from '../../default/Comment'
+
+import styles from './styles.module.scss'
 
 interface IProps {
   comments: (IComment | IReply)[]
@@ -25,7 +27,7 @@ const CommentsModal: React.FC<IProps> = ({ comments }) => {
 
   return (
     <>
-      <Button mt={3} ref={btnRef} onClick={onOpen}>
+      <Button mt={3} ref={btnRef} className={styles.btnOpenComments} onClick={onOpen}>
         Ver comentários
       </Button>
 
@@ -37,13 +39,12 @@ const CommentsModal: React.FC<IProps> = ({ comments }) => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Respostas</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            {comments.map((comment, i) => <Comment key={i} comment={comment} />)}
+          <ModalHeader className={styles.modalTitle}>Comentários</ModalHeader>
+          <ModalBody className={styles.commentList}>
+            {comments.map((comment, i) => <div key={i} className={styles.comment}><Comment comment={comment} /></div>)}
           </ModalBody>
           <ModalFooter>
-            <Button onClick={onClose}>Close</Button>
+            <Button className={styles.btnModalClose} onClick={onClose}>Close</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

@@ -1,0 +1,58 @@
+.btnOpenComments {
+  font-size: 1rem;
+  color: #8981D8;
+  box-shadow: none;
+  padding: 0;
+
+  &:hover {
+    background-color: #fff;
+    outline: none;
+     outline-offset: none;
+  }
+
+  &:current {
+    background-color: yellow;
+    outline: none;
+    outline-offset: none;
+  }
+
+  &:checked {
+    background-color: black;
+  }
+
+  &:focus {
+    outline: none;
+    outline-offset: none;
+    box-shadow: none;
+  }
+
+  overflow: hidden;
+
+  outline: none;
+  outline-offset: none;
+
+}
+
+.modalTitle {
+  color: #34495E;
+}
+
+.btnModalClose {
+  margin-right: 0 !important;
+  background-color: #fff;
+  color: #8981D8;
+  box-shadow: none !important;
+
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+.commentList {
+
+  .comment {
+    &:not(:first-child) {
+      margin-top: 3rem;
+    }
+  }
+}

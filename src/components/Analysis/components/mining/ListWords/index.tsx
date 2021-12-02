@@ -1,7 +1,5 @@
 import { JoinedWord } from "../../../../../interfaces/word"
 
-import { CommentsModal } from '../CommentsModal'
-
 interface IProps {
   words: JoinedWord[] | undefined
 }
@@ -13,7 +11,7 @@ const ListWords: React.FC<IProps> = ({ words }) => {
     return (
       <div className={styles.listWordsWrapper}>
         <h3>Palavras mineradas</h3>
-        <p>Não foram encontradas palavras.</p>
+        <p className={styles.noWordsText}>Não foram encontradas palavras.</p>
       </div>
     )
   }
@@ -21,8 +19,8 @@ const ListWords: React.FC<IProps> = ({ words }) => {
   return (
     <div className={styles.listWordsWrapper}>
       <h3>Palavras mineradas</h3>
-      <ul>
-        {words.map(word => <li>Palavra <strong>{word.content}</strong> encontrada, foi utilizada {word.timesUsed} vezes. <CommentsModal comments={word.comments} /></li>)}
+      <ul className={styles.wordList}>
+        {words.map(word => <li className={styles.word}><p className={styles.text}>Palavra <strong>{word.content}</strong> encontrada, foi utilizada <span className={styles.wordCount}>{word.timesUsed}</span> vezes.</p></li>)}
       </ul>
     </div>
   )

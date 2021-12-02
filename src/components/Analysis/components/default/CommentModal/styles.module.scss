@@ -2,9 +2,21 @@
   font-size: 0.75rem;
   color: #8981D8;
   margin-left: 1rem;
+  box-shadow: none !important;
+  padding: 0 !important;
+  font-size: 1rem !important;
+  background-color: #fff !important;
 
   &:hover {
-    background-color: #fff;
+    background-color: #fff !important;
+  }
+
+  &:focus {
+    background-color: #fff !important;
+  }
+
+  &:active {
+    background-color: #fff !important;
   }
 }
 
@@ -12,6 +24,15 @@
   margin-right: 0 !important;
   background-color: #fff;
   color: #8981D8;
+  box-shadow: none !important;
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.modalTitle {
+  color: #34495E;
 }
 
 .commentWrapper {

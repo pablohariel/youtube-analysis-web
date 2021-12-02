@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import styles from './styles.module.scss'
 
 import { Link, useHistory } from 'react-router-dom'
@@ -8,7 +8,6 @@ import { MdHeadsetMic } from 'react-icons/md'
 import { BiExit } from 'react-icons/bi'
 import { AiOutlineHistory, AiOutlinePlusCircle, AiFillPlusCircle,  AiFillHome } from 'react-icons/ai'
 import { BsPerson, BsHeadset, BsPersonFill } from 'react-icons/bs'
-
 
 import logo from '../../assets/logo-purple.svg'
 import { AuthContext, IUser } from '../../contexts/auth'

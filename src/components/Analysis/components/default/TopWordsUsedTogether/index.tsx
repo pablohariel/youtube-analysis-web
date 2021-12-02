@@ -13,7 +13,7 @@ const TopWordsUsedTogether: React.FC<IProps> = ({ words }) => {
     return (
       <div className={styles.topWordsWrapper}>
         <h3>Principais palavras usadas em conjunto</h3>
-        <p>Principais palavras usadas em conjunto não encontradas.</p>
+        <p className={styles.noWordsText}>Principais palavras usadas em conjunto não encontradas.</p>
       </div>
     )
   }
@@ -31,7 +31,7 @@ const TopWordsUsedTogether: React.FC<IProps> = ({ words }) => {
   })
 
   return (
-    <div className={styles.topWordsWrapper}>
+    <div className={styles.topWordsUsedTogetherWrapper}>
       <h3>Principais palavras usadas em conjunto</h3>
         <div className={styles.chart}>
           <ResponsiveBar

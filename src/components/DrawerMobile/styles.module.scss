@@ -1,0 +1,128 @@
+.drawerWrapper {
+  background-color: #8981D8;
+
+  .header {
+    background-color: #8981D8;
+    color: #fff;
+  }
+
+  .main {
+    background-color: #8981D8;
+
+    .searchBarWrapper {
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+
+      svg {
+        color: #fff;
+      }
+    }
+
+    .input {
+      margin-left: 0.6rem;
+
+      color: #34495E;
+      box-shadow: none;
+      outline: none;
+      outline-offset: none;
+      border-color: #fff;
+      background-color: #fff;
+    }
+
+    .linkList {
+      margin-top: 2rem;
+      padding-left: 1rem;
+      list-style: none;
+      background-color: #8981D8;
+    
+      li {
+        .link {
+          background-color: transparent;
+          width: 100%;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          height: 4rem;
+          transition: 0.5s;
+          
+          
+          svg {
+            color: #6A61C0;
+          }
+    
+          &:hover {
+            cursor: pointer;
+            filter: brightness(0.9);
+    
+            svg {
+              color: #fff;
+            }
+          }
+    
+          span {
+            color: #6A61C0;
+            margin-left: 2rem;
+            font-weight: bold;
+          }
+        }
+    
+        .linkSelected {
+          
+          svg {
+            color: #FFF;
+          }
+    
+          &:hover {
+            cursor: pointer;
+            filter: brightness(0.9);
+    
+            svg {
+              color: #fff;
+            }
+          }
+
+          span {
+            color: #fff;
+          }
+        }
+    
+        &:first-child {
+          margin-top: 1rem;
+        }
+      }
+    
+      
+      .divider {
+        width: 80%;
+        background-color: #6A61C0;
+        height: 1px;
+        margin-top: 2rem;
+        margin-left: 10%;
+      }
+    }
+  }
+}
+
+.btnBurger {
+  background-color: #fff !important;
+
+  svg {
+    color: #8981D8;
+    width: 2.188rem;
+    height: 2.188rem;
+  }
+
+  &:active {
+    background-color: #fff !important;
+  }
+
+  &:focus {
+    background-color: #fff !important;
+  }
+
+  &:hover {
+    background-color: #fff !important;
+  }
+}
+

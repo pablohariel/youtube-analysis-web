@@ -14,7 +14,7 @@ const TopPositiveComments: React.FC<IProps> = ({ comments }) => {
     return (
       <div className={styles.topPositiveCommentsWrapper}>
         <h3>Principais comentários positivos</h3>
-        <p>Não foram encontrados comentários.</p>
+        <p className={styles.noCommentsText}>Não foram encontrados comentários.</p>
       </div>
     )
   }
@@ -23,7 +23,7 @@ const TopPositiveComments: React.FC<IProps> = ({ comments }) => {
     <div className={styles.topPositiveCommentsWrapper}>
       <h3>Principais comentários positivos</h3>
       <ul className={styles.commentList}>
-        {comments.map((comment, index) => <li><Comment key={index} comment={comment} /></li>)}
+        {comments.map((comment, index) => <li key={index}><Comment comment={comment} /></li>)}
       </ul>
     </div>
   )

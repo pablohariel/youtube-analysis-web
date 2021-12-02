@@ -12,19 +12,17 @@ const CommentsFromPhrases: React.FC<IProps> = ({ comments }) => {
   if(comments === undefined || comments.length < 1) {
     return (
       <div className={styles.commentsFromPhrasesWrapper}>
-        <h3>Comentários contendo frases específicas</h3>
-        <p>Não foram encontrados comentários.</p>
+        <h3>Comentários contendo frases</h3>
+        <p className={styles.noCommentsText}>Não foram encontrados comentários.</p>
       </div>
     )
   }
 
-  console.log(comments)
-
   return (
     <div className={styles.commentsFromPhrasesWrapper}>
       <h3>Comentários contendo frases específicas</h3>
-      <ul>
-        {comments.map(comment => <li>Foram encontrados <strong>{comment.commentsCount}</strong> comentários a partir da frase {comment.phrase}. <CommentsModal comments={comment.comments} /></li>)}
+      <ul className={styles.commentList}>
+        {comments.map(comment => <li className={styles.comment}><p className={styles.text}>Foram encontrados <strong className={styles.commentCount}>{comment.commentsCount}</strong> comentários a partir da frase <strong>{comment.phrase}</strong>.</p> <CommentsModal comments={comment.comments} /> </li>)}
       </ul>
     </div>
   )

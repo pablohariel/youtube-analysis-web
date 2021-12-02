@@ -77,3 +77,13 @@ body {
 .paginate-page-link {
   padding: 10px;
 }
+
+@media only screen and (max-width: 1200px) {
+  .chakra-modal__content-container {
+    padding-left: 0rem;
+  }
+  
+  .chakra-toast__inner {
+    padding-left: 0rem;
+  }
+}

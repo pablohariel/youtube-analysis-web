@@ -27,7 +27,7 @@ const WordCount: React.FC<IProps> = ({ count, requestData }) => {
     return (
       <div className={styles.wordCountWrapper}>
         <h3>Contagem de palavras</h3>
-        <p>Não foram encontradas palavras.</p>
+        <p className={styles.noWordsText}>Não foram encontradas palavras.</p>
       </div>
     )
   }

@@ -1,7 +1,5 @@
 import { JoinedPhrase as IJoinedPhrase } from "../../../../../interfaces/joinedPhrase"
 
-import { CommentsModal } from '../CommentsModal'
-
 interface IProps {
   phrases: IJoinedPhrase[] | undefined
 }
@@ -13,7 +11,7 @@ const ListPhrases: React.FC<IProps> = ({ phrases }) => {
     return (
       <div className={styles.listPhrasesWrapper}>
         <h3>Frases mineradas</h3>
-        <p>Não foram encontradas frases.</p>
+        <p className={styles.noPhrasesText}>Não foram encontradas frases.</p>
       </div>
     )
   }
@@ -21,8 +19,8 @@ const ListPhrases: React.FC<IProps> = ({ phrases }) => {
   return (
     <div className={styles.listPhrasesWrapper}>
       <h3>Frases mineradas</h3>
-      <ul>
-        {phrases.map(phrase => <li>Frase <strong>{phrase.content}</strong> encontrada, foi utilizada {phrase.timesUsed} vezes. <CommentsModal comments={phrase.comments} /></li>)}
+      <ul className={styles.phraseList}>
+        {phrases.map(phrase => <li className={styles.phrase}><p className={styles.text}>Frase <strong>{phrase.content}</strong> encontrada, foi utilizada <strong className={styles.phraseCount}>{phrase.timesUsed}</strong> vezes.</p></li>)}
       </ul>
     </div>
   )

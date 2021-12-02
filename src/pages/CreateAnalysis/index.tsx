@@ -1,10 +1,8 @@
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useContext, useState, useEffect } from 'react'
 import { useBeforeunload } from 'react-beforeunload'
-// import { Select, MenuItem, SelectChangeEvent } from '@mui/material'
-import { Button, ButtonGroup, Image, Input, Divider, Select } from "@chakra-ui/react"
+import { Button,  Image, Input, Select } from "@chakra-ui/react"
 import { RepeatIcon, CheckIcon } from "@chakra-ui/icons"
-
 
 import { LeftBar } from '../../components/LeftBar'
 import { TopBar } from '../../components/TopBar'
@@ -20,7 +18,6 @@ import { DefaultResponse, MiningResponse } from '../../interfaces/responseData'
 import styles from './styles.module.scss'
 import { Analysis } from '../../components/Analysis'
 import { VideoData } from '../../interfaces/videoData'
-import { AnalysisContext, IDefaultAnalysis, IMiningAnalysis, ICompleteAnalysis } from '../../contexts/analysis'
 
 interface IInputs {
   videoUrl: string
@@ -39,20 +36,12 @@ const CreateAnalysis: React.FC = () => {
   })
 
   const { user } = useContext(AuthContext)
-  const { setAnalysis: setContextAnalysis } = useContext(AnalysisContext)
 
   const handleChangeType = (event: React.FormEvent<HTMLSelectElement>) => {
     setTypeSelected(event.currentTarget.value)
   }
 
-  useEffect(() => {
-    if(analysis.created) {
-      api.get<(IDefaultAnalysis | IMiningAnalysis | ICompleteAnalysis)[]>('/analysis').then(response => {
-        setContextAnalysis(response.data)
-      })
-    }
-    console.log('new analysis!!')
-  }, [analysis])
+
 
   const verifyVideo: SubmitHandler<IInputs> = async data => {
 
@@ -110,10 +99,10 @@ const CreateAnalysis: React.FC = () => {
               {video.isValid &&
                 <>
                   {video.content && (
-                    <>
-                      <h3>{video.content.title}</h3>
-                      <Image src={video.content.thumbnail} />
-                    </>
+                    <div className={styles.videoInfoWrapper}>
+                      <h3 className={styles.videoTitle}>{video.content.title}</h3>
+                      <Image className={styles.videoImg} src={video.content.thumbnail} />
+                    </div>
                   )}
 
                   <h2 className={styles.subtitle}>Opções</h2>

@@ -1,3 +1,29 @@
 .listPhrasesWrapper {
   padding: 1rem;
+
+  .noPhrasesText {
+    margin-top: 1rem;
+    color: #34495E;
+  }
+
+  .phraseList {
+    list-style: none;
+    margin-top: 1rem;
+
+    .phrase {
+      .text {
+        font-size: 1rem;
+        color: #34495E;
+
+        .phraseCount {
+          color: #8981D8;
+          font-weight: normal;
+        }
+      }
+
+      &:not(:first-child) {
+        margin-top: 0.2rem;
+      }
+    }
+  }
 }

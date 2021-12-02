@@ -1,8 +1,12 @@
 .topCommentingUserWrapper {
   padding: 1rem;
 
+  .noUserText {
+    margin-top: 1rem;
+  }
+
   .content {
-    margin-top: 2rem;
+    margin-top: 2.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;

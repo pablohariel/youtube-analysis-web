@@ -12,7 +12,7 @@ const MostRepliesComment: React.FC<IProps> = ({ comment }) => {
     return (
       <div className={styles.mostRepliesCommentWrapper}>
         <h3>Comentário com mais curtidas</h3>
-        <p>Comentário com mais respostas não encontrado.</p>
+        <p className={styles.noCommentText}>Comentário com mais respostas não encontrado.</p>
     </div>
     )
   }
@@ -20,7 +20,9 @@ const MostRepliesComment: React.FC<IProps> = ({ comment }) => {
   return (
     <div className={styles.mostRepliesCommentWrapper}>
       <h3>Comentário com mais respostas</h3>
-      <Comment comment={comment} />
+      <div className={styles.comment}>
+        <Comment comment={comment} />
+      </div>
     </div>
   )
 }

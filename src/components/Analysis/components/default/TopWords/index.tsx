@@ -14,7 +14,7 @@ const TopWords: React.FC<IProps> = ({ words }) => {
     return (
       <div className={styles.topWordsWrapper}>
         <h3>Principais palavras</h3>
-        <p>Principais palavras não encontradas.</p>
+        <p className={styles.noWordsText}>Principais palavras não encontradas.</p>
       </div>
     )
   }

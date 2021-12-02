@@ -3,17 +3,16 @@
   background: #FFFFFF;
   box-shadow: 0.25rem 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
   border-radius: 0.313rem;
-  margin-bottom: 100px;
+  margin-bottom: 6.25rem;
 
   .header {
     display: flex;
 
     .videoImg {
       border-radius: 0.313rem;
-      width: 33.875rem;
-      min-width: 33.875rem;
-      height: 20.8rem;
-      max-height: 23rem;
+      width: 33.75rem;
+      max-width: 33.75rem;
+      max-height: 18.75rem;
     }
 
     .videoInfo {
@@ -35,9 +34,9 @@
         margin-top: 0.625rem;
 
         .channelImg {
-          width: 25px;
+          width: 1.563rem;
           max-width: 1.563rem;
-          height: 25px;
+          height: 1.563rem;
           border-radius: 50%;
         }
 
@@ -81,16 +80,16 @@
 
     .optionList {
       max-width: 62rem;
-      margin: 2rem auto;
+      margin-top: 4rem;
       column-count: 2;
       column-gap: 2rem;
       row-gap: 10rem;
-      padding: 2rem;
-      column-width: 27rem;
+      column-width: 28rem;
       
       .option {
         overflow: hidden;
         break-inside: avoid-column;
+
 
         &:not(:first-child) {
           margin-top: 2rem;
@@ -104,7 +103,6 @@
       color: #34495E;
       font-weight: bold;
       line-height: 2rem;
-
     }
   }
 
@@ -134,7 +132,7 @@
 
 @media only screen and (max-width: 1200px) {
   .analysisCardWrapper {
-    width: 34rem;
+    width: 32rem;
     background: #FFFFFF;
     box-shadow: 0.25rem 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
     border-radius: 0.313rem;
@@ -146,7 +144,7 @@
       .videoImg {
         border-radius: 0.313rem;
         width: 100%;
-        min-width: 33.875rem;
+        min-width: 32rem;
         height: 23rem;
         max-height: 23rem;
       }
@@ -170,9 +168,9 @@
           margin-top: 0.625rem;
   
           .channelImg {
-            width: 25px;
+            width: 1.563rem;
             max-width: 1.563rem;
-            height: 25px;
+            height: 1.563rem;
             border-radius: 50%;
           }
   
@@ -185,6 +183,7 @@
         }
   
         .videoStatistics {
+          margin-top: 4rem;
           display: flex;
           justify-content: center;
           margin-bottom: 10px;

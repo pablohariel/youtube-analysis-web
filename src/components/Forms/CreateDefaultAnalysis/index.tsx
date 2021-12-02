@@ -160,8 +160,6 @@ const CreateDefaultAnalysis: React.FC<IProps> = ({ videoId, setAnalysis, setVide
   })
   const [creating, setCreating] = useState<boolean>(false)
   
-
-
   const onSubmit: SubmitHandler<IInputs> = async data => {
     try {
       setCreating(true)
@@ -173,6 +171,7 @@ const CreateDefaultAnalysis: React.FC<IProps> = ({ videoId, setAnalysis, setVide
       setAnalysis({ created: true, content: result.data })
     } catch(error) {
       setCreating(false)
+      console.log(error)
       alert('Não foi possível criar a análise')
     }
   }

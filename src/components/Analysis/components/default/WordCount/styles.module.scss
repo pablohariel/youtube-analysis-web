@@ -1,6 +1,10 @@
 .wordCountWrapper {
   padding: 1rem;
 
+  .noWordsText {
+    margin-top: 1rem;
+  }
+
   .titleWrapper {
     display: flex;
     align-items: flex-end;

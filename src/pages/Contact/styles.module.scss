@@ -1,5 +1,5 @@
 .contactWrapper {
-  margin-left: 5rem;
+  padding-left: 5rem;
   background-color: #F0F0F7;
 
   main {
@@ -70,5 +70,11 @@
         }
       }
     }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .contactWrapper {
+    padding: 0;
   }
 }

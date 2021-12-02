@@ -1,8 +1,24 @@
-.topWordsWrapper {
+.topWordsUsedTogetherWrapper {
   padding: 1rem;
 
+  .noWordsText {
+    margin-top: 1rem;
+  }
+
   .chart {
-    width: 28rem;
+    width: 26rem;
+    max-height: 20rem;
     height: 20rem;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .topWordsUsedTogetherWrapper {
+
+    .chart {
+      width: 26rem;
+      max-height: 20rem;
+      height: 20rem;
+    }
   }
 }

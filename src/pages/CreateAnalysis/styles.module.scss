@@ -19,6 +19,7 @@
       }
 
       .card {
+        background-color: #fff;
         width: 37.5rem;
         margin-top: 2.5rem;
         display: flex;
@@ -28,6 +29,20 @@
 
         box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 0.313rem;
+
+        .videoInfoWrapper {
+          margin-top: 1.4rem;
+
+          .videoTitle {
+            font-size: 1.6rem;
+            color: #34495E;
+            text-align: center;
+          }
+
+          .videoImg {
+            margin-top: 1rem;
+          }
+        }
 
         .label {
           margin-top: 2.5rem;
@@ -114,6 +129,31 @@
             margin-bottom: 1rem;
             font-weight: normal;
           }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .createAnalysisWrapper {
+    padding: 0;
+
+    .main {
+      width: 100%;
+  
+      .content {
+  
+        .title {
+          margin-top: 1.75rem;
+          color: #34495E;
+          font-size: 1.875rem;
+          font-weight: bold;
+        }
+  
+        .card {
+          background-color: #fff;
+          width: 30rem;
         }
       }
     }

@@ -14,7 +14,7 @@ const WordsRelatedToVideoTitle: React.FC<IProps> = ({ words }) => {
     return (
       <div className={styles.wordsRelatedToVideoTitleWrapper}>
         <h3>Palavras relacionadas ao titulo do vídeo</h3>
-        <p>Não foram encontradas palavras.</p>
+        <p className={styles.noWordsText}>Não foram encontradas palavras.</p>
       </div>
     )
   }

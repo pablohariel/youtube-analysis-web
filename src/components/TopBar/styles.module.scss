@@ -9,6 +9,10 @@
   padding-left: 2.938rem;
   padding-right: 2.938rem;
 
+  .burguer {
+    display: none;
+  }
+
   .searchBarWrapper {
     width: 30rem;
     display: flex;
@@ -99,21 +103,35 @@
   }
 }
 
+@media only screen and (max-width: 1200px) {
+  .topBarWrapper { 
+    .burguer {
+      display: flex;
+      width: 10rem;
+
+      svg {
+        width: 2rem;
+      }
+    }
+
+    .searchBarWrapper {
+      display: none;
+    }
+  }
+}
+
 @media only screen and (max-width: 490px) {
   .topBarWrapper { 
-    padding-left: 2rem;
+    padding-left: 1rem;
     padding-right: 2rem;
 
     .searchBarWrapper {
-      width: 14rem;
+      display: none;
     }
 
     .rightGroupWrapper {
       .userInfoWrapper {
-        width: 3rem;
-        .userName {
-          display: none;
-        }
+        
       }
     }
   }

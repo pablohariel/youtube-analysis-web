@@ -13,7 +13,7 @@ const CommentsLanguage: React.FC<IProps> = ({ languages }) => {
     return (
       <div className={styles.commentsLanguageWrapper}>
         <h3>Idioma dos comentários</h3>
-        <p>Idioma dos comentários não encontrado.</p>
+        <p className={styles.noCommentsText}>Idioma dos comentários não encontrado.</p>
       </div>
     )
   }
@@ -54,7 +54,7 @@ const CommentsLanguage: React.FC<IProps> = ({ languages }) => {
       <h3>Idioma dos comentários</h3>
       <div className={styles.chart}>
           <ResponsiveBar
-            data={data}
+            data={data as any}
             keys={[...wordsToString]}
             indexBy="language"
             margin={{ top: 50, right: 100, bottom: 50, left: 0 }}

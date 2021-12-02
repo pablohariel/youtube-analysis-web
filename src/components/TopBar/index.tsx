@@ -1,10 +1,13 @@
 import { useState } from 'react'
+import { HamburgerIcon } from '@chakra-ui/icons'
 import { RiSearch2Line } from 'react-icons/ri'
 import { VscBell } from 'react-icons/vsc'
+
 import { Link } from 'react-router-dom'
 
 import userImg from '../../assets/userImg.png'
 import { IUser } from '../../contexts/auth'
+import { DrawerMobile } from '../DrawerMobile'
 
 import styles from './styles.module.scss'
 
@@ -17,6 +20,9 @@ const TopBar: React.FC<IProps> = ({ user }) => {
 
   return (  
     <header className={styles.topBarWrapper}>
+      <div className={styles.burguer}>
+        <DrawerMobile user={user} search={search} setSearch={setSearch} />
+      </div>
       <div className={styles.searchBarWrapper}>
         <Link to={`/search?query=${search}`}><RiSearch2Line size={'1.6rem'} /></Link>
         <input className={styles.searchBarInput} placeholder='Procurar análise' value={search} onChange={event => setSearch((event.target as HTMLInputElement).value)} />

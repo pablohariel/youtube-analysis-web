@@ -178,13 +178,13 @@ const Analysis: React.FC<IProps> = ({ analysis }) => {
               <li className={styles.option}><WordsRelatedToVideoTitle words={wordsRelatedToVideoTitle} /></li>
             )}
 
-            {/* Data de publicação dos comentários */}
-            { options.commentsPublicationDate && (
-              <li className={styles.option}><h1>Mapa de calor dos comentários não funcionando</h1></li>
-              // <CommentsPublicationDate dates={commentsPublicationDate} />
-            )}
             </ul>
         </div>
+        {/* Data de publicação dos comentários */}
+        { options.commentsPublicationDate && (
+          // <h1>Mapa de calor dos comentários não funcionando</h1>
+          <CommentsPublicationDate dates={commentsPublicationDate} />
+        )}
         <div className={styles.btns}>
           <Button className={styles.btnDownload} onClick={handleDownload}>Baixar</Button>
           <ShareModal>Compartilhar</ShareModal>
@@ -395,12 +395,6 @@ const Analysis: React.FC<IProps> = ({ analysis }) => {
               <li className={styles.option}><WordsRelatedToVideoTitle words={wordsRelatedToVideoTitle} /></li>
             )}
 
-            {/* Data de publicação dos comentários */}
-            { options.commentsPublicationDate && (
-              <h1>Mapa de calor dos comentários não funcionando</h1>
-              // <CommentsPublicationDate dates={commentsPublicationDate} />
-            )}
-
             {/* Palavras mineradas */}
             { options.wordsToFindWords && (
               <li className={styles.option}><ListWords words={words} /></li>
@@ -427,6 +421,11 @@ const Analysis: React.FC<IProps> = ({ analysis }) => {
             )}
           </ul>
         </div>
+        {/* Data de publicação dos comentários */}
+        { options.commentsPublicationDate && (
+          // <h1>Mapa de calor dos comentários não funcionando</h1>
+          <CommentsPublicationDate dates={commentsPublicationDate} />
+        )}
         <div className={styles.btns}>
           <Button className={styles.btnDownload} onClick={handleDownload}>Baixar</Button>
           <ShareModal>Compartilhar</ShareModal>
