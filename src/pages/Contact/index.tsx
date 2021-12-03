@@ -56,15 +56,15 @@ const Contact: React.FC = () => {
             <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
               <label className={styles.label}>
                 Nome
-                <Input className={styles.input} type='text' {...register('name')} placeholder='Digite seu nome...' />
+                <Input className={styles.input} focusBorderColor={'#8981D8'} type='text' {...register('name')} placeholder='Digite seu nome...' />
               </label>
               <label className={styles.label}>
                 E-mail
-                <Input className={styles.input} type='email' {...register('email')} placeholder='Digite seu e-mail...' />
+                <Input className={styles.input} focusBorderColor={'#8981D8'} type='email' {...register('email')} placeholder='Digite seu e-mail...' />
               </label>
               <label className={styles.label}>
                 Mensagem  
-                <Textarea className={styles.textarea} type='text' {...register('message')} placeholder='Digite sua mensagem...' />
+                <Textarea className={styles.textarea} focusBorderColor={'#8981D8'} type='text' {...register('message')} placeholder='Digite sua mensagem...' />
               </label>
 
               <Button className={styles.btnSubmit} type='submit' variant='fill' >Enviar</Button>

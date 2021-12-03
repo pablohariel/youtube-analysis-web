@@ -1,7 +1,7 @@
 .cardListWrapper {
   display: flex;
   flex-direction: column;
-  padding: 3rem 5rem 1rem 5rem;
+  padding: 1rem 5rem 1rem 5rem;
 
   .header {
     display: flex;
@@ -37,3 +37,36 @@
     margin: 1rem
   }
 } 
+
+@media only screen and (max-width: 1200px) {
+  .cardListWrapper {
+    .header {
+      display: flex;
+      color: #7E7E7E;
+      align-items: center;
+      font-size: 0.80rem;
+      margin-left: 0rem;
+  
+      .resultText {
+        font-size: 0.9rem;
+
+        .resultCount {
+          color: #8981D8;
+          font-size: 0.9rem;
+        }
+      }
+
+      .selectedFilter {
+        font-size: 0.9rem;
+      }
+  
+      .divider {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        background-color: #8981D8;
+        height: 0.813rem;
+        width: 0.063rem;
+      }
+    }
+  }
+}

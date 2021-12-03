@@ -11,6 +11,17 @@
       flex-direction: column;
       align-items: center;
 
+      .analysisWrapper {
+        .createdTitle {
+          margin-top: 1.75rem;
+          margin-bottom: 3rem;
+          width: 70rem;
+          color: #34495E;
+          font-size: 1.875rem;
+          font-weight: bold;
+        }
+      }
+
       .title {
         margin-top: 1.75rem;
         color: #34495E;
@@ -105,7 +116,7 @@
         }
 
         .subtitle {
-          margin-top: 2.5rem;
+          margin-top:4rem;
           width: 28.5rem;
           font-size: 1.4rem;
           color: #34495E;

@@ -1,8 +1,9 @@
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useContext, useState, useEffect } from 'react'
 import { useBeforeunload } from 'react-beforeunload'
-import { Button,  Image, Input, Select } from "@chakra-ui/react"
-import { RepeatIcon, CheckIcon } from "@chakra-ui/icons"
+import { Button,  Image, Input, Select } from '@chakra-ui/react'
+import { RepeatIcon, CheckIcon } from '@chakra-ui/icons'
+import { useToast } from '@chakra-ui/react'
 
 import { LeftBar } from '../../components/LeftBar'
 import { TopBar } from '../../components/TopBar'
@@ -35,13 +36,13 @@ const CreateAnalysis: React.FC = () => {
     created: false
   })
 
+  const toast = useToast()
+
   const { user } = useContext(AuthContext)
 
   const handleChangeType = (event: React.FormEvent<HTMLSelectElement>) => {
     setTypeSelected(event.currentTarget.value)
   }
-
-
 
   const verifyVideo: SubmitHandler<IInputs> = async data => {
 
@@ -61,15 +62,23 @@ const CreateAnalysis: React.FC = () => {
         }
       } catch(error) {
         setVideo({ isLoading: false, isValid: false, id: '' })
-        alert('Vídeo não encontrado')
+        toast({
+          title: 'Vídeo inválido',
+          description: `Vídeo inexistente ou não possui comentários.`,
+          status: 'error',
+          isClosable: true,
+        })
       }
      
     } else {  
-      alert('Vídeo não encontrado')
+      toast({
+        title: 'Vídeo inválido',
+        description: `Vídeo inexistente ou não possui comentários.`,
+        status: 'error',
+        isClosable: true,
+      })
     }
   } 
-
-  useBeforeunload(() => 'Todos dados serão perdidos')
 
   return (
     <div className={styles.createAnalysisWrapper}>
@@ -80,10 +89,14 @@ const CreateAnalysis: React.FC = () => {
         <div className={styles.content}>
 
         { analysis.created && analysis.content ?
-           <Analysis analysis={analysis.content} />
+          <div className={styles.analysisWrapper}>
+            <h1 className={styles.createdTitle}>Análise gerada com sucesso. Resultados:</h1>
+            <Analysis analysis={analysis.content} />
+          </div>
+           
           :
           <>
-            <h1 className={styles.title}>Criar Analise</h1>
+            <h1 className={styles.title}>Criar Análise</h1>
 
             <div className={styles.card}>
               <form onSubmit={handleSubmit(verifyVideo)} className={styles.videoUrlForm}>
@@ -105,7 +118,7 @@ const CreateAnalysis: React.FC = () => {
                     </div>
                   )}
 
-                  <h2 className={styles.subtitle}>Opções</h2>
+                  <h2 className={styles.subtitle}>Dados para criação</h2>
 
                   <div className={styles.selectTypeWrapper}>
                     <label className={styles.label} htmlFor='selectType'>
@@ -127,7 +140,7 @@ const CreateAnalysis: React.FC = () => {
                   
                   <div className={styles.analysisForm}>
                     <label className={styles.label}>
-                      <span className={styles.name}>Filtros</span><span className={styles.info}>Diversas opções selecionáveis</span>
+                      <span className={styles.name}>Opções</span><span className={styles.info}>Diversas opções selecionáveis</span>
                     </label>
                     {typeSelected === 'default' && <CreateDefaultAnalysis videoId={video.id} setAnalysis={setAnalysis} setVideo={setVideo} />}
                     {typeSelected === 'mining' && <CreateMiningAnalysis videoId={video.id} setAnalysis={setAnalysis} setVideo={setVideo} />}

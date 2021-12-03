@@ -54,8 +54,11 @@ const TopWords: React.FC<IProps> = ({ words }) => {
           data={data}
           keys={[...wordsToString]}
           indexBy="word"
-          margin={{ top: 50, right: 100, bottom: 50, left: 0 }}
-          padding={0.3}
+          label={d => `${d.indexValue}`}
+          margin={{ top: 20, right: 100, bottom: 50, left: 10 }}
+          layout='horizontal'
+          padding={0.1}
+          tooltipLabel={d => `${d.indexValue}`}
           valueScale={{ type: 'linear' }}
           indexScale={{ type: 'band', round: true }}
           colors={['#855CF8', '#865cf8d1', '#865cf8ba', '#865cf884', '#865cf86f']}

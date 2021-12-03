@@ -11,23 +11,22 @@ interface IProps {
   comment: CommentAnalyzed | IComment | IReply
 }
 
+export const formatDate = (date: string): string => {
+  const dateNow = new Date()
+  const dateObject = new Date(date)
+  const difference = dateNow.getTime() - dateObject.getTime()
+  const days = Math.ceil(difference / (1000 * 3600 * 24)) - 1
+
+  if(days < 30) {
+    return `${days} dias atrás`
+  } else {
+    const months = Math.ceil(days / 30)
+    return months > 1 ? `${months} meses atrás` : `${months} mês atrás`
+  }
+}
+
 const Comment: React.FC<IProps> = ({ comment }) => {
   const { author, content, likeCount, published_at } = comment
-
-  const formatDate = (date: string): string => {
-    const dateNow = new Date()
-    const dateObject = new Date(date)
-    const difference = dateNow.getTime() - dateObject.getTime()
-    const days = Math.ceil(difference / (1000 * 3600 * 24)) - 1
-
-    if(days < 30) {
-      return `${days} dias atrás`
-    } else {
-      const months = Math.ceil(days / 30)
-      return months > 1 ? `${months} meses atrás` : `${months} mês atrás`
-    }
-
-  }
 
   if('replies' in comment) {
     console.log(comment.replies)

@@ -66,6 +66,7 @@ const CommentsLanguage: React.FC<IProps> = ({ languages }) => {
             borderColor={{ from: 'color', modifiers: [ [ 'darker', 1.6 ] ] }}
             axisTop={null}
             axisRight={null}
+            tooltipLabel={d => `${d.indexValue}`}
             axisLeft={null}
             labelSkipWidth={12}
             labelSkipHeight={12}

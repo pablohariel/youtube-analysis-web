@@ -12,6 +12,7 @@ import {
   useDisclosure 
 } from "@chakra-ui/react"
 
+import { formatDate } from '../Comment'
 import { Comment, Reply } from '../../../../../interfaces/comment'
 
 import styles from './styles.module.scss'
@@ -38,7 +39,7 @@ const CommentModal: React.FC<IProps> = ({ comment }) => {
               <Avatar src={author.profileImage} />
               <div className={styles.content}>
                 <div className={styles.header}>
-                  <span className={styles.authorName}>{author.name}</span> <span className={styles.commentDate}>{published_at}</span>
+                  <span className={styles.authorName}>{author.name}</span> <span className={styles.commentDate}>{formatDate(published_at)}</span>
                 </div>
                 <Text className={styles.main}>{content}</Text>
                 <div className={styles.footer}>
@@ -49,7 +50,6 @@ const CommentModal: React.FC<IProps> = ({ comment }) => {
               </div>  
             </div>
           </ModalBody>
-
           <ModalFooter>
             <Button className={styles.btnModalClose} mr={3} onClick={onClose}>
               Fechar

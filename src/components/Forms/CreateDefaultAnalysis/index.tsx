@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
 import { Switch, Button, Select } from '@chakra-ui/react'
+import { useToast } from '@chakra-ui/react'
 
 import { DefaultResponse, MiningResponse } from '../../../interfaces/responseData'
 import { VideoData } from '../../../interfaces/videoData'
@@ -160,6 +161,8 @@ const CreateDefaultAnalysis: React.FC<IProps> = ({ videoId, setAnalysis, setVide
   })
   const [creating, setCreating] = useState<boolean>(false)
   
+  const toast = useToast()
+
   const onSubmit: SubmitHandler<IInputs> = async data => {
     try {
       setCreating(true)
@@ -168,11 +171,23 @@ const CreateDefaultAnalysis: React.FC<IProps> = ({ videoId, setAnalysis, setVide
         type: 'default',
         ...data 
       })
+      toast({
+        title: 'Análise gerada com sucesso',
+        status: 'success',
+        isClosable: true,
+      })
+      window.scrollTo({
+        top: 0
+      })
       setAnalysis({ created: true, content: result.data })
     } catch(error) {
       setCreating(false)
-      console.log(error)
-      alert('Não foi possível criar a análise')
+      toast({
+        title: 'Não foi possível criar análise',
+        description: `Algo deu errado, tente novamente.`,
+        status: 'error',
+        isClosable: true,
+      })
     }
   }
 
@@ -186,8 +201,6 @@ const CreateDefaultAnalysis: React.FC<IProps> = ({ videoId, setAnalysis, setVide
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.defaultFormWrapper}>
-      
-
       <div className={styles.option}>
         <Controller 
           control={control}
@@ -286,7 +299,7 @@ const CreateDefaultAnalysis: React.FC<IProps> = ({ videoId, setAnalysis, setVide
           control={control}
           name='options.mostLikedComment.checked'
           render={({ field: { onChange, onBlur, value } }) => (
-            <Checkbox text='Comentários com mais curtidas' onChange={onChange} onBlur={onBlur} checked={value} />
+            <Checkbox text='Comentário com mais curtidas' onChange={onChange} onBlur={onBlur} checked={value} />
           )}
         />
         {watch('options.mostLikedComment.checked') && 

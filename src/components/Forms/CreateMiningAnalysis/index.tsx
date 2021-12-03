@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
-import { Switch, Button, Select, Input, IconButton, UnorderedList, ListItem } from '@chakra-ui/react'
+import { Switch, Button, Select, Input, IconButton, UnorderedList, ListItem, useToast } from '@chakra-ui/react'
 import { AddIcon } from '@chakra-ui/icons'
 
 import { api } from '../../../services/api'
@@ -119,6 +119,8 @@ const CreateMiningAnalysis: React.FC<IProps> = ({ videoId, setAnalysis, setVideo
   const [userToFindComments, setUserToFindComments] = useState<string>('')
   const [usersToFindComments, setUsersToFindComments] = useState<string[]>([])
 
+  const toast = useToast()
+
   const onSubmit: SubmitHandler<IInputs> = async data => {
 
     const { options, privacy, save } = data
@@ -160,11 +162,23 @@ const CreateMiningAnalysis: React.FC<IProps> = ({ videoId, setAnalysis, setVideo
     try {
       setCreating(true)
       const result = await api.post<MiningResponse>('/analysis', finalData)
-
+      toast({
+        title: 'Análise gerada com sucesso',
+        status: 'success',
+        isClosable: true,
+      })
+      window.scrollTo({
+        top: 0
+      })
       setAnalysis({ created: true, content: result.data })
     } catch(error) {
       setCreating(false)
-      alert('Não foi possível criar a análise')
+      toast({
+        title: 'Não foi possível criar análise',
+        description: `Algo deu errado, tente novamente.`,
+        status: 'error',
+        isClosable: true,
+      })
     }
   }
 

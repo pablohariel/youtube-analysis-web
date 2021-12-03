@@ -40,6 +40,7 @@ const TopWordsUsedTogether: React.FC<IProps> = ({ words }) => {
             indexBy="words"
             margin={{ top: 50, right: 100, bottom: 50, left: 0 }}
             padding={0.3}
+            tooltipLabel={d => `${d.indexValue}`}
             valueScale={{ type: 'linear' }}
             indexScale={{ type: 'band', round: true }}
             colors={['#855CF8', '#865cf8d1', '#865cf8ba', '#865cf884', '#865cf86f', '#865cf844']}

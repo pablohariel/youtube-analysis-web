@@ -1,5 +1,5 @@
 .analysisCardWrapper {
-  width: 63.75rem;
+  width: 70rem;
   background: #FFFFFF;
   box-shadow: 0.25rem 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
   border-radius: 0.313rem;
@@ -10,9 +10,8 @@
 
     .videoImg {
       border-radius: 0.313rem;
-      width: 33.75rem;
-      max-width: 33.75rem;
-      max-height: 18.75rem;
+      width: 35rem;
+      max-width: 35rem;
     }
 
     .videoInfo {
@@ -50,7 +49,7 @@
 
       .videoStatistics {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         margin-bottom: 0.2rem;
 
         div {
@@ -81,10 +80,11 @@
     .optionList {
       max-width: 62rem;
       margin-top: 4rem;
+      margin-bottom: 2rem;
       column-count: 2;
       column-gap: 2rem;
       row-gap: 10rem;
-      column-width: 28rem;
+      column-width: 30rem;
       
       .option {
         overflow: hidden;

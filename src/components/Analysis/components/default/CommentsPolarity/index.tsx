@@ -22,6 +22,9 @@ const CommentsPolarity: React.FC<IProps> = ({ commentsPolarity }) => {
   const { positive, neutral, negative } = commentsPolarity
 
   const commentCount = positive.totalCount + neutral.totalCount + negative.totalCount
+  const positiveCalc = Math.round((positive.totalCount / commentCount) * 100)
+  const neutralCalc = Math.round((neutral.totalCount / commentCount) * 100)
+  const negativeCalc = Math.round((negative.totalCount / commentCount) * 100)
 
   const getStarts = () => {
     const totalValid = positive.totalCount + negative.totalCount
@@ -195,7 +198,7 @@ const CommentsPolarity: React.FC<IProps> = ({ commentsPolarity }) => {
         <div className={styles.polarities}>
           <div className={styles.polarity}>
             <span className={styles.polarityName}>Bom </span>
-            <Slider aria-label='slider-ex-2' colorScheme='polarityGood' defaultValue={positive.totalCount} isReadOnly isDisabled >
+            <Slider aria-label='slider-ex-2' colorScheme='polarityGood' defaultValue={positiveCalc} isReadOnly isDisabled >
               <SliderTrack>
                 <SliderFilledTrack />
               </SliderTrack>
@@ -203,7 +206,7 @@ const CommentsPolarity: React.FC<IProps> = ({ commentsPolarity }) => {
           </div>
           <div className={styles.polarity}>
             <span className={styles.polarityName}>Neutro</span> 
-            <Slider aria-label='slider-ex-2' colorScheme='polarityNeutral' defaultValue={neutral.totalCount} isReadOnly isDisabled >
+            <Slider aria-label='slider-ex-2' colorScheme='polarityNeutral' defaultValue={neutralCalc} isReadOnly isDisabled >
             <SliderTrack>
               <SliderFilledTrack />
             </SliderTrack>
@@ -211,7 +214,7 @@ const CommentsPolarity: React.FC<IProps> = ({ commentsPolarity }) => {
           </div>
           <div className={styles.polarity}>
             <span className={styles.polarityName}>Ruim</span>
-            <Slider aria-label='slider-ex-2' colorScheme='polarityNegative' defaultValue={negative.totalCount} isReadOnly isDisabled className={styles.slider} >
+            <Slider aria-label='slider-ex-2' colorScheme='polarityNegative' defaultValue={negativeCalc} isReadOnly isDisabled className={styles.slider} >
               <SliderTrack >
                 <SliderFilledTrack />
               </SliderTrack>
