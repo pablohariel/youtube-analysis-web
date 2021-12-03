@@ -1,6 +1,7 @@
 import { Slider, SliderFilledTrack, SliderThumb, SliderTrack } from "@chakra-ui/react"
 import { ImStarFull, ImStarHalf, ImStarEmpty } from 'react-icons/im'
 import { CommentsGroupedByPolarityNoComments } from "../../../../../interfaces/comment"
+import { Tooltip } from '@chakra-ui/react'
 
 import styles from './styles.module.scss'
 
@@ -196,30 +197,36 @@ const CommentsPolarity: React.FC<IProps> = ({ commentsPolarity }) => {
           {getStarts()}
         </div>
         <div className={styles.polarities}>
-          <div className={styles.polarity}>
-            <span className={styles.polarityName}>Bom </span>
-            <Slider aria-label='slider-ex-2' colorScheme='polarityGood' defaultValue={positiveCalc} isReadOnly isDisabled >
+          <Tooltip label={`${positive.totalCount} comentários`}>
+            <div className={styles.polarity}>
+              <span className={styles.polarityName}>Bom</span>
+              <Slider aria-label='slider-ex-2' colorScheme='polarityGood' defaultValue={positiveCalc} isReadOnly isDisabled >
+                <SliderTrack>
+                  <SliderFilledTrack />
+                </SliderTrack>
+              </Slider>
+            </div>
+          </Tooltip>
+          <Tooltip label={`${neutral.totalCount} comentários`}>
+            <div className={styles.polarity}>
+              <span className={styles.polarityName}>Neutro</span> 
+              <Slider aria-label='slider-ex-2' colorScheme='polarityNeutral' defaultValue={neutralCalc} isReadOnly isDisabled >
               <SliderTrack>
                 <SliderFilledTrack />
               </SliderTrack>
             </Slider>
-          </div>
-          <div className={styles.polarity}>
-            <span className={styles.polarityName}>Neutro</span> 
-            <Slider aria-label='slider-ex-2' colorScheme='polarityNeutral' defaultValue={neutralCalc} isReadOnly isDisabled >
-            <SliderTrack>
-              <SliderFilledTrack />
-            </SliderTrack>
-          </Slider>
-          </div>
-          <div className={styles.polarity}>
-            <span className={styles.polarityName}>Ruim</span>
-            <Slider aria-label='slider-ex-2' colorScheme='polarityNegative' defaultValue={negativeCalc} isReadOnly isDisabled className={styles.slider} >
-              <SliderTrack >
-                <SliderFilledTrack />
-              </SliderTrack>
-            </Slider>
-          </div>
+            </div>
+          </Tooltip>
+          <Tooltip label={`${negative.totalCount} comentários`}>
+            <div className={styles.polarity}>
+              <span className={styles.polarityName}>Ruim</span>
+                <Slider aria-label='slider-ex-2' colorScheme='polarityNegative' defaultValue={negativeCalc} isReadOnly isDisabled className={styles.slider} >
+                  <SliderTrack >
+                    <SliderFilledTrack />
+                  </SliderTrack>
+                </Slider>
+            </div>
+          </Tooltip>
         </div>
       </div>
     </div>

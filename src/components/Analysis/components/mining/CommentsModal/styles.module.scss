@@ -5,32 +5,25 @@
   padding: 0;
 
   &:hover {
-    background-color: #fff;
-    outline: none;
-     outline-offset: none;
+    background-color: #fff !important;
+    border: none !important;
   }
 
   &:current {
-    background-color: yellow;
-    outline: none;
-    outline-offset: none;
+    background-color: #fff !important;
+    border: none !important;
   }
 
   &:checked {
-    background-color: black;
+    background-color: #fff !important;
+    border: none !important;
   }
 
   &:focus {
-    outline: none;
-    outline-offset: none;
-    box-shadow: none;
+    background-color: #fff !important;
+    box-shadow: none !important;
+    border: none !important;
   }
-
-  overflow: hidden;
-
-  outline: none;
-  outline-offset: none;
-
 }
 
 .modalTitle {

@@ -12,7 +12,7 @@ const CommentsFromPhrases: React.FC<IProps> = ({ comments }) => {
   if(comments === undefined || comments.length < 1) {
     return (
       <div className={styles.commentsFromPhrasesWrapper}>
-        <h3>Comentários contendo frases</h3>
+        <h3>Comentários contendo frases específicas</h3>
         <p className={styles.noCommentsText}>Não foram encontrados comentários.</p>
       </div>
     )
